@@ -1,0 +1,241 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--windowControlButton-->
+    <Style x:Key="windowControlButton" TargetType="Button">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Opacity" Value="0.5"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Height="18" Width="18" CornerRadius="9"
+                            Background="{TemplateBinding Background}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="1.0"/>
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+
+    <!--ButtonMenu-->
+    <Style x:Key="ButtonMenu" TargetType="RadioButton">
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Background" Value="Transparent"/>
+
+        <!--styles Text-->
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource SidebarTextUnselected}"/>
+        <Setter Property="TextElement.FontFamily" Value="{DynamicResource CairFont}"/>
+        <Setter Property="TextElement.FontSize" Value="14"/>
+        <Setter Property="TextElement.FontWeight" Value="Medium"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="6"
+                            Padding="15,0"
+                            >
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!--Button Styles on hover-->
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+
+                <Setter Property="Background" Value="{DynamicResource SidebarHoverBg}"/>
+                <Setter Property="TextElement.Foreground" Value="{DynamicResource SidebarTextselected}"/>
+            </Trigger>
+
+
+            <!--Button Styles on checked-->
+
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Margin" Value="0,0,5,0"/>
+                <Setter Property="Background" Value="{DynamicResource SidebarActiveBg}"/>
+                <Setter Property="TextElement.Foreground" Value="{DynamicResource SidebarTextselected}"/>
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+
+    <Style x:Key="ButtonLogout" TargetType="Button">
+        <Setter Property="Background" Value="#F23B3B"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Height="40"
+                            CornerRadius="10"
+                            Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+
+    </Style>
+    
+    
+    <!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+    <!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+    <!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+
+    <!--تنسيق خاص بزر الحفظ يحدد الابعاد و الخطوط و المظهر والعام-->
+    <Style x:Key="ButtonSave" TargetType="Button">
+        <Setter Property="Height" Value="40"/>
+
+        <!-- المسافة الخارجية حول الزر -->
+        <Setter Property="Margin" Value="10,4"/>
+        <Setter Property="Width" Value="120"/>
+
+        <!-- لون خلفية الزر في الحالة الطبيعية -->
+        <Setter Property="Background"   Value="{DynamicResource ButtonAddNormal}"/>
+
+
+
+        <!-- =========================
+         تنسيق النص داخل الزر
+         ========================= -->
+
+        <!-- لون النص -->
+        <Setter Property="TextElement.Foreground" Value="White"/>
+        <Setter Property="Content" Value="حفظ"/>
+        <!-- نوع الخط -->
+        <Setter Property="TextElement.FontFamily" Value="{DynamicResource CairFont}"/>
+
+        <!-- حجم الخط -->
+        <Setter Property="TextElement.FontSize" Value="14"/>
+
+        <!-- سماكة الخط -->
+        <Setter Property="TextElement.FontWeight" Value="Medium"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Height="40"
+                            CornerRadius="10"
+                            Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--تنسيق خاص بزر الخروج يحدد الابعاد و الخطوط و المظهر والعام-->
+    <Style x:Key="ButtonExit" TargetType="Button">
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Width" Value="80"/>
+
+        <!-- المسافة الخارجية حول الزر -->
+        <Setter Property="Margin" Value="10,4"/>
+        <Setter Property="Content" Value="الغاء"/>
+
+        <!-- لون خلفية الزر في الحالة الطبيعية -->
+        <Setter Property="Background"   Value="Red"/>
+
+
+
+        <!-- =========================
+         تنسيق النص داخل الزر
+         ========================= -->
+
+        <!-- لون النص -->
+        <Setter Property="TextElement.Foreground" Value="White"/>
+
+        <!-- نوع الخط -->
+        <Setter Property="TextElement.FontFamily" Value="{DynamicResource CairFont}"/>
+
+        <!-- حجم الخط -->
+        <Setter Property="TextElement.FontSize" Value="14"/>
+
+        <!-- سماكة الخط -->
+        <Setter Property="TextElement.FontWeight" Value="Medium"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Height="40"
+                            CornerRadius="10"
+                            Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--هذا زر الخروج في واجهه سجلات التدقيق التفاصيل في واجهه --> 
+    <Style x:Key="PanlCloseButtonStyle" TargetType="Button">
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Width" Value="30"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Content" Value="×"/>
+    </Style>
+    
+    
+    
+
+    <!--تنسيق خاص بزر الفلتره يحدد الابعاد و الخطوط و المظهر والعام-->
+    <Style x:Key="ButtonFilter" TargetType="Button">
+        <Setter Property="Height" Value="38"/>
+
+        <!-- المسافة الخارجية حول الزر -->
+        <Setter Property="Margin" Value="10,13,0,0"/>
+        <Setter Property="Width" Value="100"/>
+
+        <!-- لون خلفية الزر في الحالة الطبيعية -->
+        <Setter Property="Background"   Value="{DynamicResource ButtonAddNormal}"/>
+
+
+
+        <!-- =========================
+         تنسيق النص داخل الزر
+         ========================= -->
+
+        <!-- لون النص -->
+        <Setter Property="TextElement.Foreground" Value="White"/>
+        <Setter Property="Content" Value="تطبيق الفلاتر"/>
+        <!-- نوع الخط -->
+        <Setter Property="TextElement.FontFamily" Value="{DynamicResource CairFont}"/>
+
+        <!-- حجم الخط -->
+        <Setter Property="TextElement.FontSize" Value="14"/>
+
+        <!-- سماكة الخط -->
+        <Setter Property="TextElement.FontWeight" Value="Medium"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Height="40"
+                            CornerRadius="10"
+                            Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+   
+
+
+
+
+
+
+
+
+</ResourceDictionary>

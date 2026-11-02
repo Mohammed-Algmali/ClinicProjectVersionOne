@@ -1,0 +1,382 @@
+﻿<Window x:Class="MyClinicProject_VersionOne.View.PlatformAdmin.UserAndPermissions.RoleAndPermissios.EditRoleView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.PlatformAdmin.UserAndPermissions.RoleAndPermissios"
+        mc:Ignorable="d"
+        Title="EditRoleView"  Width="1200" MinHeight="800"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent"
+           FlowDirection="RightToLeft">
+    <Border Background="#FFB4D7FA" CornerRadius="2">
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!--عنوان راس الصفحه-->
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <!--المحتوي-->
+                <RowDefinition Height="Auto"/>
+                <!--المحتوي-->
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Style="{StaticResource MainBorderStyle}"
+                            >
+                <Grid >
+
+                    <Grid.ColumnDefinitions>
+
+                        <!-- الصورة -->
+                        <ColumnDefinition Width="Auto"/>
+
+                        <!-- العنوان والوصف -->
+                        <ColumnDefinition Width="*"/>
+
+                    </Grid.ColumnDefinitions>
+
+
+                    <!-- صورة المستخدم -->
+
+                    <Image Grid.Column="0"
+                                   Source="/Styles/Images/user.png"
+                                 Style="{StaticResource ImageHeaderStyle}"/>
+
+
+                    <!-- العنوان والوصف -->
+
+                    <StackPanel Grid.Column="1"
+                                Orientation="Vertical"
+                               >
+
+                        <TextBlock Text="إنشاء دور جديد"
+                                            Style="{StaticResource PrimaryTextTitleadd}"/>
+
+                        <TextBlock Text="قم بتحديد بيانات الدور والصلاحيات المسموحه له داخل النظام"
+                                                Style="{StaticResource SecondaryTextTitlePage}"/>
+
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+            
+            <!--الملاحظات التي غير قابله للتعديل-->
+
+            <Border  Grid.Row="1" Style="{StaticResource ReadOnlyInfoBorderStyle}">
+
+                <Grid  >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <!--العمود االاول الذي يةجد به الملاحظه-->
+                        <ColumnDefinition Width="*"/>
+                        <!--العمود الثاني الذي يحنوي علي رقم المستخدم -->
+                        <ColumnDefinition Width="*"/>
+                        <!--العمود الثالث والذي يحتوي علي تاريخ الانشاء -->
+                    </Grid.ColumnDefinitions>
+
+                    <!--العمود االاول الذي يةجد به الملاحظه-->
+                    <StackPanel Grid.Column="0" Margin="0,0,5,0" >
+                        <TextBlock Text="📝 بيانات تعريفيه -غير قابله للتعديل" Style="{StaticResource FiledLabelStyle}"/>
+                    </StackPanel>
+
+
+                    <!--العمود الثاني الذي يحنوي علي رقم المستخدم -->
+                    <StackPanel Grid.Column="1" Margin="0,0,5,0">
+                        <TextBlock Text="رقم المستخدم*" Style="{StaticResource FiledLabelStyle}"/>
+                        <TextBox Grid.Column="0"  
+                                     x:Name="txtRoleId" Text="DGN-000148" Style="{DynamicResource searchTextBoxStyle}"/>
+
+                    </StackPanel>
+
+                    <!--العمود الثالث والذي يحتوي علي تاريخ الانشاء -->
+                    <StackPanel Grid.Column="2" Margin="0,0,5,0">
+                        <TextBlock Text="تاربخ الانشاء*"  Style="{StaticResource FiledLabelStyle}"/>
+                        <TextBox x:Name="txtRoleCreateAt"  Text="2026/02/02" Style="{StaticResource TextBoxStyle}"/>
+                    </StackPanel>
+
+
+                </Grid>
+
+            </Border>
+
+
+            <!---->
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <!---->
+                        <RowDefinition Height="*"/>
+                        <!---->
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Style="{StaticResource ReadOnlyInfoBorderStyle}">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource CardHeaderStyle}" Text="❶ معلومات الدور"/>
+
+                            <TextBlock Style="{StaticResource TextSecond}" TextWrapping="Wrap" Text="بعد انشاء الدور يمكن للمستخدم استخدام النظام حسب الصلاحيات المسموح بها"/>
+
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="1" Style="{StaticResource MainBorderStyle}">
+                        <StackPanel>
+
+                        </StackPanel>
+
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Column="1" Margin="5,0,0,0" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <!---->
+                        <RowDefinition Height="*"/>
+                        <!---->
+                    </Grid.RowDefinitions>
+
+
+                    <Border Grid.Row="0" Style="{StaticResource MainBorderStyle}">
+                        <StackPanel>
+                            <TextBlock Text="❶ البيانات الأساسية" Style="{StaticResource CardHeaderStyle}"/>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+
+                                <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                                    <TextBlock Text="اسم الدور*" Style="{StaticResource FiledLabelStyle}"/>
+                                    <TextBox x:Name="txtRoleName"  Text="مثال: محمد امين محمد غالب " Style="{StaticResource TextBoxStyle}"/>
+                                </StackPanel>
+
+
+                                <StackPanel Grid.Column="1" Margin="0,0,0,0">
+                                    <TextBlock Text="*المستوى" Style="{StaticResource FiledLabelStyle}"/>
+                                    <TextBox   Text="أدخل اسم المستخدم ..." Style="{StaticResource TextBoxStyle}"/>
+                                </StackPanel>
+
+
+
+                            </Grid>
+                            <StackPanel >
+                                <TextBlock Text="الوصف" Style="{StaticResource FiledLabelStyle}" />
+                                <TextBox  x:Name="txtRoleDescription" Text="اداره عمليات العياده اليوميه والموظفين والمرضى"  Style="{StaticResource TextBoxStyle}"/>
+
+                            </StackPanel>
+                        </StackPanel>
+
+
+
+
+                    </Border>
+
+                    <Border Grid.Row="1" Style="{StaticResource MainBorderStyle}">
+                        <UniformGrid Columns="4">
+
+                            <!-- 1. إدارة المرضى -->
+                            <Border Background="White" CornerRadius="10" Padding="15" Margin="5" BorderBrush="#E2E8F0" BorderThickness="1">
+                                <StackPanel>
+                                    <StackPanel Margin="0,0,0,10">
+                                        <StackPanel Orientation="Horizontal" >
+                                            <TextBlock Text="👤" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="إدارة المرضى" FontWeight="Bold" FontSize="13" Foreground="#1E293B"/>
+
+                                        </StackPanel>
+                                        <TextBlock Text="6 صلاحيات" FontSize="10" Foreground="#94A3B8"  />
+                                    </StackPanel>
+                                    <Separator Background="#F1F5F9" Margin="0,0,0,10"/>
+                                    <CheckBox Content="عرض قائمة المرضى" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="إضافة مريض جديد" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="تعديل بيانات المريض" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="الوصول للسجل الطبي" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="إدارة التحويلات والإحالات" IsChecked="True" Margin="0,0,0,8"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- 2. المواعيد -->
+                            <Border Background="White" CornerRadius="10" Padding="15" Margin="5" BorderBrush="#E2E8F0" BorderThickness="1">
+                                <StackPanel>
+                                    <StackPanel Margin="0,0,0,10">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="📅" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="المواعيد" FontWeight="Bold" FontSize="13" Foreground="#1E293B"/>
+
+                                        </StackPanel>
+                                        <TextBlock Text="5 صلاحيات" FontSize="10" Foreground="#94A3B8"  Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                    <Separator Background="#F1F5F9" Margin="0,0,0,10"/>
+                                    <CheckBox Content="عرض المواعيد" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="إضافة موعد" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="إلغاء موعد" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="إدارة قوائم الانتظار" IsChecked="True" Margin="0,0,0,8"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- 3. الزيارات والفحوصات -->
+                            <Border Background="#FFDAE6EE" CornerRadius="10" Padding="15" Margin="5" BorderBrush="#E2E8F0" BorderThickness="1">
+                                <StackPanel>
+                                    <StackPanel Margin="0,0,0,10" >
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="🩺" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="الزيارات والفحوصات" FontWeight="Bold" FontSize="13" Foreground="#1E293B"/>
+
+                                        </StackPanel>
+                                        <TextBlock Text="5 صلاحيات" FontSize="10" Foreground="#94A3B8" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                    <Separator Background="#F1F5F9" Margin="0,0,0,10"/>
+                                    <CheckBox Content="إنشاء زيارة طبية" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="تعديل الزيارة" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="إضافة نتائج الفحوصات" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="طلب التحاليل المخبرية" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="عرض النتائج" IsChecked="True" Margin="0,0,0,8"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- 4. التقارير -->
+                            <Border Background="White" CornerRadius="10" Padding="15" Margin="5" BorderBrush="#E2E8F0" BorderThickness="1">
+                                <StackPanel>
+                                    <StackPanel Margin="0,0,0,10">
+                                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                                            <TextBlock Text="📊" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="التقارير" FontWeight="Bold" FontSize="13" Foreground="#1E293B"/>
+
+                                        </StackPanel>
+                                        <TextBlock Text="4 صلاحيات" FontSize="10" Foreground="#94A3B8" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                    <Separator Background="#F1F5F9" Margin="0,0,0,10"/>
+                                    <CheckBox Content="عرض التقارير" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="تصدير التقارير" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="تقارير إدارية" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="تقارير طبية" IsChecked="True" Margin="0,0,0,8"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- 5. المستخدمين -->
+                            <Border Background="White" CornerRadius="10" Padding="15" Margin="5" BorderBrush="#E2E8F0" BorderThickness="1">
+                                <StackPanel>
+                                    <StackPanel Margin="0,0,0,10">
+                                        <StackPanel Orientation="Horizontal" >
+                                            <TextBlock Text="👥" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="إدارة المستخدمين" FontWeight="Bold" FontSize="13" Foreground="#1E293B"/>
+
+                                        </StackPanel>
+                                        <TextBlock Text="5 صلاحيات" FontSize="10" Foreground="#94A3B8" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                    <Separator Background="#F1F5F9" Margin="0,0,0,10"/>
+                                    <CheckBox Content="إضافة مستخدم" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="تعديل مستخدم" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="حذف مستخدم" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="إدارة الأدوار والصلاحيات" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="عرض سجل النشاطات" IsChecked="True" Margin="0,0,0,8"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- 6. المنشأة والفروع -->
+                            <Border Background="White" CornerRadius="10" Padding="15" Margin="5" BorderBrush="#E2E8F0" BorderThickness="1">
+                                <StackPanel>
+                                    <StackPanel Margin="0,0,0,10">
+                                        <StackPanel Orientation="Horizontal" >
+                                            <TextBlock Text="🏢" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="إدارة المنشأة والفروع" FontWeight="Bold" FontSize="13" Foreground="#1E293B"/>
+
+                                        </StackPanel>
+                                        <TextBlock Text="4 صلاحيات" FontSize="10" Foreground="#94A3B8" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                    <Separator Background="#F1F5F9" Margin="0,0,0,10"/>
+                                    <CheckBox Content="عرض بيانات المنشأة" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="تعديل بيانات المنشأة" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="إدارة الفروع" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="إدارة الأقسام" IsChecked="True" Margin="0,0,0,8"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- 7. الصيدلية والمخزون -->
+                            <Border Background="White" CornerRadius="10" Padding="15" Margin="5" BorderBrush="#E2E8F0" BorderThickness="1">
+                                <StackPanel>
+                                    <StackPanel Margin="0,0,0,10">
+                                        <StackPanel Orientation="Horizontal" >
+                                            <TextBlock Text="💊" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="الصيدلية والمخزون" FontWeight="Bold" FontSize="13" Foreground="#1E293B"/>
+
+                                        </StackPanel>
+                                        <TextBlock Text="4 صلاحيات" FontSize="10" Foreground="#94A3B8" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                    <Separator Background="#F1F5F9" Margin="0,0,0,10"/>
+                                    <CheckBox Content="عرض الأدوية" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="إضافة دواء" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="تعديل المخزون" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="إصدار وصفة طبية" IsChecked="True" Margin="0,0,0,8"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- 8. المالية والفواتير -->
+                            <Border Background="White" CornerRadius="10" Padding="15" Margin="5" BorderBrush="#E2E8F0" BorderThickness="1">
+                                <StackPanel>
+                                    <StackPanel Margin="0,0,0,10">
+                                        <StackPanel Orientation="Horizontal" >
+                                            <TextBlock Text="💳" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="المالية والفواتير" FontWeight="Bold" FontSize="13" Foreground="#1E293B"/>
+
+                                        </StackPanel>
+                                        <TextBlock Text="4 صلاحيات" FontSize="10" Foreground="#94A3B8" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                    <Separator Background="#F1F5F9" Margin="0,0,0,10"/>
+                                    <CheckBox Content="عرض الفواتير" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="إصدار فاتورة" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="تعديل فاتورة" IsChecked="True" Margin="0,0,0,8"/>
+                                    <CheckBox Content="إدارة المدفوعات" IsChecked="True" Margin="0,0,0,8"/>
+                                </StackPanel>
+                            </Border>
+
+                        </UniformGrid>
+
+                    </Border>
+
+
+
+
+
+
+                </Grid>
+
+
+            </Grid>
+
+
+            <!--ازرار الواجهه-->
+
+            <Border Grid.Row="3"
+                Style="{StaticResource MainBorderStyle}">
+
+                <StackPanel 
+                            Orientation="Horizontal"
+                            FlowDirection="LeftToRight">
+                    <!-- زر الإلغاء -->
+
+                    <Button Style="{StaticResource ButtonExit}"
+                            x:Name="txtPatientCreateExit"
+                             />
+
+
+                    <!-- زر الحفظ -->
+
+                    <Button Style="{StaticResource ButtonSave}"
+                            x:Name="txtPatientCreateSave"
+                                 />
+
+
+                </StackPanel>
+
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>

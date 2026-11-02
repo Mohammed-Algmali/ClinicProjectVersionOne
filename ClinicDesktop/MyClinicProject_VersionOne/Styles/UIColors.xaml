@@ -1,0 +1,317 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="BackgroundMenu">#FF011424</SolidColorBrush>
+    <!--sidebarText-->
+    <SolidColorBrush x:Key="SidebarTextUnselected">#FF8A99AD</SolidColorBrush>
+    <SolidColorBrush x:Key="SidebarTextselected">#FFFFFF</SolidColorBrush>
+    <SolidColorBrush x:Key="SidebarActiveBg">#0084FF</SolidColorBrush>
+    <SolidColorBrush x:Key="SidebarHoverBg">#1E293B</SolidColorBrush>
+    <!--ButtonAdd-->
+    <SolidColorBrush x:Key="ButtonTextNormal">#FFFFFF</SolidColorBrush>
+    <SolidColorBrush x:Key="ButtonAddNormal">#0048FF</SolidColorBrush>
+    <SolidColorBrush x:Key="ButtonAddActive">#005CB8</SolidColorBrush>
+    <SolidColorBrush x:Key="ButtonADDHoverB">#0070DA</SolidColorBrush>
+    
+   
+    
+    
+  
+
+
+  
+    
+    <!--تنسيق الصور الموجوده في اعلى النوافذ جوار العنوان-->
+    <Style x:Key="ImageHeaderStyle" TargetType="Image">
+        <Setter Property="Margin" Value="0,0,15,0"/>
+    </Style>
+
+
+
+
+
+    <!-- الاستخدام لتغليف وتنظيم الواجهه في كروت بيضاء ذات زوايا دائريه-->
+    <Style x:Key="MainBorderStyle" TargetType="Border">
+        <Setter Property="Background" Value="white"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Margin" Value="0,0,0,5"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        
+    </Style>
+
+    <Style x:Key="ReadOnlyInfoBorderStyle" TargetType="Border">
+        <Setter Property="Background" Value="#F8FAFC"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Margin" Value="0,0,0,5"/>
+        <Setter Property="CornerRadius" Value="8"/>
+
+    </Style>
+
+
+
+
+    <!--
+    تنسيق زر الإضافة (ADD Button)
+    هذا الـ Style مخصص لعناصر RadioButton
+    ويحدد الشكل والألوان والخطوط وحالات الزر
+-->
+    <Style x:Key="ButtonADD" TargetType="RadioButton">
+
+        <!-- =========================
+         الخصائص الأساسية للزر
+         ========================= -->
+
+        <!-- ارتفاع الزر -->
+        <Setter Property="Height" Value="40"/>
+
+        <!-- المسافة الخارجية حول الزر -->
+        <Setter Property="Margin" Value="10,4"/>
+
+        <!-- لون خلفية الزر في الحالة الطبيعية -->
+        <Setter Property="Background"   Value="{DynamicResource ButtonAddNormal}"/>
+
+
+
+        <!-- =========================
+         تنسيق النص داخل الزر
+         ========================= -->
+
+        <!-- لون النص -->
+        <Setter Property="TextElement.Foreground" Value="White"/>
+
+        <!-- نوع الخط -->
+        <Setter Property="TextElement.FontFamily" Value="{DynamicResource CairFont}"/>
+
+        <!-- حجم الخط -->
+        <Setter Property="TextElement.FontSize" Value="14"/>
+
+        <!-- سماكة الخط -->
+        <Setter Property="TextElement.FontWeight" Value="Medium"/>
+
+
+        <!-- =========================
+         القالب الخاص بالزر
+         ========================= -->
+
+        <Setter Property="Template">
+            <Setter.Value>
+
+                <!--
+                إعادة تصميم RadioButton بالكامل
+                باستخدام ControlTemplate
+            -->
+                <ControlTemplate TargetType="RadioButton">
+
+                    <!--
+                    Border يمثل الشكل الخارجي للزر
+                    ويستخدم لإعطاء الزر خلفية وحواف دائرية
+                -->
+                    <Border
+                    Background="{TemplateBinding Background}"
+                    CornerRadius="6"
+                    Padding="5,0">
+
+                        <!--
+                        عرض محتوى الزر مثل النص أو أي عنصر آخر
+                        مع محاذاته عموديًا وأفقيًا
+                    -->
+                        <ContentPresenter
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"/>
+
+                    </Border>
+
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+
+
+        <!-- =========================
+         حالات الزر
+         ========================= -->
+
+        <Style.Triggers>
+
+            <!--
+            حالة مرور مؤشر الماوس فوق الزر
+            Mouse Hover
+        -->
+            <Trigger Property="IsMouseOver" Value="True">
+
+                <!-- تغيير لون الخلفية عند مرور الماوس -->
+                <Setter Property="Background" Value="{DynamicResource SidebarHoverBg}"/>
+
+                <!-- تغيير لون النص عند مرور الماوس -->
+                <Setter Property="TextElement.Foreground" Value="{DynamicResource SidebarTextselected}"/>
+
+            </Trigger>
+
+
+            <!--
+            حالة تحديد الزر
+            Checked / Selected
+        -->
+            <Trigger Property="IsChecked" Value="True">
+
+                <!-- لون الخلفية عندما يكون الزر محددًا -->
+                <Setter Property="Background" Value="{DynamicResource SidebarActiveBg}"/>
+
+                <!-- لون النص عندما يكون الزر محددًا -->
+                <Setter Property="TextElement.Foreground" Value="{DynamicResource SidebarTextselected}"/>
+
+            </Trigger>
+
+        </Style.Triggers>
+
+    </Style>
+    
+    
+    <!--الوان البطاقات الاحصائيه العامه-->
+
+    <!-- Background يستخدم للاحصائيات الشامله لون الخلفيه-->
+    <SolidColorBrush x:Key="StatCardBackground">#FF011424</SolidColorBrush>
+    <!--لون الحدود حق البطاقهBorderBrush -->
+    <SolidColorBrush x:Key="StatCardBorderBrush">#0048FF</SolidColorBrush>
+    <!-- لون العنوان الفرعي (Header) -->
+    <SolidColorBrush x:Key="statCardHeader">#0084FF</SolidColorBrush>
+    <!-- الرقم الإحصائي الرئيسي (Content) -->
+    <SolidColorBrush x:Key="StatCardContent">#25525525</SolidColorBrush>
+
+    <!-- 
+    ===================================================================
+    [STATISTIC CARD TEMPLATE] - قالب بطاقات الإحصائيات الموحد للتطبيق
+    ===================================================================
+                   -->
+    <!---->
+    <Style x:Key="StatisticCardStyle" TargetType="HeaderedContentControl">
+        <Setter Property="Background" Value="{DynamicResource StatCardBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource StatCardBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="15"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="HeaderedContentControl">
+                    <Border Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        CornerRadius="12" 
+                        Padding="{TemplateBinding Padding}">
+
+                        <!-- تأثير الظل الخفيف لجعل البطاقة عصرية ومرفوعة -->
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="15" ShadowDepth="2" Direction="270" Opacity="0.04" Color="#0F172A"/>
+                        </Border.Effect>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <!-- النصوص (يمين) -->
+                                <ColumnDefinition Width="Auto"/>
+                                <!-- الأيقونة (يسار) -->
+                            </Grid.ColumnDefinitions>
+
+                            <!-- قسم النصوص: العنوان والإحصائية رقمياً -->
+                            <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                <!-- العنوان الفرعي (Header) -->
+                                <ContentPresenter Content="{TemplateBinding Header}" 
+                                              TextBlock.FontSize="13" 
+                                              TextBlock.Foreground="{DynamicResource statCardHeader}" 
+                                              TextBlock.FontWeight="Medium" 
+                                              Margin="0,0,0,4"/>
+
+                                <!-- الرقم الإحصائي الرئيسي (Content) -->
+                                <ContentPresenter Content="{TemplateBinding Content}" 
+                                              TextBlock.FontSize="26" 
+                                              TextBlock.Foreground="White" 
+                                              TextBlock.FontWeight="Bold"/>
+                            </StackPanel>
+
+                            <!-- قسم الأيقونة الدائرية على اليسار (مخزنة في الـ Tag) -->
+                            <Border Grid.Column="1" 
+                                Background="#F1F5F9" 
+                                Width="46" 
+                                Height="46" 
+                                CornerRadius="23" 
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Right">
+
+                                <ContentPresenter Content="{TemplateBinding Tag}"
+                                              TextBlock.FontSize="20" 
+                                              HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+    <Style x:Key="PatientTabButtonStyle" TargetType="RadioButton">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="#64748B"/>
+        <Setter Property="Padding" Value="15,8"/>
+        <Setter Property="Margin" Value="0,0,8,0"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border x:Name="border" 
+                            Background="{TemplateBinding Background}" 
+                            CornerRadius="6" 
+                            Padding="{TemplateBinding Padding}" 
+                            Margin="{TemplateBinding Margin}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#F1F5F9"/>
+                            <Setter Property="Foreground" Value="#1E293B"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#E0F2FE"/>
+                            <Setter Property="Foreground" Value="#0284C7"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    
+    <!--بطاقه معلومات المريض-->
+
+
+    <Style x:Key="PatientMetaItemStyle" TargetType="HeaderedContentControl">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="20,0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="HeaderedContentControl">
+                    <StackPanel VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                        <!-- العنوان (Label العلوي) -->
+                        <ContentPresenter Content="{TemplateBinding Header}" 
+                                      TextBlock.Foreground="#64748B" 
+                                      TextBlock.FontSize="11" />
+                        <!-- القيمة (Value السفلي) -->
+                        <ContentPresenter Content="{TemplateBinding Content}" 
+                                      TextBlock.Foreground="#1E293B" 
+                                      TextBlock.FontSize="13" 
+                                      TextBlock.FontWeight="Bold" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+
+</ResourceDictionary>

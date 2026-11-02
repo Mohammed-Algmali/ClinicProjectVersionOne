@@ -1,0 +1,192 @@
+﻿<UserControl x:Class="MyClinicProject_VersionOne.View.HealthCareSystem.PatientAndAppointments.CreatePatientView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.HealthCareSystem.PatientAndAppointments"
+             mc:Ignorable="d" 
+              d:DesignHeight="550" d:DesignWidth="900"
+               FlowDirection="RightToLeft">
+    <Border   Background="#FFB4D7FA" CornerRadius="2">
+
+
+        <Grid Margin="5" >
+            <Grid.RowDefinitions>
+
+                <!-- العنوان والنص التوضيحي -->
+                <RowDefinition Height="Auto"/>
+
+                <!--"❶ البيانات الأساسية"-->
+                <RowDefinition Height="Auto"/>
+                <!--"❷ العنوان ومعلومات التواصل"-->
+                <RowDefinition Height="Auto"/>
+                <!-- ملاحظات -->
+                <RowDefinition Height="Auto"/>
+                <!-- الازرار -->
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- 1. العنوان والنص التوضيحي -->
+            <!-- العنوان والوصف -->
+            <Border Grid.Row="0" Style="{StaticResource MainBorderStyle}"
+                            >
+                <Grid >
+
+                    <Grid.ColumnDefinitions>
+
+                        <!-- الصورة -->
+                        <ColumnDefinition Width="Auto"/>
+
+                        <!-- العنوان والوصف -->
+                        <ColumnDefinition Width="*"/>
+
+                    </Grid.ColumnDefinitions>
+
+
+                    <!-- صورة المستخدم -->
+
+                    <Image Grid.Column="0"
+                                   Source="/Styles/Images/user.png"
+                                 Style="{StaticResource ImageHeaderStyle}"
+                                 />
+
+
+                    <!-- العنوان والوصف -->
+
+                    <StackPanel Grid.Column="1"
+                               >
+
+
+                        <TextBlock Text="اضافه مريض جديد"
+                                              Style="{StaticResource PrimaryTextTitleadd}"/>
+
+                        <TextBlock   Text="قم بادخال بيانات المريض  الجديد في النظام" 
+                                              Style="{StaticResource SecondaryTextTitlePage}"/>
+
+
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+
+            <!--"❶ البيانات الأساسية"-->
+            <Border Grid.Row="1" Style="{StaticResource MainBorderStyle}">
+                <StackPanel>
+                    <TextBlock Text="❶ البيانات الأساسية" Style="{StaticResource CardHeaderStyle}"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+
+                        <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                            <TextBlock Text="الاسم الكامل*" Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox x:Name="txtPatientName"  Text="مثال: محمد امين محمد غالب " Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Column="1" Margin="0,0,5,0">
+                            <TextBlock Text="* اسم المستخدم" Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox  x:Name="txtPatient" Text="أدخل اسم المستخدم ..." Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Column="2" Margin="0,0,5,0">
+                            <TextBlock Text="الجنس" Style="{StaticResource FiledLabelStyle}" />
+                            <TextBox  x:Name="txtPatientGender" Text="1"  Style="{StaticResource TextBoxStyle}"/>
+
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+
+
+
+
+            </Border>
+
+            <!--"❷ العنوان ومعلومات التواصل"-->
+            <Border Grid.Row="2" Style="{StaticResource MainBorderStyle}">
+                <StackPanel>
+                    <TextBlock Text="❷ العنوان ومعلومات التواصل" Style="{StaticResource CardHeaderStyle}"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Margin="0,0,5,0" >
+                            <TextBlock Text=" الهاتف*" Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox x:Name="txtPatientPhone" Style="{StaticResource TextBoxStyle}" Text="774074066" />
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Column="1" Margin="0,0,5,0">
+                            <TextBlock Text="* الايميل" Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox   x:Name="txtPatientEmail" Text="Mohammed@moh.com ..." Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Column="2" Margin="0,0,5,0">
+                            <TextBlock Text=" العنوان*" Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox x:Name="txtPatientAddress" Text="مثلا تعز-جوار مصانع هائل سعيد" Style="{StaticResource TextBoxStyle}" />
+
+                        </StackPanel>
+
+
+
+                    </Grid>
+                </StackPanel>
+
+            </Border>
+
+            <!-- 4. الملاحظات -->
+            <Border Grid.Row="3" Style="{StaticResource MainBorderStyle}" >
+                <StackPanel>
+                    <TextBlock Text="📝 ملاحظات إضافية" Style="{StaticResource CardHeaderStyle}"/>
+                    <TextBox x:Name="xtPatientNotes" Height="60" TextWrapping="Wrap" AcceptsReturn="True" Text="txtPatientPhone/txtPatientEmail/txtPatientAddress/txtPatientNotes/txtPatientCreateExit/txtPatientCreateSave/txtPatientGender/txtPatientName/يجب اضافه بيانات غير هذا مثل الجنس و الجنسيه وبعض من البيانات  تنبيه هام هذا الواجهه عند تكبير الواجهه مغير متجاوب"/>
+                    <TextBlock Text="0/500" FontSize="10" Foreground="Gray" HorizontalAlignment="Right" Margin="0,2,0,0"/>
+                </StackPanel>
+
+            </Border>
+
+
+
+            <!--الازرار  -->
+            <Border Grid.Row="4"
+                Style="{StaticResource MainBorderStyle}">
+
+                <StackPanel 
+                            Orientation="Horizontal"
+                            FlowDirection="LeftToRight">
+                    <!-- زر الإلغاء -->
+
+                    <Button Style="{StaticResource ButtonExit}"
+                            x:Name="txtPatientCreateExit"
+                             />
+
+
+                    <!-- زر الحفظ -->
+
+                    <Button Style="{StaticResource ButtonSave}"
+                            x:Name="txtPatientCreateSave"
+                                 />
+
+                    
+                </StackPanel>
+
+            </Border>
+
+
+
+
+
+        </Grid>
+
+
+    </Border>
+</UserControl>

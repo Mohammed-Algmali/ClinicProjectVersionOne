@@ -1,0 +1,190 @@
+﻿<UserControl x:Class="MyClinicProject_VersionOne.View.PlatformAdmin.FacilitiesManagement.Facility.FacilityListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.PlatformAdmin.FacilitiesManagement.Facility"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="1200"
+              FlowDirection="RightToLeft"
+             Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition  Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Top">
+
+                <Image Source="/Styles/Images/user.png"
+                      Style="{StaticResource ImageHeaderStyle}"/>
+
+                <StackPanel Orientation="Vertical"
+                                 VerticalAlignment="Center">
+
+                    <TextBlock Text="ادارة المنشآت"
+                               Style="{StaticResource PrimaryTextTitleadd}"
+                    />
+
+                    <TextBlock Text="متابعه الحسابات الاداريه للمنشآت الطبيه المشتركه " 
+                               Style="{StaticResource SecondaryTextTitlePage}"
+                    />
+
+                </StackPanel>
+            </StackPanel>
+
+            <!-- ============================================================
+                     مربع البحث عن المستخدمين
+
+                     Text:
+                     ربط النص الذي يكتبه المستخدم بالخاصية SearchText
+                     الموجودة داخل UserControllerViewModel.
+
+                     UpdateSourceTrigger=PropertyChanged:
+                     تحديث SearchText مباشرة مع كل حرف يتم كتابته،
+                     حتى نستطيع تنفيذ البحث بشكل مباشر لاحقًا.
+                     ============================================================ -->
+
+            <TextBox Grid.Column="1"
+                     Style="{DynamicResource searchTextBoxStyle}"
+                     
+                     Tag="ابحث باسم المنشاه او رقم الهاتف"
+            />
+
+
+
+
+            <RadioButton  Grid.Column="2" x:Name="btnCreateFacility"
+                             Style="{StaticResource ButtonADD}"
+                             Content="اضافه منشاه" Checked="btnCreateFacility_Checked"
+            />
+
+        </Grid>
+
+        <!-- ============================================================
+             DataGrid المستخدمين
+
+             ItemsSource:
+             مصدر البيانات المعروضة في الجدول.
+
+             SelectedItem:
+             المستخدم الذي قام المستخدم بتحديده من الجدول.
+
+             عند تحديد صف:
+             يتم وضع المستخدم المحدد داخل
+             UserControllerViewModel.SelectedUser
+             ============================================================ -->
+
+        <DataGrid Grid.Row="1"
+                  x:Name="dataGridFacilities"
+                  ItemsSource="{Binding FacilitiesList}"
+                  AutoGenerateColumns="False" >
+            <DataGrid.Columns>
+
+                <!-- رقم المستخدم -->
+                <DataGridTextColumn Header="رقم المنشاه" 
+                            Width="80"
+                            Binding="{Binding FacilityId}"/>
+
+                <!-- رقم الصلاحيه او سمهاء -->
+                <DataGridTextColumn Header="اسم المنشاه"
+                            Width="*"
+                            Binding="{Binding FacilityName}"/>
+
+                <!-- الاسم الكامل  -->
+                <DataGridTextColumn Header="اسم مدير المنشاه" 
+                            Width="*"
+                            Binding="{Binding FacilityManagerName }"/>
+
+                <!-- اسم المستخدم -->
+                <DataGridTextColumn Header="النوع"
+                            Width="*"
+                            Binding="{Binding FacilityType }"/>
+
+                <DataGridTextColumn Header="رقم الترخيض"
+                            Width="*"
+                            Binding="{Binding FacilityLicenseNumber }"/>
+
+                <DataGridTextColumn Header="تاريخ اصدار الترخيص"
+                            Width="*"
+                            Binding="{Binding FacilityLicenseIssueDate }"/>
+
+                <DataGridTextColumn Header="تاريخ الانتهاء"
+                            Width="*"
+                            Binding="{Binding FacilityLicenseExpiryDate }"/>
+
+                <!-- الحالة -->
+                <DataGridTextColumn Header="الحالة"
+                            Width="60"
+                            Binding="{Binding FacilityStatus}"/>
+
+                <!-- رمز المنشاه -->
+                <DataGridTextColumn Header="رمز المنشاء"
+                            Width="60"
+                            Binding="{Binding FacilityCode}"/>
+
+                <!-- الدوله -->
+                <DataGridTextColumn Header="الدوله"
+                            Width="60"
+                            Binding="{Binding FacilityCountry}"/>
+
+                <!-- المدينه -->
+                <DataGridTextColumn Header="المدينه"
+                            Width="60"
+                            Binding="{Binding FacilityCity}"/>
+
+                <DataGridTextColumn Header="العنوان" 
+                            Width="*"
+                            Binding="{Binding FacilityAddress}"/>
+
+
+                <!-- رقم الهاتف -->
+                <DataGridTextColumn Header="رقم الهاتف"
+                            Width="*"
+                            Binding="{Binding FacilityPhone }"/>
+
+                <!-- البريد الإلكتروني -->
+                <DataGridTextColumn Header="البريد الإلكتروني"
+                            Width="*"
+                            Binding="{Binding FacilityEmail}"/>
+
+                <!-- الموقع الالكتروني -->
+                <DataGridTextColumn Header="الموقع الالكتروني"
+                            Width="60"
+                            Binding="{Binding FacilityWebsiteUrl}"/>
+
+
+
+
+                <!-- تاريخ الانشاء -->
+                <DataGridTextColumn Header="تاريخ الانشاء"
+                            Width="*"
+                            Binding="{Binding FacilityCreatedAt, StringFormat=yyyy-MM-dd}"/>
+
+                <!-- الإجراءات سنضيفها لاحقًا -->
+                <!-- ============================================================
+                     الإجراءات
+
+                     هذا العمود مخصص للأزرار التي سنتعامل من خلالها
+                     مع المستخدم المحدد.
+
+                     حاليًا سنضع زر "تعديل" فقط.
+                     وسنضيف لاحقًا:
+                     - تعديل
+                     - تعطيل
+                     - حذف
+                     ============================================================ -->
+
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

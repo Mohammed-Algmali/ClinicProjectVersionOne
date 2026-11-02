@@ -1,0 +1,141 @@
+﻿<Window x:Class="MyClinicProject_VersionOne.View.HealthCareSystem.MedicalAdministration.PharmacyUnit.CreatePrescriptionView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.HealthCareSystem.MedicalAdministration.PharmacyUnit"
+        mc:Ignorable="d"
+        Title="CreatePrescriptionView" Height="730" Width="850"
+        Background="Transparent"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        FlowDirection="RightToLeft"
+        >
+    <Border  Background="#FFB4D7FA" CornerRadius="5">
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/><!--الصف الاول يحتوي على العنوان-->
+                <RowDefinition Height="*"/><!--الصف الثاني يحتوي على المحتوى للوصفه-->
+                <RowDefinition Height="Auto"/><!--صف الثالث للازرار والتنبيهات-->
+            </Grid.RowDefinitions>
+
+            
+            <!--الصف الاول يحتوي على العنوان-->
+            <Border Grid.Row="0"  Style="{StaticResource MainBorderStyle}"
+                            >
+                <Grid >
+
+                    <Grid.ColumnDefinitions>
+
+                        <!-- الصورة -->
+                        <ColumnDefinition Width="Auto"/>
+
+                        <!-- العنوان والوصف -->
+                        <ColumnDefinition Width="*"/>
+
+                    </Grid.ColumnDefinitions>
+
+
+                    <!-- صورة  -->
+
+                    <Image Grid.Column="0"
+                                   Source="/Styles/Images/user.png"
+                                   Width="42"
+                                   Height="42"
+                                   Margin="5,5,5,5"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Right"/>
+
+
+                    <!-- العنوان والوصف -->
+
+                    <StackPanel Grid.Column="1"
+                                Orientation="Vertical"
+                                VerticalAlignment="Center">
+                        <TextBlock Text="إنشاء وصفه طبيه"
+                                            Style="{StaticResource PrimaryTextTitleadd}"/>
+
+                        <TextBlock Text="قم بادخال بيانات الوصفه الطبيه الجديد في النظام"
+                                                Style="{StaticResource SecondaryTextTitlePage}"/>
+
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+
+
+            <!--الصف الثاني يحتوي على المحتوى للوصفه-->
+            <Border Grid.Row="1" Style="{StaticResource MainBorderStyle}">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/><!--الصف الاول يحتوي على العنوان-->
+                            <RowDefinition Height="*"/><!--الصف الثاني يحتوي على المحتوى للوصفه الdatagrid-->
+                            
+                        </Grid.RowDefinitions>
+
+                        <!--الصف الاول يحتوي على العنوان-->
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/> <!--العمود الاول يحتوي على عنوان الادويه الطبيه-->
+                                <ColumnDefinition Width="Auto"/><!--العمود الاول يحتوي على الزر اضافه دواؤ-->
+                            </Grid.ColumnDefinitions>
+                            <!--العمود الاول يحتوي على عنوان الادويه الطبيه-->
+                            <TextBlock Grid.Column="0" Text="📝 الادويه في الوصفه" Style="{StaticResource CardHeaderStyle}"/>
+
+                            <!--العمود الاول يحتوي على الزر اضافه دواء-->
+                            <RadioButton Grid.Column="1"
+                             Style="{StaticResource ButtonADD}"
+                             Content="📝 اضافه دواء"
+                             />
+
+                        </Grid>
+                        <!--الصف الثاني يحتوي على المحتوى للوصفه الdatagrid-->
+                        <DataGrid Grid.Row="1" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="#" Width="50" />
+                                <DataGridTextColumn Header="اسم الدواء" Width="2*"/>
+                                <DataGridTextColumn Header="تكرار الجرعه" Width="120"/>
+                                <DataGridTextColumn Header="طريقه الاعطاء" Width="1.5*"/>
+                                <DataGridTextColumn Header="تركيزالدواء/القوة" Width="2*"/>
+                                <DataGridTextColumn Header="مده العلاج" Width="90"/>
+                                <DataGridTextColumn Header="تعليمات" Width="110"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        
+                       
+                    </Grid> 
+                   
+                </ScrollViewer>
+            </Border>
+
+            <!--الصف الخامس والذي يحتوي على الازرار-->
+
+            <Border Grid.Row="2" 
+                Style="{StaticResource MainBorderStyle}">
+
+                <StackPanel 
+                            Orientation="Horizontal"
+                            FlowDirection="LeftToRight"
+>
+                    <!-- زر الإلغاء -->
+
+                    <Button Style="{StaticResource ButtonExit}"
+                            x:Name="btnCreatePrescriptionExit"
+                             />
+
+
+                    <!-- زر الحفظ تم تسميه كل مافي الواجهه -->
+
+                    <Button Style="{StaticResource ButtonSave}"
+                            x:Name="btnCreatePrescriptionSave"
+                                 />
+
+
+                </StackPanel>
+
+            </Border>
+
+        </Grid> 
+    </Border>
+</Window>

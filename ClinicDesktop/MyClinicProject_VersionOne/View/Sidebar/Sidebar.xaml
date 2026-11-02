@@ -1,0 +1,170 @@
+﻿<UserControl x:Class="MyClinicProject_VersionOne.View.Sidebar.Sidebar" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.Sidebar" 
+             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="290" FlowDirection="RightToLeft">
+    
+            <!-- ====================================================== -->
+            <!-- الموارد المستخدمة داخل القائمة الجانبية -->
+            <!-- ====================================================== -->
+    <UserControl.Resources>
+        <!-- تحويل قيمة Boolean إلى Visibility: True = يظهر العنصر. False = يختفي العنصر. نستخدمه لإظهار وإخفاء القوائم الفرعية. -->
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </UserControl.Resources>
+    
+    
+    <!-- ====================================================== -->
+    <!-- الحاوية الخارجية للقائمة الجانبية -->
+    <!-- ====================================================== -->
+    
+    <Border Background="#0F2747" CornerRadius="10,0,0,10">
+        
+        <!-- Grid هو الحاوية الرئيسية التي تنظم محتويات القائمة. Margin يضيف مسافة داخلية من الجهة اليسرى. -->
+        
+        <Grid Margin="10,0,0,0">
+            <!-- تقسيم القائمة إلى صف للرأس وصف لعناصر القائمة -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!-- ================================================== -->
+            <!-- رأس القائمة الجانبية -->
+            <!-- ================================================== -->
+            
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20" VerticalAlignment="Center">
+                <!-- رمز القلب المستخدم كشعار للنظام -->
+                <TextBlock Text="♥" 
+                           FontSize="38" 
+                           Foreground="White"/>
+                <!-- اسم نظام إدارة العيادات -->
+                <TextBlock Text="نظام إدارة العيادات" 
+                           Foreground="White" 
+                           FontSize="24" 
+                           FontWeight="Bold" 
+                           VerticalAlignment="Center" 
+                           Margin="12,0,0,0"/>
+            </StackPanel>
+            <!-- ================================================== -->
+            <!-- منطقة القائمة الرئيسية -->
+            <!-- ================================================== -->
+            <!-- ScrollViewer يسمح بالتمرير عندما يزيد عدد عناصر القائمة على المساحة المتاحة. إخفاء شريط التمرير لا يمنع التمرير نفسه. -->
+            
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+                
+                <!-- ItemsControl يعرض عناصر MenuItems الموجودة في SidebarViewModel. -->
+                
+                <ItemsControl ItemsSource="{Binding MenuItems}">
+                    
+                    <!-- تحديد شكل عرض كل عنصر في القائمة -->
+                    
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            
+                            <!-- تجميع العنصر الرئيسي والقائمة الفرعية -->
+                            
+                            <StackPanel Margin="0,3">
+                                
+                                <!-- ================================== -->
+                                <!-- الزر الرئيسي لكل عنصر في القائمة -->
+                                <!-- ================================== -->
+                                <!-- ToggleButton يسمح بفتح القائمة الفرعية وإغلاقها. IsChecked مرتبط بخاصية IsExpanded في SidebarItemViewModel. Mode=TwoWay يعني أن تغيير حالة الزر ينعكس على الخاصية في ViewModel. -->
+                                <ToggleButton IsChecked="{Binding IsExpanded, Mode=TwoWay}"
+                                            
+                                              Height="48" Background="Transparent" 
+                                              BorderThickness="0" Cursor="Hand" 
+                                              HorizontalContentAlignment="Stretch">
+                                    
+                                    <!-- تخصيص المظهر الداخلي للزر -->
+                                    <ToggleButton.Template>
+                                        <ControlTemplate TargetType="ToggleButton">
+                                            
+                                            <!-- خلفية الزر وحوافه -->
+                                            <Border x:Name="ItemBorder" Background="{TemplateBinding Background}" 
+                                                    CornerRadius="7" Padding="10,0">
+                                                <!-- تقسيم الزر إلى أيقونة وعنوان وسهم -->
+                                                
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="38"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="22"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <!-- الأيقونة الخاصة بالعنصر -->
+                                                    <TextBlock Grid.Column="0" Text="{Binding Icon}" 
+                                                               FontSize="20" Foreground="#DCE8F5" 
+                                                               VerticalAlignment="Center" 
+                                                               HorizontalAlignment="Center"/>
+                                                    <!-- عنوان العنصر الرئيسي -->
+                                                    <TextBlock Grid.Column="1" Text="{Binding Title}" 
+                                                               FontSize="14" Foreground="White"
+                                                               VerticalAlignment="Center" Margin="8,0,0,0"/>
+                                                    
+                                                    <!-- سهم القائمة الفرعية. HasChildren تحدد ما إذا كان العنصر يحتوي على عناصر فرعية. إذا كانت HasChildren تساوي True يظهر السهم، وإلا يختفي. -->
+                                                    <TextBlock Grid.Column="2" Text="⌄" FontSize="18" Foreground="#9FB4" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding HasChildren, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                                </Grid>
+                                            </Border>
+                                            
+                                            <!-- ================================== -->
+                                            <!-- حالات تغيير لون الزر -->
+                                            <!-- ================================== -->
+                                            
+                                            <ControlTemplate.Triggers>
+                                                <!-- تغيير الخلفية عند مرور المؤشر -->
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="ItemBorder" Property="Background" Value="#1D3B60"/>
+                                                </Trigger>
+                                                <!-- تغيير الخلفية عند فتح العنصر -->
+                                                <Trigger Property="IsChecked" Value="True">
+                                                    <Setter TargetName="ItemBorder" Property="Background" Value="#24558A"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </ToggleButton.Template>
+                                </ToggleButton>
+                                <!-- ================================== -->
+                                <!-- القائمة الفرعية -->
+                                <!-- ================================== -->
+                                <!-- ItemsSource="{Binding Children}" يربط القائمة الفرعية بالأبناء الموجودين في SidebarItemViewModel. Visibility تتحكم في ظهور القائمة حسب قيمة IsExpanded. ملاحظة: يوجد هنا أيضًا Style يحدد Visibility. الأفضل استخدام طريقة واحدة فقط حتى لا تتعارض إعدادات إظهار القائمة. -->
+                                <ItemsControl x:Name="SubMenu" ItemsSource="{Binding Children}">
+                                    
+                                    <!-- تحديد الحالة الافتراضية للقائمة الفرعية -->
+                                    
+                                    <ItemsControl.Style>
+                                        <Style TargetType="ItemsControl">
+                                            <!-- إخفاء القائمة افتراضيًا -->
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <!-- إظهار القائمة عند فتح العنصر الرئيسي -->
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsExpanded}" Value="True">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ItemsControl.Style>
+                                    <!-- تحديد شكل كل عنصر فرعي -->
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <!-- زر يمثل عنصرًا فرعيًا. Content يعرض عنوان العنصر. يمكن ربط الزر لاحقًا بأمر لفتح الصفحة المطلوبة. -->
+                                            <Button Content="{Binding Title}"
+                                                    Tag="{Binding PageName}"
+                                                      Command="{Binding DataContext.NavigateToHomeCommand,RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                                    CommandParameter="{Binding PageName}"
+       
+                                                    Height="40" Margin="35,2,5,2" 
+                                                    Padding="12,0" HorizontalContentAlignment="Left" 
+                                                    Background="Transparent" Foreground="#C5D4E5" 
+                                                    BorderThickness="0" Cursor="Hand" FontSize="13"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+</UserControl>

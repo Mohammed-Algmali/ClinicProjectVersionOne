@@ -1,0 +1,314 @@
+﻿<Window x:Class="MyClinicProject_VersionOne.View.HealthCareSystem.HumanResources.EditEmployeeView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.HealthCareSystem.HumanResources"
+        mc:Ignorable="d"
+        Title="EditEmployeeView"  Width="800" MinHeight="800"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent"
+           FlowDirection="RightToLeft">
+    <Border   Background="#FFB4D7FA" CornerRadius="2">
+
+
+
+        <ScrollViewer VerticalScrollBarVisibility="Hidden"   >
+            <StackPanel >
+
+                <!-- العنوان والوصف -->
+                <Border Background="White" Style="{StaticResource MainBorderStyle}"
+                            >
+                    <Grid >
+
+                        <Grid.ColumnDefinitions>
+
+                            <!-- الصورة -->
+                            <ColumnDefinition Width="Auto"/>
+
+                            <!-- العنوان والوصف -->
+                            <ColumnDefinition Width="*"/>
+
+                        </Grid.ColumnDefinitions>
+
+
+                        <!-- صورة المستخدم -->
+
+                        <Image Grid.Column="0"
+                                   Source="/Styles/Images/user.png"
+                                 Style="{StaticResource ImageHeaderStyle}"/>
+
+
+                        <!-- العنوان والوصف -->
+
+                        <StackPanel Grid.Column="1"
+                                Orientation="Vertical"
+                               >
+
+                            <TextBlock Text="إنشاء موظف جديد"
+                                            Style="{StaticResource PrimaryTextTitleadd}"/>
+
+                            <TextBlock Text="قم بادخال بيانات الموظف  الجديد في النظام"
+                                                Style="{StaticResource SecondaryTextTitlePage}"/>
+
+                        </StackPanel>
+
+                    </Grid>
+                </Border>
+
+                <Border  Grid.Row="1" Style="{StaticResource ReadOnlyInfoBorderStyle}">
+
+                    <Grid  >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <!--العمود االاول الذي يةجد به الملاحظه-->
+                            <ColumnDefinition Width="*"/>
+                            <!--العمود الثاني الذي يحنوي علي رقم الحساسيه -->
+                            <ColumnDefinition Width="*"/>
+                            <!--العمود الثالث والذي يحتوي علي تاريخ الانشاء -->
+                        </Grid.ColumnDefinitions>
+
+                        <!--العمود االاول الذي يةجد به الملاحظه-->
+                        <StackPanel Grid.Column="0" Margin="0,0,5,0" >
+                            <TextBlock Text="📝 بيانات تعريفيه -غير قابله للتعديل" Style="{StaticResource FiledLabelStyle}"/>
+                        </StackPanel>
+
+
+                        <!--العمود الثاني الذي يحنوي علي رقم الحساسيه -->
+                        <StackPanel Grid.Column="1" Margin="0,0,5,0">
+                            <TextBlock Text="رقم الموظف*" Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox Grid.Column="0"  
+                                     x:Name="txtPlanId" Text="DGN-000148" Style="{DynamicResource searchTextBoxStyle}"/>
+
+                        </StackPanel>
+
+                        <!--العمود الثالث والذي يحتوي علي تاريخ الانشاء -->
+                        <StackPanel Grid.Column="2" Margin="0,0,5,0">
+                            <TextBlock Text="تاربخ الانشاء*"  Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox x:Name="txtPlanCreateAt"  Text="2026/02/02" Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+
+
+                    </Grid>
+
+                </Border>
+
+
+                <!--"❶ البيانات الأساسية"-->
+                <Border Background="White" Style="{StaticResource MainBorderStyle}">
+                    <StackPanel>
+                        <TextBlock Text="❶ البيانات الأساسية" Style="{StaticResource CardHeaderStyle}"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+
+                            <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                                <TextBlock Text="الاسم الكامل*" Style="{StaticResource FiledLabelStyle}"/>
+                                <TextBox  Text="مثال: مسعده " Style="{StaticResource TextBoxStyle}"/>
+                            </StackPanel>
+
+
+                            <StackPanel Grid.Column="1" Margin="0,0,5,0">
+                                <TextBlock Text="* اسم المستخدم"  Style="{StaticResource FiledLabelStyle}"/>
+                                <TextBox  Text="أدخل اسم المستخدم ..." Style="{StaticResource TextBoxStyle}"/>
+                            </StackPanel>
+
+
+                            <StackPanel Grid.Column="2" Margin="0,0,5,0">
+                                <TextBlock Text=" *" Foreground="#333" Margin="0,0,0,5"/>
+                                <TextBox   Text="1" Style="{StaticResource TextBoxStyle}"/>
+
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!--"❷ العنوان ومعلومات التواصل"-->
+                <Border Background="White" Style="{StaticResource MainBorderStyle}">
+                    <StackPanel>
+                        <TextBlock Text="❷ العنوان ومعلومات التواصل" Style="{StaticResource CardHeaderStyle}"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                                <TextBlock Text=" الهاتف*" Style="{StaticResource FiledLabelStyle}"/>
+                                <TextBox   Text="مثال: الباقة الأساسية" Style="{StaticResource TextBoxStyle}"/>
+                            </StackPanel>
+
+
+                            <StackPanel Grid.Column="1" Margin="0,0,5,0">
+                                <TextBlock Text="* الايميل" Style="{StaticResource FiledLabelStyle}"/>
+                                <TextBox   Text="Mohammed@moh.com ..." Style="{StaticResource TextBoxStyle}"/>
+                            </StackPanel>
+
+
+                            <StackPanel Grid.Column="2" Margin="0,0,5,0">
+                                <TextBlock Text=" العنوان*" Style="{StaticResource FiledLabelStyle}"/>
+                                <TextBox   Text="مثلا تعز-جوار مصانع هائل سعيد" Style="{StaticResource TextBoxStyle}"/>
+
+                            </StackPanel>
+
+
+
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!--"❷المؤهلات العلميه والتراخيص"-->
+                <Border Style="{StaticResource MainBorderStyle}">
+                    <StackPanel>
+                        <TextBlock Text="❷المؤهلات العلميه والتراخيص" Style="{StaticResource CardHeaderStyle}"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                                <TextBlock Text=" سنوات الخبرة*" Style="{StaticResource FiledLabelStyle}"/>
+                                <TextBox   Text="ادخل البيانات هنا" Style="{StaticResource TextBoxStyle}"/>
+                            </StackPanel>
+
+
+                            <StackPanel Grid.Column="1" Margin="0,0,5,0">
+                                <TextBlock Text="*شهاده البورد/التتخصص"  Style="{StaticResource FiledLabelStyle}"/>
+                                <TextBox   Text="أدخل البيانات هنا  ..." Style="{StaticResource TextBoxStyle}"/>
+                            </StackPanel>
+
+
+                            <StackPanel Grid.Column="2" Margin="0,0,5,0">
+                                <TextBlock Text="التراخيص المهنيه*" Style="{StaticResource FiledLabelStyle}"/>
+                                <TextBox   Text="ادخل البيانات هنا" Style="{StaticResource TextBoxStyle}"/>
+
+                            </StackPanel>
+
+
+
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!--"بيانات الوظيفة"-->
+                <Border Style="{StaticResource MainBorderStyle}">
+                    <StackPanel>
+                        <TextBlock Text="بيانات الوظيفة" Style="{StaticResource CardHeaderStyle}"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                                <TextBlock Text="المسمى الوظيفي*" Style="{StaticResource FiledLabelStyle}"/>
+                                <TextBox   Text="مثلا دكتور/محاسب/فني مخبري" Style="{StaticResource TextBoxStyle}"/>
+                            </StackPanel>
+
+
+                            <StackPanel Grid.Column="1" Margin="0,0,5,0">
+                                <TextBlock Text="القسم/العياده*" Style="{StaticResource FiledLabelStyle}"/>
+                                <TextBox   Text="عياده القلب..." Style="{StaticResource TextBoxStyle}"/>
+                            </StackPanel>
+
+
+                            <StackPanel Grid.Column="2" Margin="0,0,5,0">
+                                <TextBlock Text="تاريخ التعيين*" Style="{StaticResource FiledLabelStyle}"/>
+                                <TextBox   Text="2026/02/02" Style="{StaticResource TextBoxStyle}" />
+
+                            </StackPanel>
+
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!--"صلاحيات النظام"-->
+                <Border Style="{StaticResource MainBorderStyle}">
+                    <StackPanel>
+                        <TextBlock Text="صلاحيات النظام" Style="{StaticResource CardHeaderStyle}"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                                <TextBlock Text="دور المستخدم*" Style="{StaticResource FiledLabelStyle}"/>
+                                <TextBox   Text="مثلا مدير/محاسب/موظف" Style="{StaticResource TextBoxStyle}"/>
+                            </StackPanel>
+
+
+                            <StackPanel Grid.Column="1" Margin="0,0,5,0">
+                                <TextBlock Text="اسم المستخدم*" Style="{StaticResource FiledLabelStyle}"/>
+                                <TextBox   Text="عياده القلب..." Style="{StaticResource TextBoxStyle}"/>
+                            </StackPanel>
+
+
+                            <StackPanel Grid.Column="2" Margin="0,0,5,0">
+                                <TextBlock Text="كلمه المرور الاوليه*" Style="{StaticResource FiledLabelStyle}"/>
+                                <PasswordBox Style="{StaticResource PasswordBoxStyle}"/>
+
+                            </StackPanel>
+
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!--ملاحظات إضافية-->
+                <!--كلمه المرور لم افعل لها تنسيق وهي و الملاحظات-->
+                <Border Style="{StaticResource MainBorderStyle}">
+                    <StackPanel>
+                        <TextBlock Text="📝 ملاحظات إضافية" Style="{StaticResource CardHeaderStyle}"/>
+                        <TextBox Height="60" TextWrapping="Wrap" AcceptsReturn="True" Text="  يجب اضافه الوارديه وايام وحاله المستخدم و حاله الموظف والاهتمام ب التنسيقات.ويوجد المستندات لم اصممه والايقونات.كلمه المرور لم افعل لها تنسيق وهي و الملاحظات."/>
+                        <TextBlock Text="0/500" FontSize="10" Foreground="Gray" HorizontalAlignment="Right" Margin="0,2,0,0"/>
+                    </StackPanel>
+                </Border>
+
+
+                <!--الازرار  -->
+                <Border Style="{StaticResource MainBorderStyle}">
+
+                    <StackPanel 
+                            Orientation="Horizontal"
+                            FlowDirection="LeftToRight"
+                            Margin="15,5,15,12">
+
+                        <!-- زر الحفظ -->
+
+                        <Button Style="{StaticResource ButtonSave}"
+                                 />
+
+                        <!-- زر الإلغاء -->
+
+                        <Button Style="{StaticResource ButtonExit}"
+                             />
+
+                    </StackPanel>
+
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+
+
+
+
+
+
+
+    </Border>
+</Window>

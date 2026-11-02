@@ -1,0 +1,192 @@
+﻿<UserControl x:Class="MyClinicProject_VersionOne.View.PlatformAdmin.UserAndPermissions.RoleAndPermissios.RoleListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.PlatformAdmin.UserAndPermissions.RoleAndPermissios"
+             mc:Ignorable="d" 
+            d:DesignHeight="600" d:DesignWidth="900"
+               FlowDirection="RightToLeft">
+    <Border   Background="#FFB4D7FA" CornerRadius="2">
+
+
+        <Grid Margin="5" >
+            <Grid.RowDefinitions>
+
+                <!-- العنوان والنص التوضيحي -->
+                <RowDefinition Height="Auto"/>
+
+                <!-- بطاقات الإحصائيات -->
+                <RowDefinition Height="Auto"/>
+                <!-- شريط البحث والفلترة -->
+                <RowDefinition Height="Auto"/>
+                <!-- جدول البيانات -->
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- 1. العنوان والنص التوضيحي -->
+            <!-- العنوان والوصف -->
+            <Border Grid.Row="0" Style="{StaticResource MainBorderStyle}"
+                            >
+                <Grid >
+
+                    <Grid.ColumnDefinitions>
+
+                        <!-- الصورة -->
+                        <ColumnDefinition Width="Auto"/>
+
+                        <!-- العنوان والوصف -->
+                        <ColumnDefinition Width="*"/>
+
+                    </Grid.ColumnDefinitions>
+
+
+                    <!-- صورة المستخدم -->
+
+                    <Image Grid.Column="0"
+                                   Source="/Styles/Images/user.png"
+                                  Style="{StaticResource ImageHeaderStyle}"/>
+
+
+                    <!-- العنوان والوصف -->
+
+                    <StackPanel Grid.Column="1"
+                               
+                                >
+
+
+                        <TextBlock Text=" ادارة جميع الادوار "
+                                    Style="{StaticResource PrimaryTextTitleadd}"/>
+
+                        <TextBlock   Text="عرض وادارة جميع المواعيد  في النظام" 
+                                      Style="{StaticResource SecondaryTextTitlePage}"/>
+
+
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+
+            <!-- بطاقات الإحصائيات -->
+            <Border Grid.Row="1" Style="{StaticResource MainBorderStyle}">
+
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <!--البطاقه الاولى-->
+                        <ColumnDefinition Width="*"/>
+                        <!--البطاقه الثانيه-->
+                        <ColumnDefinition Width="*"/>
+                        <!--البطاقه الثالث-->
+                        <ColumnDefinition Width="*"/>
+                        <!--البطاقه الرابعه-->
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--البطاقه الاولى وهي تجريبي-->
+                    <Border  Grid.Column="0"   CornerRadius="8"   >
+                        <HeaderedContentControl Style="{StaticResource StatisticCardStyle}"
+                            Header="إجمالي الادوار" 
+                            Content="{Binding TotalEmployeesCount, FallbackValue=142}"
+                            Tag="👥"/>
+                    </Border>
+
+
+
+                    <!--البطاقه الثانيه-->
+                    <Border  Grid.Column="1"   CornerRadius="8"   >
+                        <HeaderedContentControl Style="{StaticResource StatisticCardStyle}"
+                            Header="الادوار النشطه" 
+                            Content="{Binding TotalEmployeesCount, FallbackValue=142}" 
+                            Tag="👥" />
+                    </Border>
+
+                    <!--البطاقه الثالثه-->
+                    <Border  Grid.Column="2"   CornerRadius="8"   >
+                        <HeaderedContentControl Style="{StaticResource StatisticCardStyle}"
+                            Header="االادوار الموقفه" 
+                            Content="{Binding TotalEmployeesCount, FallbackValue=142}"
+                            Tag="👥"/>
+                    </Border>
+                    <!--البطاقه الرابعه-->
+                    <Border  Grid.Column="3"   CornerRadius="8"   >
+                        <HeaderedContentControl Style="{StaticResource StatisticCardStyle}"
+                            Header="الادوار الملغاه" 
+                            Content="{Binding TotalEmployeesCount, FallbackValue=3}"
+                            Tag="👥"/>
+                    </Border>
+
+
+
+                </Grid>
+
+            </Border>
+
+            <!-- 3. شريط البحث والفلترة (يتأقلم مع الشاشات الصغيرة) -->
+            <Border Grid.Row="2" Style="{StaticResource MainBorderStyle}">
+                <StackPanel>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+
+
+                        <TextBox Grid.Column="0"  Margin="0,0,5,0"
+                                 Style="{DynamicResource searchTextBoxStyle}"
+                                 Tag="ابحث ب الاسم او برقم الهاتف"
+                                 />
+
+                        <ComboBox Grid.Column="1"  Style="{StaticResource ModernComboBoxStyle}" Margin="0,0,5,0">
+                            <ComboBoxItem Content="كل الادوار" />
+                        </ComboBox>
+
+                        <ComboBox Grid.Column="2"  Style="{StaticResource ModernComboBoxStyle}"  Margin="0,0,5,0">
+                            <ComboBoxItem Content="حاله الادوار"/>
+                        </ComboBox>
+
+
+
+
+                       
+                        <RadioButton Grid.Column="4"
+                             Style="{StaticResource ButtonADD}"
+                             Content="اضافه دور جديد" Checked="RadioButton_Checked"
+                             />
+
+
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- 4. جدول البيانات (يدعم التمرير الأفقي عند انخفاض المساحة) -->
+            <Border Grid.Row="3" Style="{StaticResource MainBorderStyle}" >
+
+                <DataGrid >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="#" Width="50"/>
+                        <DataGridTextColumn Header="اسم الدور" Width="2*"/>
+                        <DataGridTextColumn Header="اسم المستخدم" Width="2*"/>
+                        <DataGridTextColumn Header="المستوى" Width="1.5*"/>
+                        <DataGridTextColumn Header="الحاله" Width="1.5*"/>
+                        <DataGridTextColumn Header="الوصف" Width="120"/>
+                        <DataGridTextColumn Header="تاريخ الانشاء" Width="2*"/>
+                        <DataGridTextColumn Header="الإجراءات" Width="100"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Border>
+
+
+
+
+
+        </Grid>
+
+
+    </Border>
+</UserControl>

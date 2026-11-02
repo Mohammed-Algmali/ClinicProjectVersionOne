@@ -1,0 +1,332 @@
+﻿<Window x:Class="MyClinicProject_VersionOne.View.HealthCareSystem.PatientAndAppointments.Appointment.CreateAppointmentView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.HealthCareSystem.PatientAndAppointments.Appointment"
+        mc:Ignorable="d"
+        Title="CreateAppointmentView" Height="750" Width="1200"
+        Background="Transparent"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        FlowDirection="RightToLeft">
+    <Border  Background="#FFB4D7FA" CornerRadius="5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <!--العنوان-->
+                <RowDefinition Height="Auto"/>
+                <!--المحتوي-->
+                <RowDefinition Height="*"/>
+                <!--الصف الثالث الذي يحتوي علي الملاحظات-->
+
+                <RowDefinition Height="Auto"/>
+                <!--الصف الرابع والذي يحتوي على الازرار-->
+            </Grid.RowDefinitions>
+
+            <!--العنوان-->
+            <Border Grid.Row="0"  Style="{StaticResource MainBorderStyle}"
+                            >
+                <Grid >
+
+                    <Grid.ColumnDefinitions>
+
+                        <!-- الصورة -->
+                        <ColumnDefinition Width="Auto"/>
+
+                        <!-- العنوان والوصف -->
+                        <ColumnDefinition Width="*"/>
+
+                    </Grid.ColumnDefinitions>
+
+
+                    <!-- صورة التشخيص -->
+
+                    <Image Grid.Column="0"
+                                   Source="/Styles/Images/user.png"
+                                   Style="{StaticResource ImageHeaderStyle}"/>
+
+
+                    <!-- العنوان والوصف -->
+
+                    <StackPanel Grid.Column="1">
+
+
+                        <TextBlock Text="اضافه موعد جديد"
+                                            Style="{StaticResource PrimaryTextTitleadd}"/>
+
+                        <TextBlock Text="قم بتحديد بيانات الموعد  وتفاصيل الحجز "
+                                                Style="{StaticResource SecondaryTextTitlePage}"/>
+
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+
+            
+            <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/><!--بيانات المريض وتفاصيل الموعد و سوم -->
+                        <ColumnDefinition Width="Auto"/><!--اختر التاريخ و الوقت -->
+                    </Grid.ColumnDefinitions>
+
+                <!--بيانات المريض وتفاصيل الموعد و سوم -->
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <!--"❶ البيانات الأساسية"-->
+                        <RowDefinition Height="Auto"/>
+                        <!--"تفاصيل الموعد"-->
+                        <RowDefinition Height="Auto"/>
+                        <!--"❶ رسوم الحجز"-->
+                        <RowDefinition Height="Auto"/>
+                        <!--"❶ التنبيهات"-->
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Style="{StaticResource MainBorderStyle}">
+                        <StackPanel>
+                            <TextBlock Text="❶ البيانات الأساسية" Style="{StaticResource CardHeaderStyle}"/>
+                            <Grid>
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height="*"/>
+                                    <!--"❶ البيانات الأساسية"-->
+                                    <RowDefinition Height="120"/>
+                                    <!--"تفاصيل الموعد"-->
+                                </Grid.RowDefinitions>
+                                <!-- 3. شريط البحث والفلترة (يتأقلم مع الشاشات الصغيرة) -->
+
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+
+
+                                    <TextBox Grid.Column="0"  Margin="0,0,5,0"
+                                                 Style="{DynamicResource searchTextBoxStyle}"
+                                                 Tag="ابحث ب الاسم او برقم الهاتف"
+                                                 />
+
+                                    <RadioButton Grid.Column="2"
+                                                 Style="{StaticResource ButtonADD}"
+                                                 Content="اضافه مريض جديد"
+                                                 />
+
+
+                                </Grid>
+
+                                <!--بطاقه معلومات المريض-->
+                                <Border Grid.Row="1" Style="{StaticResource MainBorderStyle}">
+                                    <Grid >
+                                        <Grid.ColumnDefinitions>
+
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+
+                                        <!-- اسم المريض ورقم الملف -->
+                                        <StackPanel Grid.Column="0" Orientation="Horizontal" >
+                                            <Border Width="40" Height="40" Background="#E2E8F0" CornerRadius="20" Margin="0,0,10,0">
+                                                <TextBlock Text="👤" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                                            </Border>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="أحمد محمد علي" FontWeight="Bold" FontSize="16" Foreground="#1E293B" />
+                                                <TextBlock Text="رقم الملف: 100458" Foreground="#64748B" FontSize="12" />
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <!-- الجنس -->
+                                        <HeaderedContentControl Grid.Column="1" Header="الجنس" Content="ذكر" Style="{StaticResource PatientMetaItemStyle}" />
+
+                                        <!-- العمر -->
+                                        <HeaderedContentControl Grid.Column="2" Header="العمر" Content="45 سنة" Style="{StaticResource PatientMetaItemStyle}" />
+
+                                        <!-- تاريخ الميلاد -->
+
+                                    </Grid>
+                                </Border>
+
+
+
+
+
+                            </Grid>
+
+
+
+                        </StackPanel>
+
+
+
+
+                    </Border>
+
+                    <!--"تفاصيل الموعد"-->
+                    <Border Grid.Row="1" Style="{StaticResource MainBorderStyle}">
+                        <StackPanel>
+                            <TextBlock Text="❶تفاصيل الموعد" Style="{StaticResource CardHeaderStyle}"/>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+
+                                <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                                    <TextBlock Text="التاريخ والوقت*" Style="{StaticResource FiledLabelStyle}"/>
+                                    <TextBox   Text="2026/02/02" Style="{StaticResource TextBoxStyle}"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Margin="0,0,5,0">
+                                    <TextBlock Text="*نوع الزياره" Style="{StaticResource FiledLabelStyle}" />
+                                    <ComboBox   Style="{StaticResource ModernComboBoxStyle }"  />
+
+                                </StackPanel>
+
+
+                                <StackPanel Grid.Column="2" Margin="0,0,5,0">
+                                    <TextBlock Text="سبب الموعد" Style="{StaticResource FiledLabelStyle}"/>
+                                    <TextBox   Text="مراجعه دوريه..." Style="{StaticResource TextBoxStyle}"/>
+                                </StackPanel>
+
+
+                              
+                            </Grid>
+                        </StackPanel>
+
+
+
+
+                    </Border>
+
+                    <!--"❶ رسوم الحجز "-->
+                    <Border Grid.Row="2" Style="{StaticResource MainBorderStyle}">
+                        <StackPanel>
+                            <TextBlock Text="❶رسوم الحجز" Style="{StaticResource CardHeaderStyle}"/>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+
+                                <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                                    <TextBlock Text="رسوم الكشف*" Style="{StaticResource FiledLabelStyle}"/>
+                                    <TextBox   Text="مثال: محمد امين محمد غالب " Style="{StaticResource TextBoxStyle}"/>
+                                </StackPanel>
+
+
+                                <StackPanel Grid.Column="1" Margin="0,0,5,0">
+                                    <TextBlock Text="*طريقه الدفع" Style="{StaticResource FiledLabelStyle}"/>
+                                    <ComboBox   Style="{StaticResource ModernComboBoxStyle }"  />
+                                </StackPanel>
+
+
+                                <StackPanel Grid.Column="2" Margin="0,0,5,0">
+                                    <TextBlock Text="حاله الدفع" Style="{StaticResource FiledLabelStyle}" />
+                                    <ComboBox   Style="{StaticResource ModernComboBoxStyle }"  />
+
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+
+
+
+
+                    </Border>
+
+                    <!--"❶ التنبيهات"-->
+                    <Border Grid.Row="3" Style="{StaticResource MainBorderStyle}">
+                        <StackPanel>
+                            <TextBlock Text="❶التنبيهات" Style="{StaticResource CardHeaderStyle}"/>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+
+                                <UniformGrid Columns="0" >
+                                    <CheckBox Content="ارسال تذكير للمريض"  Margin="5,8"/>
+                                  
+                                </UniformGrid>
+
+                                <StackPanel Grid.Column="1" Margin="0,0,5,0">
+                                    <TextBlock Text="طريقه الارشعار" Style="{StaticResource FiledLabelStyle}" />
+                                    <ComboBox   Style="{StaticResource ModernComboBoxStyle }"  />
+
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+
+
+
+
+                    </Border>
+
+
+
+                </Grid>
+
+                <!--اختر التاريخ و الوقت -->
+                <Border Grid.Column="1" Style="{StaticResource MainBorderStyle}" Margin="5,0,5,5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Border  Grid.Column="0" Background="Azure">
+                            <Viewbox Stretch="Uniform">
+                                <Calendar />
+                            </Viewbox>
+                        </Border>
+                    </Grid>
+                </Border>
+
+            </Grid>
+
+
+            <!--الصف الرابع والذي يحتوي على الازرار-->
+            <Border Grid.Row="3" 
+                Style="{StaticResource MainBorderStyle}">
+
+                <StackPanel 
+                            Orientation="Horizontal"
+                            FlowDirection="LeftToRight"
+>
+                    <!-- زر الإلغاء -->
+
+                    <Button Style="{StaticResource ButtonExit}"
+                            
+                             />
+
+
+                    <!-- زر الحفظ تم تسميه كل مافي الواجهه -->
+
+                    <Button Style="{StaticResource ButtonSave}"
+                           
+                                 />
+
+
+                </StackPanel>
+
+            </Border>
+
+
+
+
+
+
+        </Grid>
+
+    </Border>
+</Window>

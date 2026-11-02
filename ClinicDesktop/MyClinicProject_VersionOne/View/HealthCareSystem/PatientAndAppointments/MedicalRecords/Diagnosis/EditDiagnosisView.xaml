@@ -1,0 +1,219 @@
+﻿<Window x:Class="MyClinicProject_VersionOne.View.HealthCareSystem.PatientAndAppointments.MedicalRecords.Diagnosis.EditDiagnosisView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.HealthCareSystem.PatientAndAppointments.MedicalRecords.Diagnosis"
+        mc:Ignorable="d"
+        Title="EditDiagnosisView" Height="600" Width="700"
+        Background="Transparent"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        FlowDirection="RightToLeft"
+        >
+    <Border  Background="#FFB4D7FA" CornerRadius="5">
+        <Grid>
+            <Grid.RowDefinitions>
+               
+                <RowDefinition Height="Auto"/>              <!--العنوان-->
+                <RowDefinition Height="Auto"/>              <!--هنا ب يكون الرقم حق التشخيص و تاريخ الانشاء-->
+                
+                <RowDefinition Height="*"/>                 <!--المحتوي-->
+                <RowDefinition Height="150"/>               <!--الصف الثالث الذي يحتوي علي الملاحظات-->
+
+                <RowDefinition Height="Auto"/>              <!--الصف الرابع والذي يحتوي على الازرار-->
+            </Grid.RowDefinitions>
+
+            <!--العنوان-->
+            <Border Grid.Row="0"  Style="{StaticResource MainBorderStyle}"
+                            >
+                <Grid >
+
+                    <Grid.ColumnDefinitions>
+
+                        <!-- الصورة -->
+                        <ColumnDefinition Width="Auto"/>
+
+                        <!-- العنوان والوصف -->
+                        <ColumnDefinition Width="*"/>
+
+                    </Grid.ColumnDefinitions>
+
+
+                    <!-- صورة المستخدم -->
+
+                    <Image Grid.Column="0"
+                                   Source="/Styles/Images/user.png"
+                                   Width="42"
+                                   Height="42"
+                                   Margin="5,5,5,5"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Right"/>
+
+
+                    <!-- العنوان والوصف -->
+
+                    <StackPanel Grid.Column="1"
+                                Orientation="Vertical"
+                                VerticalAlignment="Center">
+                        <TextBlock Text="تعديل تشخيص"
+                                            Style="{StaticResource PrimaryTextTitleadd}"/>
+
+                        <TextBlock Text="قم تحديث بيانات التشخيص  المسجل في النظام"
+                                                Style="{StaticResource SecondaryTextTitlePage}"/>
+
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+
+            <!--هنا ب يكون الرقم حق التشخيص و تاريخ الانشاء-->
+            <Border  Grid.Row="1" Style="{StaticResource ReadOnlyInfoBorderStyle}">
+
+                <Grid  >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <!--العمود االاول الذي يةجد به الملاحظه-->
+                        <ColumnDefinition Width="*"/>
+                        <!--العمود الثاني الذي يحنوي علي رقم التشخيص -->
+                        <ColumnDefinition Width="*"/>
+                        <!--العمود الثالث والذي يحتوي علي تاريخ الانشاء -->
+                    </Grid.ColumnDefinitions>
+
+                    <!--العمود االاول الذي يةجد به الملاحظه-->
+                    <StackPanel Grid.Column="0" Margin="0,0,5,0" >
+                        <TextBlock Text="📝 بيانات تعريفيه -غير قابله للتعديل" Style="{StaticResource FiledLabelStyle}"/>
+                    </StackPanel>
+
+
+                    <!--العمود الثاني الذي يحنوي علي رقم التشخيص -->
+                    <StackPanel Grid.Column="1" Margin="0,0,5,0">
+                        <TextBlock Text="رقم التشخيص*" Style="{StaticResource FiledLabelStyle}"/>
+                        <TextBox Grid.Column="0"  
+                                     x:Name="txtDiagnosisId" Text="DGN-000148" Style="{DynamicResource TextBoxStyle}"/>
+
+                    </StackPanel>
+
+                    <!--العمود الثالث والذي يحتوي علي تاريخ الانشاء -->
+                    <StackPanel Grid.Column="2" Margin="0,0,5,0">
+                        <TextBlock Text="تاربخ الانشاء*"  Style="{StaticResource FiledLabelStyle}"/>
+                        <TextBox x:Name="txtDiagnosisCreateAt"  Text="2026/02/02" Style="{StaticResource TextBoxStyle}"/>
+                    </StackPanel>
+
+
+                </Grid>
+
+            </Border>
+
+
+            <!--المحتوي-->
+            <Border  Grid.Row="2" Style="{StaticResource MainBorderStyle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <!--الصف الاول والذي يحتوي علي اسم التشخيص و الرمز-->
+
+                        <RowDefinition Height="Auto"/>
+                        <!--الصف الثاني والذي يحتوي علي الحاله و النوع-->
+
+                    </Grid.RowDefinitions>
+
+                    <!--الصف الاول والذي يحتوي علي اسم التشخيص و الرمز-->
+                    <Grid Grid.Row="0" Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+
+                        <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                            <TextBlock Text="اسم التشخيص*" Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox Grid.Column="0"  
+                                     x:Name="txtDiagnosisName" Style="{DynamicResource searchTextBoxStyle}"/>
+
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Column="1" Margin="0,0,5,0">
+                            <TextBlock Text="الرمز*"  Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox x:Name="txtDiagnosisCode"  Text="E11.9" Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+
+
+
+                    </Grid>
+                    <!--الصف الثاني والذي يحتوي علي الحاله و النوع-->
+                    <Grid Grid.Row="1" Margin="0,0,0,10" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+
+                        <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                            <TextBlock Text="الحاله*" Style="{StaticResource FiledLabelStyle}"/>
+                            <ComboBox  x:Name="txtDiagnosisStatus" Style="{StaticResource ModernComboBoxStyle }" />
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Column="1" Margin="0,0,5,0">
+                            <TextBlock Text="نوع التشخيص*"  Style="{StaticResource FiledLabelStyle}"/>
+                            <ComboBox  x:Name="txtDiagnosisType" Style="{StaticResource ModernComboBoxStyle }" >
+                                <ComboBoxItem Content="خيار اول"/>
+                            </ComboBox>
+                        </StackPanel>
+
+                    </Grid>
+
+
+
+
+
+
+                </Grid>
+
+            </Border>
+            <!--الصف الثالث الذي يحتوي علي الملاحظات-->
+            <Border Grid.Row="3" Style="{StaticResource MainBorderStyle}">
+                <StackPanel >
+                    <TextBlock Text="📝 ملاحظات إضافية" Style="{StaticResource CardHeaderStyle}"/>
+                    <TextBox MinHeight="60" TextWrapping="Wrap" AcceptsReturn="True" Text=" يجب تعديل حواف حقول الادخال/btnEditDiagnosisExit/btnEditDiagnosisSave/txtDiagnosisNotes/txtDiagnosisId/txtDiagnosisCreateAt/txtDiagnosisName/txtDiagnosisCode/txtDiagnosisStatus/txtDiagnosisType// ......"/>
+                    <TextBlock x:Name="txtDiagnosisNotes" Text="0/500" FontSize="10" Foreground="Gray" HorizontalAlignment="Right" Margin="0,2,0,0"/>
+                </StackPanel>
+            </Border>
+
+
+
+            <!--الصف الرابع والذي يحتوي على الازرار-->
+
+            <Border Grid.Row="4" 
+                Style="{StaticResource MainBorderStyle}">
+
+                <StackPanel 
+                            Orientation="Horizontal"
+                            FlowDirection="LeftToRight"
+>
+                    <!-- زر الإلغاء -->
+
+                    <Button Style="{StaticResource ButtonExit}"
+                            x:Name="btnEditDiagnosisExit"
+                             />
+
+
+                    <!-- زر الحفظ -->
+
+                    <Button Style="{StaticResource ButtonSave}"
+                            x:Name="btnEditDiagnosisSave"
+                                 />
+
+
+                </StackPanel>
+
+            </Border>
+
+
+
+        </Grid>
+
+    </Border>
+</Window>

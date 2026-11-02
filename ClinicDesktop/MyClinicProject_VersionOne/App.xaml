@@ -1,0 +1,52 @@
+﻿<Application x:Class="MyClinicProject_VersionOne.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MyClinicProject_VersionOne"
+             xmlns:views="clr-namespace:MyClinicProject_VersionOne.View.PlatformAdmin.FacilitiesManagement.Facility"
+             xmlns:vms="clr-namespace:MyClinicProject_VersionOne.ViewModel.PlatformAdmin.FacilitiesManagement.Facility"
+              xmlns:teamview="clr-namespace:MyClinicProject_VersionOne.View.PlatformAdmin.UserAndPermissions.PlatformTeam"
+             xmlns:teamvms="clr-namespace:MyClinicProject_VersionOne.ViewModel.PlatformAdmin.UserAndPermissions.PlatformTeam"
+             xmlns:roleview="clr-namespace:MyClinicProject_VersionOne.View.PlatformAdmin.UserAndPermissions.RoleAndPermissios"
+             xmlns:rolevms="clr-namespace:MyClinicProject_VersionOne.ViewModel.PlatformAdmin.UserAndPermissions.RoleAndPermissios"
+              xmlns:planview="clr-namespace:MyClinicProject_VersionOne.View.PlatformAdmin.SubscriptionsAndFinance.Plan"
+             xmlns:planvms="clr-namespace:MyClinicProject_VersionOne.ViewModel.PlatformAdmin.SubscriptionsAndFinance.Plan"
+             StartupUri="View/PlatformAdmin/UserAndPermissions/RoleAndPermissios/CreateRoleView.xaml">
+    <!--StartupUri="View/Authentication/LoginView.xaml"-->
+    <Application.Resources>
+        <ResourceDictionary>
+            
+            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="/Styles/TextBlockStyles.xaml"/>
+                <ResourceDictionary Source="/Styles/UIColors.xaml"/>
+                
+                <!--التنسيقات الجديده-->
+                <ResourceDictionary Source="/Styles/Style/CardStyles.xaml"/>
+                <ResourceDictionary Source="/Styles/Style/TextBlockStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/Style/TextBoxStyles.xaml"/>
+                <ResourceDictionary Source="/Styles/Style/ComboBoxStyles.xaml"/>
+
+            </ResourceDictionary.MergedDictionaries>
+            <FontFamily x:Key="CairFont">/MyClinicProject_VersionOne;component/Styles/#Cairo</FontFamily>
+            <DataTemplate DataType="{x:Type vms:FacilityListViewModel}">
+                <views:FacilityListView/>
+            </DataTemplate>
+
+
+            <DataTemplate DataType="{x:Type teamvms:PlatformTeamListViewModel}">
+                <teamview:PlatformTeamListView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type planvms:PlanListViewModel}">
+                <planview:PlanListView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type rolevms:RoleListViewModel}">
+                <roleview:RoleListView/>
+            </DataTemplate>
+
+        </ResourceDictionary>
+      
+    </Application.Resources>
+</Application>

@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Styles\Images\appointment.png" />
+    <None Remove="Styles\Images\background_log.png" />
+    <None Remove="Styles\Images\cancel.png" />
+    <None Remove="Styles\Images\doctor.png" />
+    <None Remove="Styles\Images\heart2.png" />
+    <None Remove="Styles\Images\home.png" />
+    <None Remove="Styles\Images\Login.png" />
+    <None Remove="Styles\Images\logout.png" />
+    <None Remove="Styles\Images\messaging1.png" />
+    <None Remove="Styles\Images\patient.png" />
+    <None Remove="Styles\Images\setting.png" />
+    <None Remove="Styles\Images\user.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Styles\Images\appointment.png" />
+    <Resource Include="Styles\Images\background_log.png" />
+    <Resource Include="Styles\Images\cancel.png" />
+    <Resource Include="Styles\Images\doctor.png" />
+    <Resource Include="Styles\Images\heart2.png" />
+    <Resource Include="Styles\Images\home.png" />
+    <Resource Include="Styles\Images\Login.png" />
+    <Resource Include="Styles\Images\logout.png" />
+    <Resource Include="Styles\Images\messaging1.png" />
+    <Resource Include="Styles\Images\patient.png" />
+    <Resource Include="Styles\Images\setting.png" />
+    <Resource Include="Styles\Images\user.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Model\HealthCareSystem\" />
+    <Folder Include="ViewModel\HealthCareSystem\" />
+    <Folder Include="View\HealthCareSystem\MedicalAdministration\Laboratory\" />
+    <Folder Include="View\PlatformAdmin\PlatformSettings\" />
+    <Folder Include="View\PlatformAdmin\OperationsAudit\" />
+    <Folder Include="View\PlatformAdmin\ReportsAndAnalytics\" />
+    <Folder Include="View\PlatformAdmin\TechincalSupport\" />
+    <Folder Include="View\PlatformAdmin\Notifications\" />
+    <Folder Include="View\PlatformAdmin\UserAndPermissions\FacilityManagers\" />
+  </ItemGroup>
+
+</Project>

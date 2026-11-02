@@ -1,0 +1,217 @@
+﻿<Window x:Class="MyClinicProject_VersionOne.View.HealthCareSystem.PatientAndAppointments.MedicalRecords.Surgery.CreateSurgeryView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.HealthCareSystem.PatientAndAppointments.MedicalRecords.Surgery"
+        mc:Ignorable="d"
+        Title="CreateSurgeryView" Height="730" Width="850"
+        Background="Transparent"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        FlowDirection="RightToLeft"
+        >
+    <Border  Background="#FFB4D7FA" CornerRadius="5">
+        <Grid>
+            <Grid.RowDefinitions>
+                
+                <RowDefinition Height="Auto"/>               <!--العنوان-->
+             
+                <RowDefinition Height="Auto"/>              <!--الصف الثاني بيانات العمليه-->
+                 <RowDefinition Height="Auto"/>              <!--الصف الثالث تفاصيل الاجراء العمليه-->
+                <RowDefinition Height="Auto"/>              <!--الصف الثالث الذي يحتوي علي بيانات المنشاه والجراح -->
+                <RowDefinition Height="150"/>              <!--الصف الربع الذي يحتوي علي تفاصيل الاجرات-->
+
+                <RowDefinition Height="Auto"/>
+                <!--الصف الرابع والذي يحتوي على الازرار-->
+            </Grid.RowDefinitions>
+
+            <!--العنوان-->
+            <Border Grid.Row="0"  Style="{StaticResource MainBorderStyle}"
+                            >
+                <Grid >
+
+                    <Grid.ColumnDefinitions>
+
+                        <!-- الصورة -->
+                        <ColumnDefinition Width="Auto"/>
+
+                        <!-- العنوان والوصف -->
+                        <ColumnDefinition Width="*"/>
+
+                    </Grid.ColumnDefinitions>
+
+
+                    <!-- صورة  -->
+
+                    <Image Grid.Column="0"
+                                   Source="/Styles/Images/user.png"
+                                   Width="42"
+                                   Height="42"
+                                   Margin="5,5,5,5"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Right"/>
+
+
+                    <!-- العنوان والوصف -->
+
+                    <StackPanel Grid.Column="1"
+                                Orientation="Vertical"
+                                VerticalAlignment="Center">
+                        <TextBlock Text="إنشاء سجل عمليه جديد"
+                                            Style="{StaticResource PrimaryTextTitleadd}"/>
+
+                        <TextBlock Text="قم بادخال بيانات سجل العمليه الجديد في النظام"
+                                                Style="{StaticResource SecondaryTextTitlePage}"/>
+
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+
+            <!--الصف الثاني بيانات العمليه-->
+            <Border  Grid.Row="1" Style="{StaticResource MainBorderStyle}">
+                <StackPanel >
+                    <TextBlock Text="📝 بيانات العمليه" Style="{StaticResource CardHeaderStyle}"/>
+                    <Grid  Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>                           <!--العمود الاول الذي يحتوي على مربع البحث الخاص ب اسم العمليه-->
+                            <ColumnDefinition Width="*"/>                          <!--العمود الثاني الذي يحتوي على المرز الخاص ب العمليه-->
+                        </Grid.ColumnDefinitions>
+
+                        <!--العمود الاول الذي يحتوي على مربع البحث الخاص ب اسم الحساسيه-->
+                        <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                            <TextBlock Text="اسم العمليه*" Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox Grid.Column="0" 
+                                         Tag="اكتب اسم الحساسيه او ICD-10"
+                                         x:Name="txtSurgeryName" Style="{DynamicResource searchTextBoxStyle}"/>
+
+                        </StackPanel>
+
+                        <!--العمود الثاني الذي يحتوي على الرمز الخاص ب العمليه بيكون نفس ثابت Id-->
+                        <StackPanel Grid.Column="1" Margin="0,0,5,0">
+                            <TextBlock Text="كود العمليه*"  Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox x:Name="txtSurgeryCode"  Text="E11.9" Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+
+
+
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!--الصف الثالث تفاصيل الاجراء العمليه-->
+            <Border  Grid.Row="2" Style="{StaticResource MainBorderStyle}">
+                <StackPanel >
+                    <TextBlock Text="📝 تفاصيل الاجراء" Style="{StaticResource CardHeaderStyle}"/>
+                    <Grid  Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>                           <!--العمود الاول الذي يحتوي على تاريخ اجراء  العمليه ومكان الجراحه في الجسم-->
+                            <ColumnDefinition Width="*"/>                           <!--العمود الثاني الذي يحتوي على سبب اجراء   العمليه-->
+                            <ColumnDefinition Width="*"/>                           <!--العمود الثالث الذي يحتوي على سبب اجراء   العمليه-->
+
+                        </Grid.ColumnDefinitions>
+
+                        <!--العمود الاول الذي يحتوي على تاريخ اجراء  العمليه ومكان الجراحه في الجسم-->
+
+                            <StackPanel Grid.Column="0" Margin="0,0,5,0" >
+                                <TextBlock Text="تاريخ اجراء العمليه*" Style="{StaticResource FiledLabelStyle}"/>
+                                <TextBox   x:Name="txtSurgeyDate"  Text="E11.9" Style="{StaticResource TextBoxStyle}" />
+
+                            </StackPanel>
+
+                        <!--العمود الثاني الذي يحتوي على مكان العمليه في الجسم-->
+                        <StackPanel Grid.Column="1" Margin="0,0,5,0" >
+                            <TextBlock Text="مكان الجراحه في الجسم*" Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox x:Name="txtSurgeyBodySite"  Text="E11.9" Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+
+                        <!--العمود الثالث الذي يحتوي على سبب اجراء   العمليه-->
+                        <StackPanel Grid.Column="2" Margin="0,0,5,0" >
+                            <TextBlock Text="سبب اجراء العمليه*"  Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox x:Name="txtSurgeyIndiction" MinHeight="60" Text="E11.9"  Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+                        
+                       
+
+
+
+
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!--الصف الثالث الذي يحتوي علي بيانات المنشاه والجراح -->
+            <Border  Grid.Row="3" Style="{StaticResource MainBorderStyle}">
+                <StackPanel >
+                    <TextBlock Text="📝 بيانات المنشاه والجراح" Style="{StaticResource CardHeaderStyle}"/>
+                    <Grid  Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>     <!--العمود الاول الذي يحتوي على   اسم المنشاه-->
+                            <ColumnDefinition Width="*"/>     <!--العمود الثاني الذي يحتوي على اسم الجراح -->
+                        </Grid.ColumnDefinitions>
+
+                        <!--العمود الاول الذي يحتوي على   اسم المنشاه-->
+                        <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                            <TextBlock Text="اسم المستشفى*" Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox x:Name="txtHospitalName" Text="مستشفى الجمالي" Style="{StaticResource TextBoxStyle}"/>
+                                        
+
+                        </StackPanel>
+                        <!--العمود الثاني الذي يحتوي على اسم الجراح -->
+                        <StackPanel Grid.Column="1" Margin="0,0,5,0">
+                            <TextBlock Text="اسم الجراح *"  Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox x:Name="txtSurerianName"  Text="هلهول بن هلهول" Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+
+
+
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+
+            <!--الصف الرابع الذي يحتوي علي الملاحظات-->
+            <Border Grid.Row="4" Style="{StaticResource MainBorderStyle}">
+                <StackPanel >
+                    <TextBlock Text="📝 المظاعفات الطبيه" Style="{StaticResource CardHeaderStyle}"/>
+                    <TextBox x:Name="txtSurgeryNotes" MinHeight="60" TextWrapping="Wrap" AcceptsReturn="True" Text=" btnCreateSurgerySave / btnCreateSurgeryExit / txtSurerianName / txtHospitalName / txtSurgeyDate /  txtSurgeyBodySite /  txtSurgeyIndiction / txtSurgeryCode /txtSurgeryCode/تم تسميه جميع الازرار مع الحقول كل شي جاهز ....."/>
+                    <TextBlock Text="0/500" FontSize="10" Foreground="Gray" HorizontalAlignment="Right" Margin="0,2,0,0"/>
+                </StackPanel>
+            </Border>
+
+
+
+            <!--الصف الخامس والذي يحتوي على الازرار-->
+
+            <Border Grid.Row="5" 
+                Style="{StaticResource MainBorderStyle}">
+
+                <StackPanel 
+                            Orientation="Horizontal"
+                            FlowDirection="LeftToRight"
+>
+                    <!-- زر الإلغاء -->
+
+                    <Button Style="{StaticResource ButtonExit}"
+                            x:Name="btnCreateSurgeryExit"
+                             />
+
+
+                    <!-- زر الحفظ تم تسميه كل مافي الواجهه -->
+
+                    <Button Style="{StaticResource ButtonSave}"
+                            x:Name="btnCreateSurgerySave"
+                                 />
+
+
+                </StackPanel>
+
+            </Border>
+
+
+
+        </Grid>
+
+    </Border>
+</Window>

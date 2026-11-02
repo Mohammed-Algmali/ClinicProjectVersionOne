@@ -1,0 +1,23 @@
+﻿global using MyClinicProject_VersionOne.View.Dashboard;
+global using MyClinicProject_VersionOne.View.PlatformAdmin.FacilitiesManagement.Facility;
+global using MyClinicProject_VersionOne.ViewModel.PlatformAdmin.FacilitiesManagement.Facility;
+global using MyClinicProject_VersionOne.View.PlatformAdmin.SubscriptionsAndFinance.Plan;
+global using MyClinicProject_VersionOne.ViewModel.PlatformAdmin.SubscriptionsAndFinance.Plan;
+global using MyClinicProject_VersionOne.View.PlatformAdmin.SubscriptionsAndFinance.SubscriptionAuditLog;
+global using MyClinicProject_VersionOne.View.HealthCareSystem.Attendance;
+global using MyClinicProject_VersionOne.View.HealthCareSystem.HumanResources;
+global using MyClinicProject_VersionOne.ViewModel.PlatformAdmin.UserAndPermissions.PlatformTeam;
+global using MyClinicProject_VersionOne.ViewModel.PlatformAdmin.UserAndPermissions.RoleAndPermissios;
+global using MyClinicProject_VersionOne.Model.PlatformAdmin.UserAndPermissions.PlatformTeam;
+global using MyClinicProject_VersionOne.Model.PlatformAdmin.FacilitiesManagement.Facility;
+global using MyClinicProject_VersionOne.Model.PlatformAdmin.UserAndPermissions.RoleAndPermissios;
+global using MyClinicProject_VersionOne.Model.BaseModel;
+global using MyClinicProject_VersionOne.Model.PlatformAdmin.UserAndPermissions.FacilityManagers;
+global using MyClinicProject_VersionOne.Helpers;
+global using MyClinicProject_VersionOne.ViewModel.Sidebar;
+global using MyClinicProject_VersionOne.ViewModel.Authentication;
+global using MyClinicProject_VersionOne.Model.Authentication;
+global using MyClinicProject_VersionOne.Command;
+global using MyClinicProject_VersionOne.Services;
+
+

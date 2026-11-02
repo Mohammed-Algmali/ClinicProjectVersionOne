@@ -1,0 +1,176 @@
+﻿<UserControl x:Class="MyClinicProject_VersionOne.View.PlatformAdmin.UserAndPermissions.PlatformTeam.PlatformTeamListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.PlatformAdmin.UserAndPermissions.PlatformTeam"
+             mc:Ignorable="d" 
+              d:DesignHeight="450" d:DesignWidth="1000"
+             FlowDirection="RightToLeft"
+             Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0"
+                        Orientation="Horizontal"
+                        >
+
+                <Image Source="/Styles/Images/user.png"
+                        Style="{StaticResource ImageHeaderStyle}"/>
+                <StackPanel Orientation="Vertical">
+
+
+                    <TextBlock Text="ادارة فرق المنصه"
+                               Style="{StaticResource PrimaryTextTitleadd}"
+                    />
+
+                    <TextBlock Text="عرض وادارة جميع المستخدمين الموجودين في النظام" 
+                               Style="{StaticResource SecondaryTextTitlePage}"
+                    />
+                    
+                </StackPanel>
+            </StackPanel>
+
+            <!-- ============================================================
+                     مربع البحث عن المستخدمين
+
+                     Text:
+                     ربط النص الذي يكتبه المستخدم بالخاصية SearchText
+                     الموجودة داخل UserControllerViewModel.
+
+                     UpdateSourceTrigger=PropertyChanged:
+                     تحديث SearchText مباشرة مع كل حرف يتم كتابته،
+                     حتى نستطيع تنفيذ البحث بشكل مباشر لاحقًا.
+                     ============================================================ -->
+
+            <TextBox Grid.Column="1"
+                     Style="{DynamicResource searchTextBoxStyle}"
+                     Tag="ابحث باسم المستخدم او رقم الهاتف"
+                   />
+
+
+
+                <RadioButton Grid.Column="2"
+                             Style="{StaticResource ButtonADD}"
+                             Content="اضافه مستخدم"
+                             x:Name="BtnPlatformTeamAddUser"
+                             Click="BtnPlatformTeamAddUser_Click"
+                />
+
+            
+        </Grid>
+
+        <!-- ============================================================
+             DataGrid المستخدمين
+
+             ItemsSource:
+             مصدر البيانات المعروضة في الجدول.
+
+             SelectedItem:
+             المستخدم الذي قام المستخدم بتحديده من الجدول.
+
+             عند تحديد صف:
+             يتم وضع المستخدم المحدد داخل
+             UserControllerViewModel.SelectedUser
+             ============================================================ -->
+
+        <DataGrid Grid.Row="1"
+                  x:Name="dataGridUser"
+               
+                  ItemsSource="{Binding PlatformUsersList}"
+                  AutoGenerateColumns="False" >
+            <DataGrid.Columns >
+
+                <!-- رقم المستخدم -->
+                <DataGridTextColumn Header="رقم المستخدم" 
+                            Width="80"
+                            Binding="{Binding UserId}"/>
+
+                <!-- رقم الصلاحيه او سمهاء -->
+                <DataGridTextColumn Header="الصلاحيه"
+                            Width="70"
+                            Binding="{Binding RoleId}"/>
+
+                <!-- الاسم الكامل  -->
+                <DataGridTextColumn Header="الاسم الكامل" 
+                            Width="*"
+                            Binding="{Binding FullName}"/>
+
+                <!-- اسم المستخدم -->
+                <DataGridTextColumn Header="اسم المستخدم"
+                            Width="*"
+                            Binding="{Binding UserName}"/>
+
+                <!-- رقم الهاتف -->
+                <DataGridTextColumn Header="رقم الهاتف"
+                            Width="*"
+                            Binding="{Binding UserPhone}"/>
+
+                <!-- البريد الإلكتروني -->
+                <DataGridTextColumn Header="البريد الإلكتروني"
+                            Width="*"
+                            Binding="{Binding UserEmail}"/>
+
+                <DataGridTextColumn Header="العنوان" 
+                            Width="80"
+                            Binding="{Binding UserAddress}"/>
+
+
+                <!-- الحالة -->
+                <DataGridTextColumn Header="الحالة"
+                            Width="60"
+                            Binding="{Binding UserStatus}"/>
+
+
+
+                <!-- تاريخ الانشاء -->
+                <DataGridTextColumn Header="تاريخ الانشاء"
+                            Width="*"
+                            Binding="{Binding UserCreatedAt, StringFormat=yyyy-MM-dd}"/>
+
+                <!-- الإجراءات سنضيفها لاحقًا -->
+                <!-- ============================================================
+                     الإجراءات
+
+                     هذا العمود مخصص للأزرار التي سنتعامل من خلالها
+                     مع المستخدم المحدد.
+
+                     حاليًا سنضع زر "تعديل" فقط.
+                     وسنضيف لاحقًا:
+                     - تعديل
+                     - تعطيل
+                     - حذف
+                     ============================================================ -->
+                <DataGridTemplateColumn Header="الاجراءات" Width="*" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel >
+                                <Button Content="✎"
+                                        Width="30"
+                                        Height="30"
+                                        BorderThickness="0"
+                                        Foreground="Blue"
+                                       x:Name="BtnEditUser"
+                                        Click="BtnEditUser_Click"
+                                        />
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                                     
+
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

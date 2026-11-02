@@ -1,0 +1,189 @@
+﻿<UserControl x:Class="MyClinicProject_VersionOne.View.HealthCareSystem.HumanResources.EmployeeListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.HealthCareSystem.HumanResources"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="900"
+               FlowDirection="RightToLeft">
+    <Border   Background="#FFB4D7FA" CornerRadius="2">
+
+        
+            <Grid Margin="5" >
+                <Grid.RowDefinitions>
+                  
+                    <!-- العنوان والنص التوضيحي -->
+                    <RowDefinition Height="Auto"/>
+                   
+                    <!-- بطاقات الإحصائيات -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- شريط البحث والفلترة -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- جدول البيانات -->
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- 1. العنوان والنص التوضيحي -->
+                <!-- العنوان والوصف -->
+                <Border Grid.Row="0" Style="{StaticResource MainBorderStyle}"
+                            >
+                    <Grid >
+
+                        <Grid.ColumnDefinitions>
+
+                            <!-- الصورة -->
+                            <ColumnDefinition Width="Auto"/>
+
+                            <!-- العنوان والوصف -->
+                            <ColumnDefinition Width="*"/>
+
+                        </Grid.ColumnDefinitions>
+
+
+                        <!-- صورة المستخدم -->
+
+                        <Image Grid.Column="0"
+                                   Source="/Styles/Images/user.png"
+                                 Style="{StaticResource ImageHeaderStyle}"/>
+
+
+                        <!-- العنوان والوصف -->
+
+                        <StackPanel Grid.Column="1"
+                                Orientation="Vertical"
+                                VerticalAlignment="Center"
+                                >
+
+
+                            <TextBlock Text=" ادارة الموظفين"
+                                              Style="{StaticResource PrimaryTextTitleadd}"/>
+
+                            <TextBlock   Text="عرض وادارة جميع الموظفين الموجودين في النظام" 
+                                              Style="{StaticResource SecondaryTextTitlePage}"/>
+
+
+                        </StackPanel>
+
+                    </Grid>
+                </Border>
+
+                <!-- بطاقات الإحصائيات -->
+                <Border Grid.Row="1" Style="{StaticResource MainBorderStyle}">
+                    
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <!--البطاقه الاولى-->
+                                <ColumnDefinition Width="*"/>
+                                 <!--البطاقه الثانيه-->
+                                <ColumnDefinition Width="*"/>
+                                 <!--البطاقه الثالث-->
+                                <ColumnDefinition Width="*"/>
+                                <!--البطاقه الرابعه-->
+                                <ColumnDefinition Width="*"/>
+                             </Grid.ColumnDefinitions>
+
+                        <!--البطاقه الاولى-->
+                        <Border  Grid.Column="0"   >
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Width="40" Height="40" Background="#CCFBF1" CornerRadius="8" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0">
+                                    <TextBlock Text="👥" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock Text="إجمالي الأطباء" Foreground="#64748B" FontSize="12"/>
+                                    <TextBlock Text="58 طبيب" FontWeight="Bold" FontSize="20" Foreground="#1E293B" Margin="0,5,0,0"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                        <!--البطاقه الثانيه-->
+                        <Border  Grid.Column="1"  Background="SeaGreen" CornerRadius="8" Padding="10" Margin="0,0,5,0" >
+                            
+                        </Border>
+
+                        <!--البطاقه الثالثه-->
+                         <Border  Grid.Column="2"  Background="White" CornerRadius="8" Padding="10" Margin="0,0,5,0" >
+                             <StackPanel>
+                                <TextBlock Text="📝 ملاحظات إضافية" FontSize="14" FontWeight="Bold" Foreground="#0066FF" Margin="0,0,0,10"/>
+                                <TextBox Height="60" TextWrapping="Wrap" AcceptsReturn="True" Text=" يجب تصميم البطائق ووضعها في مكانها المخصص مع الاهتمام في القوائم المنسدله و فلتر البحث وتنسيق زر الاضافه.."/>
+                             </StackPanel>
+                          </Border>
+                    <!--البطاقه الرابعه-->
+
+
+
+                    </Grid>
+                   
+                </Border>
+
+                <!-- 3. شريط البحث والفلترة (يتأقلم مع الشاشات الصغيرة) -->
+                <Border Grid.Row="2" Style="{StaticResource MainBorderStyle}">
+                    <StackPanel>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+
+
+                            <TextBox Grid.Column="0"  Margin="0,0,5,0"
+                                 Style="{DynamicResource searchTextBoxStyle}"
+                                 HorizontalAlignment="Stretch"/>
+
+                            <ComboBox Grid.Column="1" MinWidth="130"  Margin="0,0,5,0">
+                                <ComboBoxItem Content="كل التخصصات"/>
+                            </ComboBox>
+
+                            <ComboBox Grid.Column="2" MinWidth="130"  Margin="0,0,5,0">
+                                <ComboBoxItem Content="كل التخصصات"/>
+                            </ComboBox>
+
+                            <Button Grid.Column="3" Content="فلترة 🔽" Background="White" Foreground="#475569" Padding="12,8" BorderBrush="#CBD5E1" BorderThickness="1" Margin="0,0,5,0"/>
+
+                        <RadioButton Grid.Column="4"
+                             Style="{StaticResource ButtonADD}"
+                             Content="اضافه موظف جديد"
+                             />
+
+
+                    </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- 4. جدول البيانات (يدعم التمرير الأفقي عند انخفاض المساحة) -->
+                <Border Grid.Row="3" Style="{StaticResource MainBorderStyle}" >
+                    
+                        <DataGrid >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="#" Width="50"/>
+                                <DataGridTextColumn Header="اسم الموظف" Width="2*"/>
+                                <DataGridTextColumn Header="التخصص" Width="1.5*"/>
+                                <DataGridTextColumn Header="القسم" Width="1.5*"/>
+                                <DataGridTextColumn Header="رقم الهاتف" Width="120"/>
+                                <DataGridTextColumn Header="البريد الإلكتروني" Width="2*"/>
+                                <DataGridTextColumn Header="الحالة" Width="90"/>
+                                <DataGridTextColumn Header="تاريخ الانضمام" Width="110"/>
+                                <DataGridTextColumn Header="الإجراءات" Width="100"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    
+                </Border>
+
+
+
+
+
+            </Grid>
+        
+
+    </Border>
+</UserControl>

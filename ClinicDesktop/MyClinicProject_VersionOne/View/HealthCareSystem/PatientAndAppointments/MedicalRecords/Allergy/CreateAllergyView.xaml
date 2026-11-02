@@ -1,0 +1,182 @@
+﻿<Window x:Class="MyClinicProject_VersionOne.View.HealthCareSystem.PatientAndAppointments.MedicalRecords.Allergy.CreateAllergyView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.HealthCareSystem.PatientAndAppointments.MedicalRecords.Allergy"
+        mc:Ignorable="d"
+        Title="CreateAllergyView" Height="500" Width="700"
+        Background="Transparent"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        FlowDirection="RightToLeft"
+        >
+    <Border  Background="#FFB4D7FA" CornerRadius="5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <!--العنوان-->
+                <RowDefinition Height="Auto"/>
+                <!--المحتوي-->
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="150"/>                   <!--الصف الثالث الذي يحتوي علي الملاحظات-->
+
+                <RowDefinition Height="Auto"/>                 <!--الصف الرابع والذي يحتوي على الازرار-->
+            </Grid.RowDefinitions>
+            
+            <!--العنوان-->
+            <Border Grid.Row="0"  Style="{StaticResource MainBorderStyle}"
+                            >
+                <Grid >
+
+                    <Grid.ColumnDefinitions>
+
+                        <!-- الصورة -->
+                        <ColumnDefinition Width="Auto"/>
+
+                        <!-- العنوان والوصف -->
+                        <ColumnDefinition Width="*"/>
+
+                    </Grid.ColumnDefinitions>
+
+
+                    <!-- صورة التشخيص -->
+
+                    <Image Grid.Column="0"
+                                   Source="/Styles/Images/user.png"
+                                   Width="42"
+                                   Height="42"
+                                   Margin="5,5,5,5"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Right"/>
+
+
+                    <!-- العنوان والوصف -->
+
+                    <StackPanel Grid.Column="1"
+                                Orientation="Vertical"
+                                VerticalAlignment="Center">
+                        <TextBlock Text="إنشاء حساسيه جديد"
+                                            Style="{StaticResource PrimaryTextTitleadd}"/>
+
+                        <TextBlock Text="قم بادخال بيانات الحساسيه  الجديد في النظام"
+                                                Style="{StaticResource SecondaryTextTitlePage}"/>
+
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+
+            <!--المحتوي-->
+            <Border  Grid.Row="1" Style="{StaticResource MainBorderStyle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>                 <!--الصف الاول والذي يحتوي علي اسم الحساسيه و الرمز-->
+                        
+                        <RowDefinition Height="Auto"/>                 <!--الصف الثاني والذي يحتوي علي الحاله و النوع-->
+                                  
+                    </Grid.RowDefinitions>
+                    
+                    <!--الصف الاول والذي يحتوي علي اسم الحساسيه و الرمز-->
+                    <Grid Grid.Row="0" Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/> <!--العمود الاول الذي يحتوي على مربع البحث الخاص ب اسم الحساسيه-->
+                            <ColumnDefinition Width="*"/> <!--العمود الثاني الذي يحتوي على المرز الخاص ب الحساسيه-->
+                        </Grid.ColumnDefinitions>
+
+                        <!--العمود الاول الذي يحتوي على مربع البحث الخاص ب اسم الحساسيه-->
+                        <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                            <TextBlock Text="اسم الحساسيه*" Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox Grid.Column="0" 
+                                     Tag="اكتب اسم الحساسيه او ICD-10"
+                                     x:Name="txtAllergyName" Style="{DynamicResource searchTextBoxStyle}"/>
+                            
+                        </StackPanel>
+
+                        <!--العمود الثاني الذي يحتوي على الرمز الخاص ب الحساسيه بيكون نفس ثابت Id-->
+                        <StackPanel Grid.Column="1" Margin="0,0,5,0">
+                            <TextBlock Text="الرمز*"  Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox x:Name="txtAllergyCode"  Text="E11.9" Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+
+
+                        
+                    </Grid>
+                    <!--الصف الثاني والذي يحتوي علي الحاله و النوع-->
+                    <Grid Grid.Row="1" Margin="0,0,0,10" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/> <!--العمود الاول الذي يحتوي على الحاله  الخاص ب  الحساسيه-->
+                            <ColumnDefinition Width="*"/> <!--العمود الثاني الذي يحتوي على النوع الخاص ب الحساسيه-->
+                        </Grid.ColumnDefinitions>
+
+                        <!--العمود الاول الذي يحتوي على الحاله  الخاص ب  الحساسيه-->
+                        <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                            <TextBlock Text="حاله الحساسيه*" Style="{StaticResource FiledLabelStyle}"/>
+                            <ComboBox  x:Name="txtAllergyStatus" Style="{StaticResource ModernComboBoxStyle }" />
+                        </StackPanel>
+
+                        <!--العمود الثاني الذي يحتوي على النوع الخاص ب الحساسيه-->
+                        <StackPanel Grid.Column="1" Margin="0,0,5,0">
+                            <TextBlock Text="نوع الحساسيه*"  Style="{StaticResource FiledLabelStyle}"/>
+                            <ComboBox  x:Name="txtAllergyType" Style="{StaticResource ModernComboBoxStyle }"  >
+                                <!--//////////////////////
+                                هذا مثال ويجب حذفه-
+                                ////////////////////////
+                                -->
+                                <ComboBoxItem Content="خيار اول"/>
+                            </ComboBox>
+                        </StackPanel>
+
+                    </Grid>
+
+                   
+                    
+
+
+
+                </Grid>
+              
+            </Border>
+            <!--الصف الثالث الذي يحتوي علي الملاحظات-->
+            <Border Grid.Row="2" Style="{StaticResource MainBorderStyle}">
+                <StackPanel >
+                    <TextBlock Text="📝 ملاحظات إضافية" Style="{StaticResource CardHeaderStyle}"/>
+                    <TextBox x:Name="txtAllergyNotes" MinHeight="60" TextWrapping="Wrap" AcceptsReturn="True" Text=" x:Name=txtAllergyName / txtAllergyCode / x:Name=txtAllergyStatus / x:Name=txtAllergyType / x:Name=txtAllergyNotes /  x:Name=btnCreateAllergyExit /  x:Name=btnCreateAllergySave /  تم تسميه جميع الازرار مع الحقول كل شي جاهز ....."/>
+                    <TextBlock Text="0/500" FontSize="10" Foreground="Gray" HorizontalAlignment="Right" Margin="0,2,0,0"/>
+                </StackPanel>
+            </Border>
+
+
+
+            <!--الصف الرابع والذي يحتوي على الازرار-->
+
+            <Border Grid.Row="3" 
+                Style="{StaticResource MainBorderStyle}">
+
+                <StackPanel 
+                            Orientation="Horizontal"
+                            FlowDirection="LeftToRight"
+>
+                    <!-- زر الإلغاء -->
+
+                    <Button Style="{StaticResource ButtonExit}"
+                            x:Name="btnCreateAllergyExit"
+                             />
+
+
+                    <!-- زر الحفظ تم تسميه كل مافي الواجهه -->
+
+                    <Button Style="{StaticResource ButtonSave}"
+                            x:Name="btnCreateAllergySave"
+                                 />
+
+
+                </StackPanel>
+
+            </Border>
+
+
+
+        </Grid>
+        
+    </Border>
+</Window>
