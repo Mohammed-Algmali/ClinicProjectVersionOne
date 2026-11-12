@@ -1,0 +1,166 @@
+﻿<Window x:Class="MyClinicProject_VersionOne.View.HealthCareSystem.MedicalAdministration.Laboratory.CreateTestView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.HealthCareSystem.MedicalAdministration.Laboratory"
+        mc:Ignorable="d"
+        Title="CreateTestView" Height="450" Width="800"
+        Background="Transparent"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        FlowDirection="RightToLeft"
+        >
+    <Border   Background="#FFB4D7FA" CornerRadius="2">
+
+
+        <Grid Margin="5" >
+            <Grid.RowDefinitions>
+
+                <RowDefinition Height="Auto"/>
+                <!--شريط العنوان الرئيسي-->
+                <RowDefinition Height="120"/>
+                <!--بطاقه معلومات المريض-->
+                <RowDefinition Height="Auto"/>
+                <!--شريط التبويبات -->
+                <RowDefinition Height="*"/>
+                <!--شريط  البيانات الجدولية-->
+                <RowDefinition Height="Auto"/>
+                <!-- ازرار حفظ الطلب و الحذف-->
+            </Grid.RowDefinitions>
+
+            <!-- 1. شريط العنوان الرئيسي -->
+            <Border Grid.Row="0" Style="{StaticResource MainBorderStyle}"
+                            >
+                <Grid >
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- الصورة -->
+                        <ColumnDefinition Width="*"/>
+                        <!-- العنوان والوصف -->
+                    </Grid.ColumnDefinitions>
+
+
+                    <!-- صورة المستخدم -->
+
+                    <Image Grid.Column="0"
+                                   Source="/Styles/Images/user.png"
+                                   Width="42"
+                                   Height="42"
+                                   Margin="5"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Right"/>
+
+                    <!-- العنوان والوصف -->
+
+                    <StackPanel Grid.Column="1"
+                                Orientation="Vertical"
+                                VerticalAlignment="Center"
+                                Margin="10,0,0,0">
+
+                        <TextBlock Text="طلب تحليل جديد  "
+                                    Style="{StaticResource PrimaryTextTitleadd}"/>
+
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+
+            <!--بطاقه معلومات المريض-->
+            <Border Grid.Row="1" Style="{StaticResource MainBorderStyle}">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <!-- اسم المريض ورقم الملف -->
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" >
+                        <Border Width="40" Height="40" Background="#E2E8F0" CornerRadius="20" Margin="0,0,10,0">
+                            <TextBlock Text="👤" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="أحمد محمد علي" FontWeight="Bold" FontSize="16" Foreground="#1E293B" />
+                            <TextBlock Text="رقم الملف: 100458" Foreground="#64748B" FontSize="12" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- الجنس -->
+                    <HeaderedContentControl Grid.Column="1" Header="الجنس" Content="ذكر" Style="{StaticResource PatientMetaItemStyle}" />
+
+                    <!-- العمر -->
+                    <HeaderedContentControl Grid.Column="2" Header="العمر" Content="45 سنة" Style="{StaticResource PatientMetaItemStyle}" />
+
+                    <!-- تاريخ الميلاد -->
+                    <HeaderedContentControl Grid.Column="3" Header="تاريخ الميلاد" Content="1980/05/12" Style="{StaticResource PatientMetaItemStyle}" />
+
+                </Grid>
+            </Border>
+
+            <!--شريط التبويبات -->
+            <Border Grid.Row="2" Style="{StaticResource MainBorderStyle}">
+
+
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton Content="الكيمياء الحيوية" Style="{StaticResource PatientTabButtonStyle}"/>
+                    <RadioButton Content="أمراض الدم" Style="{StaticResource PatientTabButtonStyle}"/>
+                    <RadioButton Content="المناعه والسيرولوجيا" Style="{StaticResource PatientTabButtonStyle}"/>
+                    <RadioButton Content="الهرمونات" Style="{StaticResource PatientTabButtonStyle}"/>
+                    <RadioButton Content="تحليل البول" Style="{StaticResource PatientTabButtonStyle}"/>
+                    <RadioButton Content="تحليل البراز" Style="{StaticResource PatientTabButtonStyle}"/>
+                    <RadioButton Content="علم الانسجة " Style="{StaticResource PatientTabButtonStyle}"/>
+                    <RadioButton Content=" اختبارات خاصة " Style="{StaticResource PatientTabButtonStyle}"/>
+                </StackPanel>
+
+            </Border>
+
+
+            <!-- البيانات التي سوف تطلع من خلال اختيار التبويب -->
+            <Border Grid.Row="3" Style="{StaticResource MainBorderStyle}">
+
+            </Border>
+
+
+            <Border Grid.Row="4" 
+                Style="{StaticResource MainBorderStyle}">
+
+                <StackPanel 
+                            Orientation="Horizontal"
+                            FlowDirection="LeftToRight"
+>
+                    <!-- زر الإلغاء -->
+
+                    <Button Style="{StaticResource ButtonExit}"
+                            x:Name="btnEditChronicDiseasesExit"
+                             />
+
+
+                    <!-- زر الحفظ تم تسميه كل مافي الواجهه -->
+
+                    <Button Style="{StaticResource ButtonSave}"
+                            x:Name="btnEditChronicDiseasesSave"
+                                 />
+                    <RadioButton Content="عرض تفاصيل الطلب" Style="{StaticResource ButtonShow}" />
+
+
+                </StackPanel>
+
+            </Border>
+
+
+
+
+
+
+        </Grid>
+
+
+    </Border>
+</Window>

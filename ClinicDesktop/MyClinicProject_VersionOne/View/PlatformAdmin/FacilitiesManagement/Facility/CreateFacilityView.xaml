@@ -555,7 +555,9 @@
 
                             <TextBox 
                                  Style="{StaticResource TextBoxStyle}"
-                                />
+                                 Text="{Binding ManagerEmail, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
+
+                            
 
                         </StackPanel>
 

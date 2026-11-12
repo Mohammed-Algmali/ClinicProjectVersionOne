@@ -1,0 +1,190 @@
+﻿<UserControl x:Class="MyClinicProject_VersionOne.View.HealthCareSystem.MedicalAdministration.PharmacyUnit.Prescription.PrescriptionTabView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.HealthCareSystem.MedicalAdministration.PharmacyUnit.Prescription"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" FlowDirection="RightToLeft">
+
+    <Border Background="#FFB4D7FA" CornerRadius="2">
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <!--  شريط بيانات المريض -->
+                <RowDefinition Height="Auto"/>
+                <!--  بطاقة البحث والجدول -->
+                <RowDefinition Height="*"/>
+                <!--  شريط الترقيم والإجمالي السفلي -->
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!--  شريط بيانات المريض العلوي (بنفس نمط مشروعك) -->
+            <Border Grid.Row="0" Style="{StaticResource MainBorderStyle}">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <HeaderedContentControl Grid.Column="0" Header="رقم الملف الطبي" Content="{Binding MedicalRecordNumber, FallbackValue='PT-000125'}" Style="{StaticResource PatientMetaItemStyle}" Margin="0,0,25,0"/>
+                    <HeaderedContentControl Grid.Column="1" Header="الجنس" Content="{Binding Gender, FallbackValue='ذكر'}" Style="{StaticResource PatientMetaItemStyle}" Margin="0,0,25,0"/>
+                    <HeaderedContentControl Grid.Column="2" Header="العمر" Content="{Binding Age, FallbackValue='42 سنة'}" Style="{StaticResource PatientMetaItemStyle}" Margin="0,0,25,0"/>
+
+                    <!-- اسم المريض ورقم الملف مع الأيقونة في اليسار كما في الصورة -->
+                    <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <StackPanel VerticalAlignment="Center" Margin="0,0,12,0">
+                            <TextBlock Text="{Binding PatientFullName, FallbackValue='أحمد محمد علي'}" FontWeight="Bold" FontSize="16" Foreground="#1E293B"/>
+                            <TextBlock Text="{Binding MedicalRecordNumber, FallbackValue='PT-000125'}" Foreground="#64748B" FontSize="12" FlowDirection="LeftToRight" HorizontalAlignment="Right"/>
+                        </StackPanel>
+                        <Border Width="42" Height="42" Background="#E0F2FE" CornerRadius="21">
+                            <TextBlock Text="👤" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="#0369A1"/>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!--  بطاقة جدول الوصفات الطبية وشريط الأدوات العلوي -->
+            <Border Grid.Row="1" Style="{StaticResource MainBorderStyle}">
+                <Grid Margin="5">
+                    <Grid.RowDefinitions>
+                        <!-- شريط البحث + زر إنشاء وصفة جديدة -->
+                        <RowDefinition Height="Auto"/>
+                        <!-- جدول الوصفات -->
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- شريط البحث (يمين) وزر إنشاء وصفة جديدة (يسار كما في الصورة) -->
+                    <Grid Grid.Row="0" Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="340"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- مربع البحث مع أيقونة العدسة -->
+                        <Border Grid.Column="0" BorderBrush="#CBD5E1" BorderThickness="1" CornerRadius="6" Background="White" Height="38">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="36"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="🔍" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#94A3B8"/>
+                                <TextBox Grid.Column="1" 
+                                         Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
+                                         BorderThickness="0" Background="Transparent" VerticalContentAlignment="Center" Padding="4,0"
+                                         Tag="ابحث عن اسم الدواء أو رقم الوصفة..."/>
+                            </Grid>
+                        </Border>
+
+                        <!-- زر + إنشاء وصفة جديدة -->
+                        <Button Grid.Column="2" 
+                                Content="  +  إنشاء وصفة" 
+                                Command="{Binding OpenCreatePrescriptionCommand}" 
+                                Style="{StaticResource ButtonSave}"/>
+                    </Grid>
+
+                    <!-- جدول الوصفات الطبية -->
+                    <DataGrid Grid.Row="1"
+                              ItemsSource="{Binding PrescriptionsList}"
+                              SelectedItem="{Binding SelectedPrescription}"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              IsReadOnly="True"
+                              HeadersVisibility="Column"
+                              GridLinesVisibility="Horizontal"
+                              HorizontalGridLinesBrush="#F1F5F9"
+                              RowHeight="48"
+                              Background="White"
+                              BorderBrush="#E2E8F0"
+                              BorderThickness="1">
+
+                        <DataGrid.Columns>
+                            <!-- # التسلسل -->
+                            <DataGridTextColumn Header="#" Binding="{Binding RowNumber}" Width="0.4*"/>
+
+                            <!-- رقم الوصفة (مثل RX-000245) -->
+                            <DataGridTextColumn Header="رقم الوصفة" Binding="{Binding PrescriptionCode}" Width="1.1*"/>
+
+                            <!-- تاريخ الإنشاء (التاريخ وتحته الوقت كما في الصورة) -->
+                            <DataGridTemplateColumn Header="تاريخ الإنشاء" Width="1.1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <TextBlock Text="{Binding CreatedDate, FallbackValue='2025/10/14'}" FontWeight="SemiBold" Foreground="#334155" FontSize="12.5" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="{Binding CreatedTime, FallbackValue='10:30 ص'}" Foreground="#64748B" FontSize="11" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <!-- الطبيب -->
+                            <DataGridTextColumn Header="الطبيب" Binding="{Binding DoctorName}" Width="1.3*"/>
+
+                            <!-- عدد الأدوية -->
+                            <DataGridTextColumn Header="عدد الأدوية" Binding="{Binding MedicationsCount}" Width="0.8*"/>
+
+                            <!-- الحالة (مكتملة باللون الأخضر / ملغاة باللون الأحمر) -->
+                            <DataGridTemplateColumn Header="الحالة" Width="1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Style="{StaticResource MainBorderStyle}">
+                                            <TextBlock Text="{Binding Status, FallbackValue='مكتملة'}" Style="{StaticResource FiledLabelStyle}"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <!-- إجراءات (ثلاث نقاط للتعديل/الحذف، طباعة، معاينة العين) -->
+                            <DataGridTemplateColumn Header="إجراءات" Width="1.1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <!-- زر التعديل / الخيارات الإضافية -->
+                                            <Button Content="⋮" ToolTip="تعديل الوصفة"
+                                                    Command="{Binding DataContext.OpenEditPrescriptionCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                    CommandParameter="{Binding}"
+                                                    Style="{StaticResource GridActionIconBtnStyle}" Foreground="#475569" FontWeight="Bold"/>
+                                            <!-- زر الطباعة -->
+                                            <Button Content="🖨️" ToolTip="طباعة الوصفة"
+                                                    Command="{Binding DataContext.PrintPrescriptionCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                    CommandParameter="{Binding}"
+                                                    Style="{StaticResource GridActionIconBtnStyle}"/>
+                                            <!-- زر المعاينة (العين) -->
+                                            <Button Content="👁️" ToolTip="عرض تفاصيل الوصفة"
+                                                    Command="{Binding DataContext.ViewPrescriptionDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                    CommandParameter="{Binding}"
+                                                    Style="{StaticResource GridActionIconBtnStyle}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Border>
+
+            <!--  شريط الترقيم السفلي وإجمالي النتائج (كما في أسفل يسار الصورة) -->
+            <Border Grid.Row="2" Style="{StaticResource MainBorderStyle}">
+                <Grid Margin="10,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding TotalCountText, FallbackValue='إجمالي النتائج: 8'}" Foreground="#475569" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,15,0"/>
+
+                        <Button Content="‹" Width="28" Height="28" Background="White" BorderBrush="#CBD5E1" Margin="2,0"/>
+                        <Border Width="28" Height="28" Background="#0066CC" CornerRadius="4" Margin="2,0">
+                            <TextBlock Text="1" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Button Content="›" Width="28" Height="28" Background="White" BorderBrush="#CBD5E1" Margin="2,0"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
+</UserControl>

@@ -69,58 +69,56 @@
                 </Border>
 
                 <!-- بطاقات الإحصائيات -->
-                <Border Grid.Row="1" Style="{StaticResource MainBorderStyle}">
+            <Border Grid.Row="1" Style="{StaticResource MainBorderStyle}">
+
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <!--البطاقه الاولى-->
+                        <ColumnDefinition Width="*"/>
+                        <!--البطاقه الثانيه-->
+                        <ColumnDefinition Width="*"/>
+                        <!--البطاقه الثالث-->
+                        <ColumnDefinition Width="*"/>
+                        <!--البطاقه الرابعه-->
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--البطاقه الاولى وهي تجريبي-->
+                    <HeaderedContentControl Grid.Column="0"  Style="{StaticResource StatisticCardStyle}"
+                            Header="الادوار النشطه" 
+                            Content="{Binding TotalEmployeesCount, FallbackValue=142}" 
+                            Tag="👥" />
+
+
+
+                    <!--البطاقه الثانيه-->
+                    
+                     <HeaderedContentControl Grid.Column="1"  Style="{StaticResource StatisticCardStyle}"
+                            Header="الادوار النشطه" 
+                            Content="{Binding TotalEmployeesCount, FallbackValue=142}" 
+                            Tag="👥" />
                     
 
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <!--البطاقه الاولى-->
-                                <ColumnDefinition Width="*"/>
-                                 <!--البطاقه الثانيه-->
-                                <ColumnDefinition Width="*"/>
-                                 <!--البطاقه الثالث-->
-                                <ColumnDefinition Width="*"/>
-                                <!--البطاقه الرابعه-->
-                                <ColumnDefinition Width="*"/>
-                             </Grid.ColumnDefinitions>
-
-                        <!--البطاقه الاولى-->
-                        <Border  Grid.Column="0"   >
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Border Width="40" Height="40" Background="#CCFBF1" CornerRadius="8" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0">
-                                    <TextBlock Text="👥" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                    <TextBlock Text="إجمالي الأطباء" Foreground="#64748B" FontSize="12"/>
-                                    <TextBlock Text="58 طبيب" FontWeight="Bold" FontSize="20" Foreground="#1E293B" Margin="0,5,0,0"/>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-                        <!--البطاقه الثانيه-->
-                        <Border  Grid.Column="1"  Background="SeaGreen" CornerRadius="8" Padding="10" Margin="0,0,5,0" >
-                            
-                        </Border>
-
-                        <!--البطاقه الثالثه-->
-                         <Border  Grid.Column="2"  Background="White" CornerRadius="8" Padding="10" Margin="0,0,5,0" >
-                             <StackPanel>
-                                <TextBlock Text="📝 ملاحظات إضافية" FontSize="14" FontWeight="Bold" Foreground="#0066FF" Margin="0,0,0,10"/>
-                                <TextBox Height="60" TextWrapping="Wrap" AcceptsReturn="True" Text=" يجب تصميم البطائق ووضعها في مكانها المخصص مع الاهتمام في القوائم المنسدله و فلتر البحث وتنسيق زر الاضافه.."/>
-                             </StackPanel>
-                          </Border>
+                    <!--البطاقه الثالثه-->
+                    <HeaderedContentControl Grid.Column="2"  Style="{StaticResource StatisticCardStyle}"
+                            Header="الادوار النشطه" 
+                            Content="{Binding TotalEmployeesCount, FallbackValue=142}" 
+                            Tag="👥" />
                     <!--البطاقه الرابعه-->
+                    <HeaderedContentControl Grid.Column="3"  Style="{StaticResource StatisticCardStyle}"
+                            Header="الادوار النشطه" 
+                            Content="{Binding TotalEmployeesCount, FallbackValue=142}" 
+                            Tag="👥" />
 
 
 
-                    </Grid>
-                   
-                </Border>
+                </Grid>
 
-                <!-- 3. شريط البحث والفلترة (يتأقلم مع الشاشات الصغيرة) -->
+            </Border>
+
+
+            <!-- 3. شريط البحث والفلترة (يتأقلم مع الشاشات الصغيرة) -->
                 <Border Grid.Row="2" Style="{StaticResource MainBorderStyle}">
                     <StackPanel>
 
@@ -137,19 +135,23 @@
 
                             <TextBox Grid.Column="0"  Margin="0,0,5,0"
                                  Style="{DynamicResource searchTextBoxStyle}"
-                                 HorizontalAlignment="Stretch"/>
+                                 Tag="ابحث بالاسم اورقم الهاتف"/>
 
-                            <ComboBox Grid.Column="1" MinWidth="130"  Margin="0,0,5,0">
-                                <ComboBoxItem Content="كل التخصصات"/>
-                            </ComboBox>
 
-                            <ComboBox Grid.Column="2" MinWidth="130"  Margin="0,0,5,0">
-                                <ComboBoxItem Content="كل التخصصات"/>
-                            </ComboBox>
+                        <ComboBox Grid.Column="1"
+                            x:Name="cmbPermi"
+                               
+                                Style="{StaticResource ModernComboBoxStyle}"/>
 
-                            <Button Grid.Column="3" Content="فلترة 🔽" Background="White" Foreground="#475569" Padding="12,8" BorderBrush="#CBD5E1" BorderThickness="1" Margin="0,0,5,0"/>
+                        <ComboBox Grid.Column="2"
+                               
+                                Style="{StaticResource ModernComboBoxStyle}"/>
+
+                        <Button Grid.Column="3" Content="فلترة 🔽" Background="White" Foreground="#475569" Padding="12,8" BorderBrush="#CBD5E1" BorderThickness="1" Margin="0,0,5,0"/>
 
                         <RadioButton Grid.Column="4"
+                                     x:Name="btnCreateEmployee"
+                                     Click="btnCreateEmployee_Click"
                              Style="{StaticResource ButtonADD}"
                              Content="اضافه موظف جديد"
                              />
@@ -161,22 +163,85 @@
 
                 <!-- 4. جدول البيانات (يدعم التمرير الأفقي عند انخفاض المساحة) -->
                 <Border Grid.Row="3" Style="{StaticResource MainBorderStyle}" >
-                    
-                        <DataGrid >
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="#" Width="50"/>
-                                <DataGridTextColumn Header="اسم الموظف" Width="2*"/>
-                                <DataGridTextColumn Header="التخصص" Width="1.5*"/>
-                                <DataGridTextColumn Header="القسم" Width="1.5*"/>
-                                <DataGridTextColumn Header="رقم الهاتف" Width="120"/>
-                                <DataGridTextColumn Header="البريد الإلكتروني" Width="2*"/>
-                                <DataGridTextColumn Header="الحالة" Width="90"/>
-                                <DataGridTextColumn Header="تاريخ الانضمام" Width="110"/>
-                                <DataGridTextColumn Header="الإجراءات" Width="100"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    
-                </Border>
+
+                <DataGrid ItemsSource="{Binding Employees}"
+          AutoGenerateColumns="False"
+          IsReadOnly="True"
+          SelectionMode="Single"
+          CanUserAddRows="False"
+          GridLinesVisibility="Horizontal"
+          HeadersVisibility="Column"
+          RowHeight="36"
+          FontSize="13"
+          HorizontalGridLinesBrush="#E2E8F0"
+          FlowDirection="RightToLeft">
+
+                    <DataGrid.Columns>
+
+                        <!-- 1. الرقم الوظيفي -->
+                        <DataGridTextColumn Header="الرقم الوظيفي" 
+                            Binding="{Binding EmployeeId}" 
+                            Width="100"/>
+
+                        <!-- 2. الاسم الكامل -->
+                        <DataGridTextColumn Header="اسم الموظف / الطبيب" 
+                            Binding="{Binding UserFullName}" 
+                            Width="180"/>
+
+                        <!-- 3. اسم المستخدم -->
+                        <DataGridTextColumn Header="اسم الدخول" 
+                            Binding="{Binding Username}" 
+                            Width="120"/>
+
+                        <!-- 4. الدور الوظيفي -->
+                        <DataGridTextColumn Header="الدور الوظيفي" 
+                            Binding="{Binding RoleName}" 
+                            Width="130"/>
+
+                        <!-- 5. التخصص الطبي (يظهر للأطباء، وإن لم يوجد يظهر فارغاً) -->
+                        <DataGridTextColumn Header="التخصص" 
+                            Binding="{Binding Specialization}" 
+                            Width="140"/>
+
+                        <!-- 6. رقم ترخيص المزاولة -->
+                        <DataGridTextColumn Header="ترخيص المزاولة" 
+                            Binding="{Binding MedicalLicenseNumber}" 
+                            Width="130"/>
+
+                        <!-- 7. رقم الهاتف -->
+                        <DataGridTextColumn Header="رقم الهاتف" 
+                            Binding="{Binding UserPhone}" 
+                            Width="120"/>
+
+                        <!-- 8. البريد الإلكتروني (يتوسع تلقائياً ليأخذ باقي المساحة) -->
+                        <DataGridTextColumn Header="البريد الإلكتروني" 
+                            Binding="{Binding UserEmail}" 
+                            Width="*"/>
+
+                        <!-- 9. الحالة الوظيفية -->
+                        <DataGridTextColumn Header="الحالة" 
+                            Binding="{Binding EmployeeStatus}" 
+                            Width="90"/>
+
+
+                        <DataGridTemplateColumn Header="الإجراءات"
+                        Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="تعديل"
+                                 Width="60"
+                                 Margin="2"
+                                    Command="{Binding DataContext.EditFacilityCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                     CommandParameter="{Binding EmployeeId}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                   
+
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Border>
 
 
 

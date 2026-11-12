@@ -89,14 +89,14 @@
                             </Ellipse>
 
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="علياء محمد"
+                                <TextBlock Text="{Binding CurrentUserName}"
                                            FontSize="12"
                                            Margin="5,7,5,0"
                                            Foreground="Black"
                                            FontWeight="Medium"
                                            FontFamily="{StaticResource CairFont}"/>
 
-                                <TextBlock     Text="مدير النظام"
+                                <TextBlock    Text="{Binding CurrentUserRole}"
                                                FontSize="10"
                                                Margin="5,7,5,0"
                                                Foreground="Gray"

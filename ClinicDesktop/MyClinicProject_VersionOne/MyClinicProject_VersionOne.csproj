@@ -38,9 +38,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Model\HealthCareSystem\" />
-    <Folder Include="ViewModel\HealthCareSystem\" />
-    <Folder Include="View\HealthCareSystem\MedicalAdministration\Laboratory\" />
+    <Folder Include="View\HealthCareSystem\HumanResources\NewFolder\" />
+    <Folder Include="View\HealthCareSystem\Settings\" />
     <Folder Include="View\PlatformAdmin\PlatformSettings\" />
     <Folder Include="View\PlatformAdmin\OperationsAudit\" />
     <Folder Include="View\PlatformAdmin\ReportsAndAnalytics\" />

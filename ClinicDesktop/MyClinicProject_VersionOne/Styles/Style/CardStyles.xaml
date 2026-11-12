@@ -72,11 +72,70 @@
     </Style>
 
     <!---->
-    
- 
-   
+    <!-- قالب البطاقات المصغرة والمعلومات -->
+    <Style x:Key="InfoCardStyle" TargetType="HeaderedContentControl">
+        <Setter Property="Background" Value="Red"/>
+        <Setter Property="BorderBrush" Value="#E2E8F0"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="15"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="FlowDirection" Value="RightToLeft"/>
 
-    
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="HeaderedContentControl">
+                    <Border Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        CornerRadius="10" 
+                        Padding="{TemplateBinding Padding}">
+
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="1" Direction="270" Opacity="0.03" Color="#0F172A"/>
+                        </Border.Effect>
+
+                        <Grid VerticalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <!-- الصف الأول: القيمة والأيقونة -->
+                                <RowDefinition Height="*"/>
+                                <!-- الصف الثاني: الوصف / العنوان الفرعي -->
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- القيمة الأيقونة + النص (Content & Tag) -->
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,4">
+                                <!-- الأيقونة (توضع في Tag) -->
+                                <ContentPresenter Content="{TemplateBinding Tag}" 
+                                              TextBlock.FontSize="16" 
+                                              TextBlock.Foreground="#475569"
+                                              VerticalAlignment="Center" 
+                                              Margin="0,0,8,0"/>
+
+                                <!-- القيمة الرئيسية (توضع في Content) -->
+                                <ContentPresenter Content="{TemplateBinding Content}" 
+                                              TextBlock.FontSize="15" 
+                                              TextBlock.FontWeight="Bold" 
+                                              TextBlock.Foreground="#1E293B" 
+                                              VerticalAlignment="Center"/>
+                            </StackPanel>
+
+                            <!-- العنوان الفرعي/الوصف (Header) -->
+                            <ContentPresenter Grid.Row="1" 
+                                          Content="{TemplateBinding Header}" 
+                                          TextBlock.FontSize="11" 
+                                          TextBlock.Foreground="#64748B" 
+                                          HorizontalAlignment="Right"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+
+
 
 
 

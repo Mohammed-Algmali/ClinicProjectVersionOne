@@ -50,8 +50,47 @@ class RoleResponse(RoleBase):
   # تاريخ وتوقيت إنشاء الدور
 
   class Config:
-    orm_mode = True
+    
     from_attributes = True
 
 
+
+
+class UserBase(BaseModel):
+  RoleId:int
+  UserFullName:str
+  Username:str
+  UserEmail:str
+  UserPhone:str
+  gender: str = "Male"              # ذكر / أنثى
+  birth_date: Optional[str] = None
+  UserAddress: Optional[str] = None
+
+  
+
+class ManagerCreate(UserBase):
+  Password:str
+  
+
+
+class PatientCreate(UserBase):
+  FacilityId: Optional[int] = None  # رقم المنشأة (إذا تُرك فارغاً يأخذه النظام تلقائياً من المدير الحالي)
+ 
+
+class EmployeeUserCreate(UserBase):
+    Password: str
+    FacilityId: Optional[int] = None  # رقم المنشأة (إذا تُرك فارغاً يأخذه النظام تلقائياً من المدير الحالي)
+    
+class EmployeeUserUpdate(UserBase):
+    UserStatus: Optional[str] = None
+
+
+class UserResponse(UserBase):
+  UserId:int
+  CreatedAt:datetime
+  class Config:
+    from_attributes = True
+
+
+  
 

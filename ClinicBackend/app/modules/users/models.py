@@ -28,14 +28,23 @@ class User(Base):
     """
     جدول المستخدمين الأساسي لكافة أطراف النظام.
     - يحتوي على بيانات الحساب والتحقق وتفاصيل الاتصال لكافة الفئات (أطباء، إداريين، مرضى).
-    - يرتبط بدور محدد (Role) وتتفرع منه ملفات الموظفين أو المرضى أو المنشآت.
+    - يرتبط بدور محدد (Role) وينتمي إلى منشأة طبية محددة (Facility).
     """
     __tablename__ = "Users"
 
     UserId: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
     RoleId: Mapped[int] = mapped_column(BigInteger, ForeignKey("tbRoles.RoleId"), nullable=False, index=True)
+    
+    # -------------------------------------------------------------
+    # المفتاح الأجنبي للمنشأة: المستخدم يتبع منشأة معينة
+    # ملاحظة: وضعنا nullable=True حتى يمكن إنشاء "مسؤول النظام العام Platform Admin" بدون منشأة
+    # -------------------------------------------------------------
+    FacilityId: Mapped[Optional[int]] = mapped_column(BigInteger, ForeignKey("Facilities.FacilityId"), nullable=True, index=True)
+
     UserFullName: Mapped[str] = mapped_column(String(100), nullable=False)
     Username: Mapped[str] = mapped_column(String(50), unique=True, nullable=False, index=True)
+    gender: Mapped[str] = mapped_column(String(50), nullable=False)
+    birth_date: Mapped[Optional[str]] = mapped_column(String(50), nullable=False)
     UserPhone: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)
     UserEmail: Mapped[Optional[str]] = mapped_column(String(100), unique=True, nullable=True)
     Password: Mapped[str] = mapped_column(String(100), nullable=False)
@@ -46,13 +55,34 @@ class User(Base):
     # علاقة: المستخدم يمتلك دوراً واحداً
     role: Mapped["Role"] = relationship("Role", back_populates="users")
 
-        # قائمة بجميع المستندات والملفات التي تخص هذا المستخدم
+    # علاقة: المستخدم ينتمي إلى منشأة واحدة
+    facility: Mapped[Optional["Facility"]] = relationship(
+        "Facility", 
+        back_populates="users",
+        foreign_keys=[FacilityId]
+    )
+
+    # علاقة تمكنك من كتابة: user.employee.Specialization
+    employee: Mapped[Optional["Employee"]] = relationship(
+        "Employee", 
+        back_populates="user", 
+        uselist=False  # لأن العلاقة 1 إلى 1
+    )
+
+    # قائمة بجميع المستندات والملفات التي تخص هذا المستخدم
     documents: Mapped[List["Document"]] = relationship(
         "Document",
         foreign_keys="[Document.user_id]",
         back_populates="user",
         cascade="all, delete-orphan",
     )
+
+    biometrics: Mapped[List["BiometricCredential"]] = relationship(
+        "BiometricCredential",
+        back_populates="user",
+        cascade="all, delete-orphan"
+    )
+
 
 
 
@@ -88,9 +118,7 @@ class Document(Base):
     visit_id: Mapped[Optional[int]] = mapped_column(BigInteger, ForeignKey("tbVisits.visit_id"), nullable=True, index=True)
     # معرف الزيارة الطبية إن كان المستند مرتبطاً بكشف طبي محدد (مثل أشعة أثناء زيارة)
 
-    uploaded_by: Mapped[int] = mapped_column(BigInteger, ForeignKey("Users.UserId"), nullable=False)
-    # معرف الموظف أو المستخدم الذي قام برفع الملف فعلياً إلى النظام لتوثيق المسؤولية
-
+  
     description: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     # شرح أو ملاحظات إضافية حول محتوى الملف
 

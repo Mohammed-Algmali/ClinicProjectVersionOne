@@ -31,10 +31,9 @@ class PatientInvoice(Base):
     invoice_number: Mapped[str] = mapped_column(String(50), unique=True, nullable=False, index=True)
     # رقم الفاتورة المالي/الضريبي المطبوع للمريض (مثل: INV-2026-0001)
 
-    patient_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("patient.patient_id"), nullable=False, index=True)
-    # معرف المريض الصادرة باسمه الفاتورة
+    user_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("Users.UserId"), nullable=False, unique=True, index=True)
 
-    visit_id: Mapped[Optional[int]] = mapped_column(BigInteger, ForeignKey("tbVisits.visit_id"), nullable=True, index=True)
+    visit_id: Mapped[Optional[int]] = mapped_column(BigInteger, ForeignKey("tbVisits.visit_id"), nullable=False, index=True)
     # معرف الزيارة الطبية المرتبطة بهذه الفاتورة
 
     total_amount: Mapped[Decimal] = mapped_column(Numeric(10, 2), default=0.0, nullable=False)
@@ -61,14 +60,14 @@ class PatientInvoice(Base):
     invoice_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
     # تاريخ ووقت إصدار الفاتورة
 
+# ==============================================================================
+# 2. جدول بنود وتفاصيل الفاتورة (tbPatientInvoiceItems)
+# ==================================
     # العلاقات
     items: Mapped[List["PatientInvoiceItem"]] = relationship("PatientInvoiceItem", back_populates="invoice", cascade="all, delete-orphan")
     payments: Mapped[List["PatientPayment"]] = relationship("PatientPayment", back_populates="invoice", cascade="all, delete-orphan")
 
-
-# ==============================================================================
-# 2. جدول بنود وتفاصيل الفاتورة (tbPatientInvoiceItems)
-# ==============================================================================
+#============================================
 class PatientInvoiceItem(Base):
     """
     جدول تفاصيل الخدمات المسعرة داخل فاتورة المريض
@@ -130,8 +129,7 @@ class PatientPayment(Base):
     transaction_reference: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
     # رقم العملية البنكية أو إشعار التحويل في حال الدفع الإلكتروني
 
-    cashier_user_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("Users.UserId"), nullable=False)
-    # موظف الصندوق أو الكاشير الذي استلم المبلغ وأصدر السند
+   
 
     payment_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
     # تاريخ وتوقيت استلام المبلغ بالثواني

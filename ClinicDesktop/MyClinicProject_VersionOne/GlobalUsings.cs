@@ -4,14 +4,23 @@ global using MyClinicProject_VersionOne.ViewModel.PlatformAdmin.FacilitiesManage
 global using MyClinicProject_VersionOne.View.PlatformAdmin.SubscriptionsAndFinance.Plan;
 global using MyClinicProject_VersionOne.ViewModel.PlatformAdmin.SubscriptionsAndFinance.Plan;
 global using MyClinicProject_VersionOne.View.PlatformAdmin.SubscriptionsAndFinance.SubscriptionAuditLog;
-global using MyClinicProject_VersionOne.View.HealthCareSystem.Attendance;
 global using MyClinicProject_VersionOne.View.HealthCareSystem.HumanResources;
 global using MyClinicProject_VersionOne.ViewModel.PlatformAdmin.UserAndPermissions.PlatformTeam;
+global using MyClinicProject_VersionOne.View.HealthCareSystem.HumanResources.Attendance;
+global using MyClinicProject_VersionOne.View.HealthCareSystem.OperationAudit;
+global using MyClinicProject_VersionOne.ViewModel.HealthCareSystem.HumanResources.Attendance;
+global using MyClinicProject_VersionOne.ViewModel.HealthCareSystem.HumanResources;
 global using MyClinicProject_VersionOne.ViewModel.PlatformAdmin.UserAndPermissions.RoleAndPermissios;
+global using MyClinicProject_VersionOne.ViewModel.HealthCareSystem.Notification;
+global using MyClinicProject_VersionOne.ViewModel.HealthCareSystem.OperationAudit;
 global using MyClinicProject_VersionOne.Model.PlatformAdmin.UserAndPermissions.PlatformTeam;
 global using MyClinicProject_VersionOne.Model.PlatformAdmin.FacilitiesManagement.Facility;
+global using MyClinicProject_VersionOne.Model.HealthCareSystem.Notification;
 global using MyClinicProject_VersionOne.Model.PlatformAdmin.UserAndPermissions.RoleAndPermissios;
 global using MyClinicProject_VersionOne.Model.BaseModel;
+global using MyClinicProject_VersionOne.Model.HealthCareSystem.HumanResources;
+global using MyClinicProject_VersionOne.Model.HealthCareSystem.Shift;
+global using MyClinicProject_VersionOne.ViewModel.HealthCareSystem.HumanResources;
 global using MyClinicProject_VersionOne.Model.PlatformAdmin.UserAndPermissions.FacilityManagers;
 global using MyClinicProject_VersionOne.Helpers;
 global using MyClinicProject_VersionOne.ViewModel.Sidebar;
@@ -19,5 +28,11 @@ global using MyClinicProject_VersionOne.ViewModel.Authentication;
 global using MyClinicProject_VersionOne.Model.Authentication;
 global using MyClinicProject_VersionOne.Command;
 global using MyClinicProject_VersionOne.Services;
+
+global using MyClinicProject_VersionOne.View.HealthCareSystem.HumanResources.Job;
+global using MyClinicProject_VersionOne.ViewModel.HealthCareSystem.HumanResources.Job;
+global using MyClinicProject_VersionOne.ViewModel.HealthCareSystem.HumanResources.Shift;
+
+
 
 

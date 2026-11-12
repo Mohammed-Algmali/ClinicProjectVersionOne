@@ -1,0 +1,99 @@
+﻿<Window x:Class="MyClinicProject_VersionOne.View.HealthCareSystem.MedicalAdministration.Laboratory.CreateLabResult"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.HealthCareSystem.MedicalAdministration.Laboratory"
+        mc:Ignorable="d"
+        Title="CreateLabResult" Height="450" Width="800"
+         WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent"
+           FlowDirection="RightToLeft">
+
+    <Border   Background="#FFB4D7FA" CornerRadius="2">
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Style="{StaticResource MainBorderStyle}">
+                <Grid Margin="5" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+
+
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" >
+                        <Border Width="40" Height="40" Background="#E2E8F0" CornerRadius="20" Margin="0,0,10,0">
+                            <TextBlock Text="👤" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+
+                            <TextBlock Text="اسم المريض الكامل" Foreground="#64748B" FontSize="12" />
+                            <TextBlock Text="أحمد محمد علي" FontWeight="Bold" FontSize="16" Foreground="#1E293B" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <HeaderedContentControl Grid.Column="1" Header=" اسم الطبيب " Content="حمزه مجيب الصلوي" Style="{StaticResource PatientMetaItemStyle}" />
+
+                    <HeaderedContentControl Grid.Column="2" Header="رقم الملف الطبي" Content="100458" Style="{StaticResource PatientMetaItemStyle}" />
+
+                    <HeaderedContentControl Grid.Column="3" Header="الجنس" Content="ذكر" Style="{StaticResource PatientMetaItemStyle}" />
+
+                    <HeaderedContentControl Grid.Column="4" Header="العمر" Content="45 سنة" Style="{StaticResource PatientMetaItemStyle}" />
+
+                    <HeaderedContentControl Grid.Column="5" Header="رقم الزيارة" Content="45 " Style="{StaticResource PatientMetaItemStyle}" />
+
+
+
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="1" Style="{StaticResource MainBorderStyle}">
+
+                <StackPanel>
+                    <TextBlock  Text=" الفحوصات والنتائج المخبرية   " Style="{StaticResource CardHeaderStyle}"/>
+                    <DataGrid >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="رقم المكون" Width="*"/>
+                            <DataGridTextColumn Header="اسم المكون" Width="*"/>
+                            <DataGridTextColumn Header="النتيجة" Width="*"/>
+                            <DataGridTextColumn Header="الوحدة" Width="*"/>
+                            <DataGridTextColumn Header="المجال المرجعي " Width="*"/>
+                            <DataGridTextColumn Header="الاشارة " Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+
+            </Border>
+
+            <Border Grid.Row="2" Style="{StaticResource MainBorderStyle}">
+
+                <StackPanel 
+                            Orientation="Horizontal"
+                            FlowDirection="LeftToRight"
+>
+                    <RadioButton Content="  تعديل النتائج" Style="{StaticResource ButtonEdit}" />
+                    <RadioButton Content="ارسال الى الطبيب" Style="{StaticResource ButtonADD}" />
+                    <RadioButton Content=" طباعة " Style="{StaticResource ButtonPrint}" />
+
+
+
+                </StackPanel>
+
+            </Border>
+
+        </Grid>
+
+    </Border>
+</Window>

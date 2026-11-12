@@ -1,0 +1,223 @@
+﻿<UserControl x:Class="MyClinicProject_VersionOne.View.HealthCareSystem.PatientAndAppointments.MedicalRecords.Surgery.SurgeryListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.HealthCareSystem.PatientAndAppointments.MedicalRecords.Surgery"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             FlowDirection="RightToLeft">
+
+
+    <Border Background="#FFB4D7FA" CornerRadius="2">
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <!--  العنوان والوصف -->
+                <RowDefinition Height="Auto"/>
+                <!-- شريط بيانات المريض -->
+                <RowDefinition Height="Auto"/>
+                <!--  شريط البحث والجدول الرئيسي -->
+                <RowDefinition Height="*"/>
+                <!--  شريط تفاصيل المضاعفات السريعة + الأزرار السفلية -->
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!--  رأس الصفحة (العنوان والوصف بنفس نمط شاشة إنشاء العملية) -->
+            <Border Grid.Row="0" Style="{StaticResource MainBorderStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Column="0"
+                           Source="/Styles/Images/user.png"
+                           Width="42" Height="42"
+                           Margin="5"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"/>
+
+                    <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" Margin="10,0,0,0">
+                        <TextBlock Text="سجل العمليات الجراحية" Style="{StaticResource PrimaryTextTitleadd}"/>
+                        <TextBlock Text="عرض وإدارة السجل الجراحي للمريض وتفاصيل العمليات السابقة والمضاعفات الطبية" Style="{StaticResource SecondaryTextTitlePage}"/>
+                    </StackPanel>
+
+                    <!-- زر فتح شاشة إنشاء سجل عملية جديد -->
+                    <Button x:Name="btnOpenCreateSurgery"
+                            Grid.Column="2"
+                            Content="    +  إنشاء  عملية      "
+                            Command="{Binding OpenCreateSurgeryCommand}"
+                            Style="{StaticResource ButtonSave }"
+                            VerticalAlignment="Center"
+                            Margin="10,0"/>
+                </Grid>
+            </Border>
+
+            <!--  شريط بيانات المريض الأساسية (بنفس نمطك المعتمد) -->
+            <Border Grid.Row="1" Style="{StaticResource MainBorderStyle}">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.5*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                        <Border Width="40" Height="40" Background="#E2E8F0" CornerRadius="20" Margin="0,0,10,0">
+                            <TextBlock Text="👤" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="اسم المريض الكامل" Foreground="#64748B" FontSize="12"/>
+                            <TextBlock Text="{Binding PatientFullName, FallbackValue='أحمد محمد علي'}" FontWeight="Bold" FontSize="16" Foreground="#1E293B"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <HeaderedContentControl Grid.Column="1" Header="رقم الملف الطبي" Content="{Binding MedicalRecordNumber, FallbackValue='100458'}" Style="{StaticResource PatientMetaItemStyle}"/>
+                    <HeaderedContentControl Grid.Column="2" Header="الجنس" Content="{Binding Gender, FallbackValue='ذكر'}" Style="{StaticResource PatientMetaItemStyle}"/>
+                    <HeaderedContentControl Grid.Column="3" Header="العمر" Content="{Binding Age, FallbackValue='45 سنة'}" Style="{StaticResource PatientMetaItemStyle}"/>
+                    <HeaderedContentControl Grid.Column="4" Header="إجمالي العمليات" Content="{Binding TotalSurgeriesCount, FallbackValue='3 عمليات'}" Style="{StaticResource PatientMetaItemStyle}"/>
+                </Grid>
+            </Border>
+
+            <!-- جدول عرض العمليات الجراحية وشريط البحث والفلترة -->
+            <Border Grid.Row="2" Style="{StaticResource MainBorderStyle}">
+                <Grid Margin="5">
+                    <Grid.RowDefinitions>
+                        <!-- عنوان البطاقة + شريط البحث -->
+                        <RowDefinition Height="Auto"/>
+                        <!-- الجدول -->
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- شريط العنوان والبحث عن عملية -->
+                    <Grid Grid.Row="0" Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="320"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text=" قائمة العمليات الجراحية المسجلة" Style="{StaticResource CardHeaderStyle}" VerticalAlignment="Center" Margin="0"/>
+
+                        <!-- حقل البحث باسم العملية أو الكود أو اسم الجراح -->
+                        <Border Grid.Column="2" BorderBrush="#CBD5E1" BorderThickness="1" CornerRadius="6" Background="White" Height="36">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="34"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="🔍" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#94A3B8"/>
+                                <TextBox x:Name="txtSearchSurgery"
+                                         Grid.Column="1"
+                                         Text="{Binding SearchSurgeryText, UpdateSourceTrigger=PropertyChanged}"
+                                         BorderThickness="0" Background="Transparent" VerticalContentAlignment="Center" Padding="4,0"
+                                         ToolTip="ابحث باسم العملية، كود ICD-10، اسم المستشفى، أو الجراح"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+
+                    <!-- جدول العمليات الجراحية (مطابق تماماً لحقول شاشة الإضافة الخاصة بك) -->
+                    <DataGrid x:Name="dgSurgeriesList"
+                              Grid.Row="1"
+                              ItemsSource="{Binding SurgeriesList}"
+                              SelectedItem="{Binding SelectedSurgery}"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              IsReadOnly="True"
+                              HeadersVisibility="Column"
+                              GridLinesVisibility="Horizontal"
+                              HorizontalGridLinesBrush="#E2E8F0"
+                              RowHeight="44"
+                              Background="White"
+                              BorderBrush="#CBD5E0"
+                              BorderThickness="1">
+
+                        <DataGrid.Columns>
+                            <!-- كود العملية (txtSurgeryCode) -->
+                            <DataGridTextColumn Header="رقم العملية" Binding="{Binding SurgeryCode}" Width="0.8*"/>
+
+                            <!-- اسم العملية (txtSurgeryName) -->
+                            <DataGridTextColumn Header="اسم العملية" Binding="{Binding SurgeryName}" Width="1.6*"/>
+
+                            <!-- تاريخ إجراء العملية (txtSurgeryDate) -->
+                            <DataGridTextColumn Header="تاريخ الإجراء" Binding="{Binding SurgeryDate}" Width="1*"/>
+
+                            <!-- مكان الجراحة في الجسم (txtSurgeryBodySite) -->
+                            <DataGridTextColumn Header="مكان الجراحة في الجسم" Binding="{Binding SurgeryBodySite}" Width="1.2*"/>
+
+                            <!-- سبب إجراء العملية (txtSurgeryIndication) -->
+                            <DataGridTextColumn Header="سبب إجراء العملية" Binding="{Binding SurgeryIndication}" Width="1.3*"/>
+
+                            <!-- اسم المستشفى (txtHospitalName) -->
+                            <DataGridTextColumn Header="اسم المستشفى" Binding="{Binding HospitalName}" Width="1.2*"/>
+
+                            <!-- اسم الجراح (txtSurgeonName) -->
+                            <DataGridTextColumn Header="اسم الجراح" Binding="{Binding SurgeonName}" Width="1.2*"/>
+
+                            <!-- المضاعفات الطبية -->
+                            <DataGridTemplateColumn Header="المضاعفات" Width="0.9*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Style="{StaticResource MainBorderStyle}">
+                                            <TextBlock Text="{Binding ComplicationsSummary, FallbackValue='لا يوجد'}" Style="{StaticResource FiledLabelStyle}"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <!-- إجراءات (عرض، تعديل، طباعة، حذف) -->
+                            <DataGridTemplateColumn Header="إجراءات" Width="1.1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Button Content="👁️" ToolTip="عرض تفاصيل العملية والمضاعفات"
+                                                    Command="{Binding DataContext.ViewSurgeryDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                    CommandParameter="{Binding}"
+                                                    Style="{StaticResource GridActionIconBtnStyle}"/>
+                                            <Button Content="✏️" ToolTip="تعديل سجل العملية"
+                                                    Command="{Binding DataContext.EditSurgeryCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                    CommandParameter="{Binding}"
+                                                    Style="{StaticResource GridActionIconBtnStyle}"/>
+                                            <Button Content="🖨️" ToolTip="طباعة التقرير الجراحي"
+                                                    Command="{Binding DataContext.PrintSurgeryReportCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                    CommandParameter="{Binding}"
+                                                    Style="{StaticResource GridActionIconBtnStyle}"/>
+                                            <Button Content="🗑️" ToolTip="حذف السجل"
+                                                    Command="{Binding DataContext.DeleteSurgeryCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                    CommandParameter="{Binding}"
+                                                    Style="{StaticResource GridActionIconBtnStyle}" Foreground="#DC2626"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Border>
+
+            <!--  عرض تفاصيل المضاعفات الطبية للعملية المحددة + أزرار التحكم السفلية -->
+            <Border Grid.Row="3" Style="{StaticResource MainBorderStyle}">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <!-- عرض نص المضاعفات الطبية للسطر المحدد في الجدول -->
+                        <ColumnDefinition Width="*"/>
+                        <!-- أزرار التحكم -->
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+
+
+                    <!-- أزرار التحكم السفلية بنفس نمطك -->
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" FlowDirection="LeftToRight">
+                        <RadioButton x:Name="btnEditSurgery" Content="تعديل السجل" Command="{Binding EditSelectedSurgeryCommand}" Style="{StaticResource ButtonEdit}" Margin="0,0,8,0"/>
+                        <RadioButton x:Name="btnPrintSurgery" Content="طباعة السجل" Command="{Binding PrintAllSurgeriesCommand}" Style="{StaticResource ButtonPrint}"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
+</UserControl>

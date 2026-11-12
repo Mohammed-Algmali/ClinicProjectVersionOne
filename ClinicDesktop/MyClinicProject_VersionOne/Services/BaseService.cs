@@ -55,6 +55,103 @@ namespace MyClinicProject_VersionOne.Services
             }
         }
 
+
+
+
+        /// <summary>
+        /// دالة عامة مشتركة لإرسال طلبات GET وجلب البيانات من أي مسار في FastAPI
+        /// الحرف T يمثل المودل المطلوب (مثل: List<FacilityGridItemModel> أو RoleResponseModel)
+        /// </summary>
+        protected async Task<(bool Success, T? Data, string ErrorMessage)> SendGetRequestAsync<T>(string endpoint)
+        {
+            try
+            {
+                // 1. إرسال طلب GET للمسار المحدد
+                var response = await _client.GetAsync(endpoint);
+
+                // 2. قراءة نص الرد القادم من الخادم
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                // -------------------------------------------------------------
+                // الحالة 1: نجاح جلب البيانات (Status Code: 200 OK)
+                // -------------------------------------------------------------
+                if (response.IsSuccessStatusCode)
+                {
+                    var data = JsonSerializer.Deserialize<T>(responseBody, _jsonOption);
+                    return (true, data, string.Empty);
+                }
+
+                // -------------------------------------------------------------
+                // الحالة 2: حدث خطأ من الخادم (مثل 401، 403، 404)
+                // -------------------------------------------------------------
+                string errorMessage = ExtractErrorMessage(response.StatusCode, responseBody);
+                return (false, default, errorMessage);
+            }
+            catch (HttpRequestException)
+            {
+                return (false, default, "تعذر الاتصال بالخادم. يرجى التأكد من تشغيل FastAPI.");
+            }
+            catch (TaskCanceledException)
+            {
+                return (false, default, "انتهت مهلة انتظار الخادم دون استجابة.");
+            }
+            catch (Exception ex)
+            {
+                return (false, default, $"حدث خطأ غير متوقع: {ex.Message}");
+            }
+        }
+
+
+
+
+
+        // بدلاً من: Request requestData
+        // اكتب TRequest هكذا:
+        protected async Task<(bool Success, TResponse? Data, string ErrorMessage)> SendPutRequestAsync<TResponse, TRequest>(
+            string endpoint,
+            TRequest requestData)
+        {
+            try
+            {
+                // 1. تحويل كائن البيانات إلى JSON وتجهيز محتوى الطلب
+                string jsonPayload = JsonSerializer.Serialize(requestData, _jsonOption);
+                var content = new StringContent(jsonPayload, System.Text.Encoding.UTF8, "application/json");
+
+                // 2. إرسال طلب PUT للمسار المحدد
+                var response = await _client.PutAsync(endpoint, content);
+
+                // 3. قراءة نص الرد القادم من الخادم
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                // -------------------------------------------------------------
+                // الحالة 1: نجاح التحديث (Status Code: 200 OK)
+                // -------------------------------------------------------------
+                if (response.IsSuccessStatusCode)
+                {
+                    var data = JsonSerializer.Deserialize<TResponse>(responseBody, _jsonOption);
+                    return (true, data, string.Empty);
+                }
+
+                // -------------------------------------------------------------
+                // الحالة 2: حدث خطأ من الخادم (400، 401، 403، 404، 422، 500)
+                // -------------------------------------------------------------
+                string errorMessage = ExtractErrorMessage(response.StatusCode, responseBody);
+                return (false, default, errorMessage);
+            }
+            catch (HttpRequestException)
+            {
+                return (false, default, "تعذر الاتصال بالخادم. يرجى التأكد من تشغيل FastAPI.");
+            }
+            catch (TaskCanceledException)
+            {
+                return (false, default, "انتهت مهلة انتظار الخادم دون استجابة.");
+            }
+            catch (Exception ex)
+            {
+                return (false, default, $"حدث خطأ غير متوقع: {ex.Message}");
+            }
+        }
+
         //
         // داله استخراج وتوحيد رساله الخطاء بناء على كود الحاله
         private string ExtractErrorMessage(HttpStatusCode statusCode,string responseBody)

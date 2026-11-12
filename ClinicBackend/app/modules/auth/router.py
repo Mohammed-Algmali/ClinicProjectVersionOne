@@ -79,6 +79,9 @@ def login_for_swagger_token(
 # ==============================================================================
 # 3. مسار تسجيل الدخول القياسي عبر JSON (للفروونت إند والموبايل)
 # ==============================================================================
+# ==============================================================================
+# 3. مسار تسجيل الدخول القياسي عبر JSON (للفروونت إند والموبايل)
+# ==============================================================================
 @router.post(
     "/login",
     response_model=Token,
@@ -89,11 +92,10 @@ def login(
     db: Session = Depends(get_db)
 ):
     """
-    مسار تسجيل الدخول المباشر المخصص للفرونت إند (React / Flutter / Vue)
+    مسار تسجيل الدخول المباشر المخصص للفرونت إند و WPF
     """
     # 1. البحث عن المستخدم
     user = db.query(User).filter(User.Username == login_data.username).first()
-    # الاستعلام عن الحساب بالاسم
 
     # 2. فحص كلمة المرور
     if not user or not verify_password(login_data.password, user.Password):
@@ -101,7 +103,6 @@ def login(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="اسم المستخدم أو كلمة المرور غير صحيحة"
         )
-        # رفض الطلب إذا كانت البيانات غير متطابقة
 
     # 3. فحص حالة الحساب
     if user.UserStatus != "Active":
@@ -109,20 +110,25 @@ def login(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="هذا الحساب موقوف أو غير نشط."
         )
-        # حظر الحسابات غير المفعلة
 
-    # 4. توليد التوكن
+    # 4. توليد التوكن (أضفنا facility_id داخل التوكن ليكون متاحاً دائماً)
     access_token = create_access_token(
         data={
             "sub": user.Username,
             "user_id": user.UserId,
-            "role_id": user.RoleId
+            "role_id": user.RoleId,
+            "facility_id": user.FacilityId  # تم إضافة رقم المنشأة للتوكن
         }
     )
-    # إنشاء رمز JWT ساري المفعول
 
+    # جلب اسم الدور (RoleName) إن وجد
+    role_id = user.role.RoleId if user.role else ""
+
+    # 5. إرجاع الرد مطابقاً لكلاس C# في WPF
     return {
         "access_token": access_token,
-        "token_type": "bearer"
+        "token_type": "bearer",
+        "role_id": user.RoleId,            # إرجاع رقم الدور هنا
+        "full_name": user.UserFullName,
+        "facility_id": user.FacilityId
     }
-    # إرجاع رمز الوصول

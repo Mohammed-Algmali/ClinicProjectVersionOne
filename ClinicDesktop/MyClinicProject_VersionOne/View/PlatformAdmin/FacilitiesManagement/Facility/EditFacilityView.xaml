@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.PlatformAdmin.FacilitiesManagement.Facility"
         mc:Ignorable="d"
-        Title="EditFacilityView" Height="805" Width="800" FlowDirection="RightToLeft"
+        Title="EditFacilityView" Height="650" Width="800" FlowDirection="RightToLeft"
         Background="Transparent"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None">
@@ -79,515 +79,196 @@
             <!-- ========================================================= -->
             <!--البيانات الثابته-->
             <!-- ========================================================= -->
-
-            <Border  Grid.Row="1" Style="{StaticResource ReadOnlyInfoBorderStyle}">
-
-                <Grid  >
+            <Border Grid.Row="1" Style="{StaticResource ReadOnlyInfoBorderStyle}">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <!--العمود االاول الذي يةجد به الملاحظه-->
                         <ColumnDefinition Width="*"/>
-                        <!--العمود الثاني الذي يحنوي علي رقم الحساسيه -->
                         <ColumnDefinition Width="*"/>
-                        <!--العمود الثالث والذي يحتوي علي تاريخ الانشاء -->
                     </Grid.ColumnDefinitions>
 
-                    <!--العمود االاول الذي يةجد به الملاحظه-->
-                    <StackPanel Grid.Column="0" Margin="0,0,5,0" >
+                    <!-- العمود الأول: الملاحظة -->
+                    <StackPanel Grid.Column="0" Margin="0,0,5,0">
                         <TextBlock Text="📝 بيانات تعريفيه -غير قابله للتعديل" Style="{StaticResource FiledLabelStyle}"/>
                     </StackPanel>
 
-
-                    <!--العمود الثاني الذي يحنوي علي رقم الحساسيه -->
+                    <!-- العمود الثاني: رقم/كود المنشأة -->
                     <StackPanel Grid.Column="1" Margin="0,0,5,0">
                         <TextBlock Text="رقم المنشاه*" Style="{StaticResource FiledLabelStyle}"/>
-                        <TextBox Grid.Column="0"  
-                                     x:Name="txtFacliltyId" Text="DGN-000148" Style="{DynamicResource searchTextBoxStyle}"/>
-
+                        <TextBox x:Name="txtFacliltyId"
+                                 Text="{Binding FacilityCode}"
+                                 IsReadOnly="True"
+                                 Style="{DynamicResource searchTextBoxStyle}"/>
                     </StackPanel>
 
-                    <!--العمود الثالث والذي يحتوي علي تاريخ الانشاء -->
+                    <!-- العمود الثالث: تاريخ الإنشاء -->
                     <StackPanel Grid.Column="2" Margin="0,0,5,0">
-                        <TextBlock Text="تاربخ الانشاء*"  Style="{StaticResource FiledLabelStyle}"/>
-                        <TextBox x:Name="txtFacilityCreateAt"  Text="2026/02/02" Style="{StaticResource TextBoxStyle}"/>
+                        <TextBlock Text="تاربخ الانشاء*" Style="{StaticResource FiledLabelStyle}"/>
+                        <TextBox x:Name="txtFacilityCreateAt"
+                                 Text="{Binding CreatedAt}"
+                                 IsReadOnly="True"
+                                 Style="{StaticResource TextBoxStyle}"/>
                     </StackPanel>
-
-
                 </Grid>
-
             </Border>
 
             <!-- ========================================================= -->
-            <!--                 2 - معلومات المنشاة                      -->
+            <!--                   2 - معلومات المنشاة                     -->
             <!-- ========================================================= -->
-
-            <Border Grid.Row="2"
-               Style="{StaticResource MainBorderStyle}">
-
+            <Border Grid.Row="2" Style="{StaticResource MainBorderStyle}">
                 <StackPanel>
+                    <TextBlock Text="①  معلومات المنشاة" Style="{StaticResource CardHeaderStyle}"/>
 
-
-                    <!-- عنوان القسم -->
-
-                    <TextBlock Text="①  معلومات المنشاة"
-                           Style="{StaticResource CardHeaderStyle}"/>
-
-
-                    <!-- ================================================= -->
-                    <!-- الصف الأول                                        -->
-                    <!-- الاسم الكامل - اسم المستخدم - كلمة المرور         -->
-                    <!-- ================================================= -->
-
+                    <!-- الصف الأول -->
                     <Grid>
-
                         <Grid.ColumnDefinitions>
-
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
-
                         </Grid.ColumnDefinitions>
 
-
-                        <!-- الاسم الكامل -->
-
-
+                        <!-- اسم المنشأة -->
                         <StackPanel Grid.Column="0" Margin="0,0,5,0">
-
-
-                            <TextBlock Text="اسم المنشاه *"
-                                   Style="{StaticResource FiledLabelStyle}"/>
-
+                            <TextBlock Text="اسم المنشاه *" Style="{StaticResource FiledLabelStyle}"/>
                             <TextBox x:Name="txtFacilityName"
-                                 Style="{StaticResource TextBoxStyle}"
-                               
-                                 />
-
+                                     Style="{StaticResource TextBoxStyle}"
+                                     Text="{Binding FacilityName, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
                         </StackPanel>
 
-
-
-                        <!-- اسم المستخدم -->
-
-                        <StackPanel Grid.Column="1"
-                                Margin="0,0,5,0">
-
-                            <TextBlock Text="رمز المنشاء*"
-                                   Style="{StaticResource FiledLabelStyle}"/>
-
+                        <!-- رمز المنشأة -->
+                        <StackPanel Grid.Column="1" Margin="0,0,5,0">
+                            <TextBlock Text="رمز المنشاء*" Style="{StaticResource FiledLabelStyle}"/>
                             <TextBox x:Name="txtFacilityCode"
-                                 Style="{StaticResource TextBoxStyle}"
-                               />
-
+                                     IsReadOnly="True"
+                                     Text="{Binding FacilityCode}"
+                                     Style="{StaticResource TextBoxStyle}"/>
                         </StackPanel>
 
-
-                        <!-- كلمة المرور -->
-
-                        <StackPanel Grid.Column="2"
-                                Margin="0,0,5,0">
-
-                            <TextBlock Text="نوع المنشاء *"
-                                   Style="{StaticResource FiledLabelStyle}"/>
-
+                        <!-- نوع المنشأة -->
+                        <StackPanel Grid.Column="2" Margin="0,0,5,0">
+                            <TextBlock Text="نوع المنشاء *" Style="{StaticResource FiledLabelStyle}"/>
                             <ComboBox x:Name="cmbFacilityTypes"
-                                      ItemsSource="{Binding FacilityType}"
+                                      ItemsSource="{Binding FacilityTypesList}"
                                       SelectedItem="{Binding SelectedFacilityType}"
-                              Style="{StaticResource ModernComboBoxStyle}"/>
-
+                                      Style="{StaticResource ModernComboBoxStyle}"/>
                         </StackPanel>
-
-
-
-
                     </Grid>
 
-
-                    <!-- ================================================= -->
-                    <!-- الصف الثاني                                       -->
-                    <!-- العنوان - الإيميل - رقم الهاتف                    -->
-                    <!-- ================================================= -->
-
+                    <!-- الصف الثاني -->
                     <Grid Margin="0,10,0,0">
-
                         <Grid.ColumnDefinitions>
-
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
-
                         </Grid.ColumnDefinitions>
 
-
-                        <!-- العنوان -->
-
+                        <!-- رقم الترخيص -->
                         <StackPanel Grid.Column="0" Margin="0,0,5,0">
-
-
-                            <TextBlock Text="رقم ترخيص المنشاه*"
-                                   Style="{StaticResource FiledLabelStyle}"/>
-
+                            <TextBlock Text="رقم ترخيص المنشاه*" Style="{StaticResource FiledLabelStyle}"/>
                             <TextBox x:Name="txtFacilityLicenseNumber"
-                                 Style="{StaticResource TextBoxStyle}"
-                                />
-
+                                     Text="{Binding FacilityLicenseNumber, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource TextBoxStyle}"/>
                         </StackPanel>
 
-
-                        <!-- الإيميل -->
-
+                        <!-- تاريخ إصدار الترخيص -->
                         <StackPanel Grid.Column="1" Margin="0,0,5,0">
-
-
-                            <TextBlock Text="تاريخ اصدار المنشاه*"
-                                   Style="{StaticResource FiledLabelStyle}"/>
-
+                            <TextBlock Text="تاريخ اصدار المنشاه*" Style="{StaticResource FiledLabelStyle}"/>
                             <TextBox x:Name="txtFacilityLicenseIssueDate"
-                                 Style="{StaticResource TextBoxStyle}"
-                                />
-
+                                     Text="{Binding LicenseIssueDate, StringFormat=yyyy/MM/dd, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource TextBoxStyle}"/>
                         </StackPanel>
 
-
-                        <!-- رقم الهاتف -->
-
+                        <!-- تاريخ انتهاء الترخيص -->
                         <StackPanel Grid.Column="2" Margin="0,0,5,0">
-
-
-                            <TextBlock Text="تاريخ انتهاء الترخيص*"
-                                   Style="{StaticResource FiledLabelStyle}"/>
-
-                            <TextBox  x:Name="txtFacilityLicenseExpiryDate"
-                                 Style="{StaticResource TextBoxStyle}"
-                                />
-
+                            <TextBlock Text="تاريخ انتهاء الترخيص*" Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox x:Name="txtFacilityLicenseExpiryDate"
+                                     Text="{Binding LicenseExpiryDate, StringFormat=yyyy/MM/dd, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource TextBoxStyle}"/>
                         </StackPanel>
-
                     </Grid>
-
-
-
-
-
-
                 </StackPanel>
-
             </Border>
 
-
-
             <!-- ========================================================= -->
-            <!-- 3 - معلومات مدير المنشاه   -->
+            <!--                3 - الموقع و بيانات التواصل                -->
             <!-- ========================================================= -->
-            <Border Grid.Row="3"
-                Style="{StaticResource MainBorderStyle}">
-
+            <Border Grid.Row="3" Style="{StaticResource MainBorderStyle}">
                 <StackPanel>
+                    <TextBlock Text="①  الموقع و بيانات التواصل" Style="{StaticResource CardHeaderStyle}"/>
 
-
-                    <!-- عنوان القسم -->
-
-                    <TextBlock Text="①  الموقع و بيانات التواصل"
-                           Style="{StaticResource CardHeaderStyle}"/>
-
-
-                    <!-- ================================================= -->
-                    <!-- الصف الأول                                        -->
-                    <!-- الاسم الكامل - اسم المستخدم - كلمة المرور         -->
-                    <!-- ================================================= -->
-
+                    <!-- الصف الأول -->
                     <Grid>
-
                         <Grid.ColumnDefinitions>
-
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
-
                         </Grid.ColumnDefinitions>
 
-
-                        <!-- الاسم الكامل -->
-
-
-                        <StackPanel Grid.Column="0" Margin="0,0,5,0"
-                               >
-
-                            <TextBlock Text=" الدوله*"
-                                   Style="{StaticResource FiledLabelStyle}"/>
-
-                            <TextBox  x:Name="txtFacilityCountry"
-                                 Style="{StaticResource TextBoxStyle}"
-                               
-                                 />
-
+                        <!-- الدولة -->
+                        <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                            <TextBlock Text=" الدوله*" Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox x:Name="txtFacilityCountry"
+                                     Text="{Binding FacilityCountry, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource TextBoxStyle}"/>
                         </StackPanel>
 
-
-
-                        <!-- اسم المستخدم -->
-
-                        <StackPanel Grid.Column="1"
-                               Margin="0,0,5,0">
-
-                            <TextBlock Text="المحافظه/المدينه *"
-                                   Style="{StaticResource FiledLabelStyle}"/>
-
-                            <TextBox  x:Name="txtFacilityCity"
-                                 Style="{StaticResource TextBoxStyle}"
-                               />
-
+                        <!-- المحافظة/المدينة -->
+                        <StackPanel Grid.Column="1" Margin="0,0,5,0">
+                            <TextBlock Text="المحافظه/المدينه *" Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox x:Name="txtFacilityCity"
+                                     Text="{Binding FacilityCity, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource TextBoxStyle}"/>
                         </StackPanel>
 
-
-                        <!-- كلمة المرور -->
-
-                        <StackPanel Grid.Column="2"
-                                Margin="0,0,5,0">
-
-                            <TextBlock Text="العنوان-التفصيلي *"
-                                   Style="{StaticResource FiledLabelStyle}"/>
-
-                            <TextBox  x:Name="txtFacilityAddress"
-                                 Style="{StaticResource TextBoxStyle}"
-                               />
-
+                        <!-- العنوان التفصيلي -->
+                        <StackPanel Grid.Column="2" Margin="0,0,5,0">
+                            <TextBlock Text="العنوان-التفصيلي *" Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox x:Name="txtFacilityAddress"
+                                     Text="{Binding FacilityAddress, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource TextBoxStyle}"/>
                         </StackPanel>
-
-
-
-
                     </Grid>
 
-
-                    <!-- ================================================= -->
-                    <!-- الصف الثاني                                       -->
-                    <!-- العنوان - الإيميل - رقم الهاتف                    -->
-                    <!-- ================================================= -->
-
+                    <!-- الصف الثاني -->
                     <Grid Margin="0,10,0,0">
-
                         <Grid.ColumnDefinitions>
-
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
-
                         </Grid.ColumnDefinitions>
-
-
-                        <!-- العنوان -->
-
-                        <StackPanel Grid.Column="0"
-                               Margin="0,0,5,0">
-
-                            <TextBlock Text=" رقم الهاتف *"
-                                   Style="{StaticResource FiledLabelStyle}"/>
-
-                            <TextBox  x:Name="txtFacilityPhone"
-                                 Style="{StaticResource TextBoxStyle}"
-                                />
-
-                        </StackPanel>
-
-
-                        <!-- الإيميل -->
-
-                        <StackPanel Grid.Column="1" Margin="0,0,5,0">
-
-
-                            <TextBlock Text="  البريد الالكتروني*"
-                                   Style="{StaticResource FiledLabelStyle}"/>
-
-                            <TextBox  x:Name="txtFacilityEmail"
-                                 Style="{StaticResource TextBoxStyle}"
-                                />
-
-                        </StackPanel>
-
 
                         <!-- رقم الهاتف -->
-
-                        <StackPanel Grid.Column="2" Margin="0,0,5,0">
-
-
-                            <TextBlock Text="الموقع الالكتروني *"
-                                   Style="{StaticResource FiledLabelStyle}"/>
-
-                            <TextBox  x:Name="txtFacilityWebsiteUrl"
-                                 Style="{StaticResource TextBoxStyle}"
-                                />
-
+                        <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                            <TextBlock Text=" رقم الهاتف *" Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox x:Name="txtFacilityPhone"
+                                     Text="{Binding FacilityPhone, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource TextBoxStyle}"/>
                         </StackPanel>
 
+                        <!-- البريد الإلكتروني -->
+                        <StackPanel Grid.Column="1" Margin="0,0,5,0">
+                            <TextBlock Text="  البريد الالكتروني*" Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox x:Name="txtFacilityEmail"
+                                     Text="{Binding FacilityEmail, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+
+                        <!-- الموقع الإلكتروني -->
+                        <StackPanel Grid.Column="2" Margin="0,0,5,0">
+                            <TextBlock Text="الموقع الالكتروني *" Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox x:Name="txtFacilityWebsiteUrl"
+                                     Text="{Binding FacilityWebSite, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
                     </Grid>
-
-
-                    <!-- ================================================= -->
-                    <!-- الصف الثالث                                       -->
-                    <!-- العنوان -  المحافظه  - المديره                 -->
-                    <!-- ================================================= -->
-
-
-
-
                 </StackPanel>
-
             </Border>
 
 
             <!-- ========================================================= -->
             <!--                       4 - معلومات مدير المنشاه            -->
             <!-- ========================================================= -->
-            <Border Grid.Row="4"
-               Style="{StaticResource MainBorderStyle}">
-
-                <StackPanel>
-
-
-                    <!-- عنوان القسم -->
-
-                    <TextBlock Text="①  معلومات مدير المنشاه"
-                           Style="{StaticResource CardHeaderStyle}"/>
-
-
-                    <!-- ================================================= -->
-                    <!-- الصف الأول                                        -->
-                    <!-- الاسم الكامل - اسم المستخدم - كلمة المرور         -->
-                    <!-- ================================================= -->
-
-                    <Grid>
-
-                        <Grid.ColumnDefinitions>
-
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-
-                        </Grid.ColumnDefinitions>
-
-
-                        <!-- الاسم الكامل -->
-
-
-                        <StackPanel Grid.Column="0" Margin="0,0,5,0">
-
-
-                            <TextBlock Text="اسم الكامل *"
-                                   Style="{StaticResource FiledLabelStyle}"/>
-
-                            <TextBox 
-                                 Style="{StaticResource TextBoxStyle}" />
-
-
-
-                        </StackPanel>
-
-
-
-                        <!-- اسم المستخدم -->
-
-                        <StackPanel Grid.Column="1"
-                                Margin="0,0,5,0">
-
-                            <TextBlock Text="اسم المستخدم*"
-                                   Style="{StaticResource FiledLabelStyle}"/>
-
-                            <TextBox 
-                                 Style="{StaticResource TextBoxStyle}"
-                               />
-
-                        </StackPanel>
-
-
-                        <!-- كلمة المرور -->
-
-                        <StackPanel Grid.Column="2"
-                                Margin="0,0,5,0">
-
-                            <TextBlock Text="رقم الهاتف*"
-                                   Style="{StaticResource FiledLabelStyle}"/>
-
-                            <TextBox 
-                                 Style="{StaticResource TextBoxStyle}"
-                               />
-
-
-                        </StackPanel>
-
-
-
-
-                    </Grid>
-
-
-                    <!-- ================================================= -->
-                    <!-- الصف الثاني                                       -->
-                    <!-- العنوان - الإيميل - رقم الهاتف                    -->
-                    <!-- ================================================= -->
-
-                    <Grid Margin="0,10,0,0">
-
-                        <Grid.ColumnDefinitions>
-
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-
-                        </Grid.ColumnDefinitions>
-
-
-                        <!-- العنوان -->
-
-                        <StackPanel Grid.Column="0" Margin="0,0,5,0">
-
-
-                            <TextBlock Text="البريد الالكتروني*"
-                                   Style="{StaticResource FiledLabelStyle}"/>
-
-                            <TextBox 
-                                 Style="{StaticResource TextBoxStyle}"
-                                />
-
-                        </StackPanel>
-
-
-                        <!-- الإيميل -->
-
-                        <StackPanel Grid.Column="1" Margin="0,0,5,0">
-
-
-                            <TextBlock Text="كلمه المرور المؤقته*"
-                                   Style="{StaticResource FiledLabelStyle}"/>
-
-                            <PasswordBox Style="{StaticResource PasswordBoxStyle}"/>
-
-                        </StackPanel>
-
-
-                        <!-- رقم الهاتف -->
-
-                        <StackPanel Grid.Column="2" Margin="0,0,5,0">
-
-
-                            <TextBlock Text="الدور*"
-                                   Style="{StaticResource FiledLabelStyle}"/>
-                            <ComboBox
-                            Style="{StaticResource ModernComboBoxStyle}"/>
-
-                        </StackPanel>
-
-                    </Grid>
-
-
-
-
-
-
-                </StackPanel>
-
-            </Border>
-
+           
 
 
             <!-- ========================================================= -->
@@ -605,6 +286,7 @@
 
                     <Button Style="{StaticResource ButtonExit}"
                             x:Name="btnCreateFacilityExit"
+                            Command="{Binding SaveCommand}"
                              />
 
 

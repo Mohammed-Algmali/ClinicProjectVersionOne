@@ -4,30 +4,35 @@ from sqlalchemy.orm import Session
 
 from typing import List
 from app.core.database import get_db
-from app.modules.users.schemas import RoleCreate, RoleResponse
-from app.modules.users.services import RoleService
+from app.modules.users.schemas import RoleCreate, RoleResponse,UserResponse,ManagerCreate
+from app.modules.users.services import RoleService,UserService
 
 # ==============================================================================
 # 1. تهيئة موجه مسارات الأدوار
 # ==============================================================================
-router = APIRouter(
+roles_router = APIRouter(
     prefix="/roles",
     tags=["إدارة الأدوار والصلاحيات (Roles)"]
 )
 # prefix="/roles" تعني أن كل المسارات في هذا الملف ستبدأ تلقائياً بـ /roles
 
+user_router = APIRouter(
+    prefix="/user",
+    tags=["إدارة المستخدمين والصلاحيات (user)"]
+)
+# prefix="/roles" تعني أن كل المسارات في هذا الملف ستبدأ تلقائياً بـ /roles
 
 # ==============================================================================
 # 2. المسار الأول: إنشاء دور وظيفي جديد
 # ==============================================================================
-@router.post(
+@roles_router.post(
     "/",
     response_model=RoleResponse,
     status_code=status.HTTP_201_CREATED,
-    summary="إنشاء دور وظيفي جديد"
+    summary="إنشاء دور   جديد"
 )
 def create_new_role(
-    data: RoleCreate,
+    data:RoleCreate,
     db: Session = Depends(get_db)
 ):
     """
@@ -54,7 +59,7 @@ def create_new_role(
 # ==============================================================================
 # المسار الثاني: جلب وعرض قائمة جميع الأدوار
 # ==============================================================================
-@router.get(
+@roles_router.get(
     "/",
     response_model=List[RoleResponse],
     status_code=status.HTTP_200_OK,
@@ -67,3 +72,32 @@ def get_all_roles(db: Session = Depends(get_db)):
 
   return service.list_all_roles()
   # جلب قائمة الأدوار كاملة من Service وإرجاعها للواجهة كمصفوفة JSON
+
+
+
+
+
+#/////////////////////////////////////////////////////////////////////
+
+
+# ==============================================================================
+# 2. المسار الأول: إنشاء دور وظيفي جديد
+# ==============================================================================
+@user_router.post(
+    "/",
+    response_model=UserResponse,
+    status_code=status.HTTP_201_CREATED,
+    summary="إنشاء مدير منشاه جديد"
+)
+def create_new_user(
+    data: ManagerCreate,
+    db: Session = Depends(get_db)
+):
+    """
+    مسار استقبال طلب إضافة دور جديد من الواجهة وتمريره للـ Service
+    """
+   
+    service = UserService(db)
+    # تهيئة طبقة الخدمات وتمرير جلسة قاعدة البيانات لها
+
+    return service.create_new_user(data)

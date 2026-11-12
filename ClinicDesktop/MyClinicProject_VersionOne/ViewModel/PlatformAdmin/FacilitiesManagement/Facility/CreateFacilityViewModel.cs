@@ -383,7 +383,7 @@ namespace MyClinicProject_VersionOne.ViewModel.PlatformAdmin.FacilitiesManagemen
                 {
                     FacilityName = this.FacilityName.Trim(),
                     FacilityCode = this.FacilityCode.Trim(),
-                    FacilityType = this.SelectedFacilityType,
+                   // FacilityType = this.SelectedFacilityType,
                     FacilityLicenseNumber = this.FacilityLicenseNumber,
                     FacilityLicenseIssueDate = this.FacilityLicenseIssueDate,
                     FacilityLicenseExpiryDate = this.FacilityLicenseExpiryDate,

@@ -143,16 +143,9 @@ namespace MyClinicProject_VersionOne.ViewModel.Authentication
 
             if (success && data != null)
             {
-                // إظهار رسالة ترحيبية بالاسم والدور الوظيفي
-          /*      MessageBox.Show($"تم تسجيل الدخول بنجاح!\nمرحباً بك: {data.FullName}\nالدور الوظيفي: {data.Role}",
-                                "نجاح المصادقة",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Information);
-                
-                */
-                    // حفظ بيانات الجلسة
-                  
-                  
+                // 2. تفعيل حفظ بيانات الجلسة وتثبيت التوكن
+                UserSession.SetSession(data);
+
                 // إطلاق حدث النجاح للانتقال للنافذة التالية
                 OnLoginSuccess?.Invoke();
             }
@@ -163,5 +156,4 @@ namespace MyClinicProject_VersionOne.ViewModel.Authentication
             }
         }
     }
-
 }

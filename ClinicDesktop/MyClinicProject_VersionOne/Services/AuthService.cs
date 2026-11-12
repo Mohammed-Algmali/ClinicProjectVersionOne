@@ -13,95 +13,39 @@ namespace MyClinicProject_VersionOne.Services
     /// 3. تثبيت التوكن داخل ApiClient المشترك فور نجاح الدخول.
     /// 4. معالجة سيناريوهات الأخطاء (انقطاع الاتصال بالسيرفر، كلمة مرور غير صحيحة، انتهاء المهلة).
     /// </summary>
-    public class AuthService
+    public class AuthService : BaseService
     {
-        // استدعاء كائن الاتصال المشترك (Singleton)
-        private readonly HttpClient _client = ApiClient.Instance.Client;
+        /// <summary>
+        /// خدمة المصادقة وتسجيل الدخول:
+        /// ترث من BaseService للاستفادة من الدوال العامة الموحدة للاتصال بالخادم.
+        /// </summary>
 
         /// <summary>
-        /// دالة تسجيل الدخول غير المتزامنة (Async Login):
-        /// تُرجع Tuple يحتوي على ثلاثة عناصر:
-        /// 1. Success: (true/false) هل نجحت العملية؟
-        /// 2. Data: كائن البيانات القادم من السيرفر (التوكن، الدور الوظيفي، الاسم).
-        /// 3. ErrorMessage: نص الخطأ بالعربي في حال فشلت العملية لعرضه في الواجهة.
+        /// دالة تسجيل الدخول غير المتزامنة:
+        /// تأخذ اسم المستخدم وكلمة المرور وترسلهما لمسار /auth/login،
+        /// وتُرجع نتيجة العملية (نجاح/فشل، كائن البيانات، نص الخطأ بالعربي).
         /// </summary>
         public async Task<(bool Success, LoginResponseModel? Data, string ErrorMessage)> LoginAsync(string username, string password)
         {
-            try
+            // 1. تجهيز كائن الطلب وتعبئته بالبيانات المدخلة من واجهة المستخدم
+            var requestData = new LoginRequestModel
             {
-                // 1. تجميع البيانات داخل كائن المودل
-                var requestData = new LoginRequestModel
-                {
-                    Username = username,
-                    Password = password
-                };
+                Username = username,
+                Password = password
+            };
 
-                // 2. تحويل كائن C# إلى نص بتنسيق JSON
-                string jsonPayload = JsonSerializer.Serialize(requestData);
-                var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+            // 2. إرسال الطلب عبر دالة الأب BaseService إلى مسار الدخول في FastAPI
+            var result = await SendPostRequestAsync<LoginResponseModel, LoginRequestModel>("/auth/login", requestData);
 
-                // 3. إرسال طلب POST إلى مسار الدخول في FastAPI
-                HttpResponseMessage response = await _client.PostAsync("/auth/login", content);
-
-                // 4. قراءة محتوى الرد القادم من الخادم
-                string responseBody = await response.Content.ReadAsStringAsync();
-
-                // -------------------------------------------------------------
-                // الحالة الأولى: نجاح الدخول (رمز الاستجابة 200 OK)
-                // -------------------------------------------------------------
-                if (response.IsSuccessStatusCode)
-                {
-                    // خيار تجاهل حالة الأحرف الكبيرة والصغيرة في خصائص JSON
-                    var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-                    var result = JsonSerializer.Deserialize<LoginResponseModel>(responseBody, options);
-
-                    if (result != null)
-                    {
-                        // تثبيت التوكن في النسخة المركزية لـ ApiClient ليستخدمه كل التطبيق
-                        ApiClient.Instance.SetToken(result.AccessToken);
-
-                        return (true, result, string.Empty);
-                    }
-                }
-                // -------------------------------------------------------------
-                // الحالة الثانية: بيانات الدخول غير صحيحة (رمز 401 Unauthorized)
-                // -------------------------------------------------------------
-                else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-                {
-                    return (false, null, "اسم المستخدم أو كلمة المرور غير صحيحة.");
-                }
-                // -------------------------------------------------------------
-                // الحالة الثالثة: خطأ في صيغة البيانات (رمز 422 Unprocessable Entity)
-                // -------------------------------------------------------------
-                else if (response.StatusCode == System.Net.HttpStatusCode.UnprocessableEntity)
-                {
-                    return (false, null, "البيانات المرسلة غير متوافقة مع متطلبات الخادم.");
-                }
-                // -------------------------------------------------------------
-                // أي كود استجابة آخر
-                // -------------------------------------------------------------
-                else
-                {
-                    return (false, null, $"فشل تسجيل الدخول. رمز الخادم: {(int)response.StatusCode}");
-                }
-
-                return (false, null, "تعذر قراءة بيانات الاستجابة من الخادم.");
-            }
-            // في حال كان خادم FastAPI متوقفاً أو عنوان IP غير متاح
-            catch (HttpRequestException)
+            // 3. التحقق من نجاح العملية والحصول على بيانات الرد
+            if (result.Success && result.Data != null)
             {
-                return (false, null, "تعذر الاتصال بالخادم. تأكد من تشغيل خادم FastAPI أولاً.");
+                // حفظ التوكن وبيانات المستخدم في كلاس الجلسة UserSession وحقنها في ترويسة الطلبات
+                UserSession.SetSession(result.Data);
             }
-            // في حال استغرق الخادم أكثر من 10 ثوانٍ للرد
-            catch (TaskCanceledException)
-            {
-                return (false, null, "انتهت مهلة الانتظار دون استجابة من الخادم.");
-            }
-            // أي استثناء غير متوقع
-            catch (Exception ex)
-            {
-                return (false, null, $"حدث خطأ غير متوقع: {ex.Message}");
-            }
+
+            // 4. إرجاع النتيجة الكاملة للـ ViewModel ليتصرف بناءً عليها (فتح النافذة أو إظهار الخطأ)
+            return (result.Success, result.Data, result.ErrorMessage);
         }
-    }
+    }  
 }

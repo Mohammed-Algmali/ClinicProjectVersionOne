@@ -228,8 +228,494 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
-   
+
+
+
+
+    <!--خصائص زر التعديل-->
+    <SolidColorBrush x:Key="btnEdit">#FF008000</SolidColorBrush>
+    <Style x:Key="ButtonEdit" TargetType="RadioButton">
+
+        <!-- =========================
+         الخصائص الأساسية للزر
+         ========================= -->
+
+        <!-- ارتفاع الزر -->
+        <Setter Property="Height" Value="40"/>
+
+        <!-- المسافة الخارجية حول الزر -->
+        <Setter Property="Margin" Value="10,4"/>
+
+        <!-- لون خلفية الزر في الحالة الطبيعية -->
+        <Setter Property="Background"   Value="{DynamicResource btnEdit}"/>
+
+
+
+        <!-- =========================
+         تنسيق النص داخل الزر
+         ========================= -->
+
+        <!-- لون النص -->
+        <Setter Property="TextElement.Foreground" Value="White"/>
+
+        <!-- نوع الخط -->
+        <Setter Property="TextElement.FontFamily" Value="{DynamicResource CairFont}"/>
+
+        <!-- حجم الخط -->
+        <Setter Property="TextElement.FontSize" Value="14"/>
+
+        <!-- سماكة الخط -->
+        <Setter Property="TextElement.FontWeight" Value="Medium"/>
+
+
+        <!-- =========================
+         القالب الخاص بالزر
+         ========================= -->
+
+        <Setter Property="Template">
+            <Setter.Value>
+
+                <!--
+                إعادة تصميم RadioButton بالكامل
+                باستخدام ControlTemplate
+            -->
+                <ControlTemplate TargetType="RadioButton">
+
+                    <!--
+                    Border يمثل الشكل الخارجي للزر
+                    ويستخدم لإعطاء الزر خلفية وحواف دائرية
+                -->
+                    <Border
+                    Background="{TemplateBinding Background}"
+                    CornerRadius="6"
+                    Padding="5,0">
+
+                        <!--
+                        عرض محتوى الزر مثل النص أو أي عنصر آخر
+                        مع محاذاته عموديًا وأفقيًا
+                    -->
+                        <ContentPresenter
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"/>
+
+                    </Border>
+
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+
+
+        <!-- =========================
+         حالات الزر
+         ========================= -->
+
+        <Style.Triggers>
+
+            <!--
+            حالة مرور مؤشر الماوس فوق الزر
+            Mouse Hover
+        -->
+            <Trigger Property="IsMouseOver" Value="True">
+
+                <!-- تغيير لون الخلفية عند مرور الماوس -->
+                <Setter Property="Background" Value="{DynamicResource SidebarHoverBg}"/>
+
+                <!-- تغيير لون النص عند مرور الماوس -->
+                <Setter Property="TextElement.Foreground" Value="{DynamicResource SidebarTextselected}"/>
+
+            </Trigger>
+
+
+            <!--
+            حالة تحديد الزر
+            Checked / Selected
+        -->
+            <Trigger Property="IsChecked" Value="True">
+
+                <!-- لون الخلفية عندما يكون الزر محددًا -->
+                <Setter Property="Background" Value="{DynamicResource SidebarActiveBg}"/>
+
+                <!-- لون النص عندما يكون الزر محددًا -->
+                <Setter Property="TextElement.Foreground" Value="{DynamicResource SidebarTextselected}"/>
+
+            </Trigger>
+
+        </Style.Triggers>
+
+    </Style>
+
+
+    <SolidColorBrush x:Key="btnprint">#FF808080</SolidColorBrush>
+    <Style x:Key="ButtonPrint" TargetType="RadioButton">
+
+        <!-- =========================
+         الخصائص الأساسية للزر
+         ========================= -->
+
+        <!-- ارتفاع الزر -->
+        <Setter Property="Height" Value="40"/>
+
+        <!-- المسافة الخارجية حول الزر -->
+        <Setter Property="Margin" Value="10,4"/>
+
+        <!-- لون خلفية الزر في الحالة الطبيعية -->
+        <Setter Property="Background"   Value="{DynamicResource btnprint}"/>
+
+
+
+        <!-- =========================
+         تنسيق النص داخل الزر
+         ========================= -->
+
+        <!-- لون النص -->
+        <Setter Property="TextElement.Foreground" Value="White"/>
+
+        <!-- نوع الخط -->
+        <Setter Property="TextElement.FontFamily" Value="{DynamicResource CairFont}"/>
+
+        <!-- حجم الخط -->
+        <Setter Property="TextElement.FontSize" Value="14"/>
+
+        <!-- سماكة الخط -->
+        <Setter Property="TextElement.FontWeight" Value="Medium"/>
+
+
+        <!-- =========================
+         القالب الخاص بالزر
+         ========================= -->
+
+        <Setter Property="Template">
+            <Setter.Value>
+
+                <!--
+                إعادة تصميم RadioButton بالكامل
+                باستخدام ControlTemplate
+            -->
+                <ControlTemplate TargetType="RadioButton">
+
+                    <!--
+                    Border يمثل الشكل الخارجي للزر
+                    ويستخدم لإعطاء الزر خلفية وحواف دائرية
+                -->
+                    <Border
+                    Background="{TemplateBinding Background}"
+                    CornerRadius="6"
+                    Padding="5,0">
+
+                        <!--
+                        عرض محتوى الزر مثل النص أو أي عنصر آخر
+                        مع محاذاته عموديًا وأفقيًا
+                    -->
+                        <ContentPresenter
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"/>
+
+                    </Border>
+
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+
+
+        <!-- =========================
+         حالات الزر
+         ========================= -->
+
+        <Style.Triggers>
+
+            <!--
+            حالة مرور مؤشر الماوس فوق الزر
+            Mouse Hover
+        -->
+            <Trigger Property="IsMouseOver" Value="True">
+
+                <!-- تغيير لون الخلفية عند مرور الماوس -->
+                <Setter Property="Background" Value="{DynamicResource SidebarHoverBg}"/>
+
+                <!-- تغيير لون النص عند مرور الماوس -->
+                <Setter Property="TextElement.Foreground" Value="{DynamicResource SidebarTextselected}"/>
+
+            </Trigger>
+
+
+            <!--
+            حالة تحديد الزر
+            Checked / Selected
+        -->
+            <Trigger Property="IsChecked" Value="True">
+
+                <!-- لون الخلفية عندما يكون الزر محددًا -->
+                <Setter Property="Background" Value="{DynamicResource SidebarActiveBg}"/>
+
+                <!-- لون النص عندما يكون الزر محددًا -->
+                <Setter Property="TextElement.Foreground" Value="{DynamicResource SidebarTextselected}"/>
+
+            </Trigger>
+
+        </Style.Triggers>
+
+    </Style>
+
+
+    <SolidColorBrush x:Key="btnShow">#FF808080</SolidColorBrush>
+    <Style x:Key="ButtonShow" TargetType="RadioButton">
+
+        <!-- =========================
+         الخصائص الأساسية للزر
+         ========================= -->
+
+        <!-- ارتفاع الزر -->
+        <Setter Property="Height" Value="40"/>
+
+        <!-- المسافة الخارجية حول الزر -->
+        <Setter Property="Margin" Value="10,4"/>
+
+        <!-- لون خلفية الزر في الحالة الطبيعية -->
+        <Setter Property="Background"   Value="{DynamicResource btnShow}"/>
+
+
+
+        <!-- =========================
+         تنسيق النص داخل الزر
+         ========================= -->
+
+        <!-- لون النص -->
+        <Setter Property="TextElement.Foreground" Value="White"/>
+
+        <!-- نوع الخط -->
+        <Setter Property="TextElement.FontFamily" Value="{DynamicResource CairFont}"/>
+
+        <!-- حجم الخط -->
+        <Setter Property="TextElement.FontSize" Value="14"/>
+
+        <!-- سماكة الخط -->
+        <Setter Property="TextElement.FontWeight" Value="Medium"/>
+
+
+        <!-- =========================
+         القالب الخاص بالزر
+         ========================= -->
+
+        <Setter Property="Template">
+            <Setter.Value>
+
+                <!--
+                إعادة تصميم RadioButton بالكامل
+                باستخدام ControlTemplate
+            -->
+                <ControlTemplate TargetType="RadioButton">
+
+                    <!--
+                    Border يمثل الشكل الخارجي للزر
+                    ويستخدم لإعطاء الزر خلفية وحواف دائرية
+                -->
+                    <Border
+                    Background="{TemplateBinding Background}"
+                    CornerRadius="6"
+                    Padding="5,0">
+
+                        <!--
+                        عرض محتوى الزر مثل النص أو أي عنصر آخر
+                        مع محاذاته عموديًا وأفقيًا
+                    -->
+                        <ContentPresenter
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"/>
+
+                    </Border>
+
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+
+
+        <!-- =========================
+         حالات الزر
+         ========================= -->
+
+        <Style.Triggers>
+
+            <!--
+            حالة مرور مؤشر الماوس فوق الزر
+            Mouse Hover
+        -->
+            <Trigger Property="IsMouseOver" Value="True">
+
+                <!-- تغيير لون الخلفية عند مرور الماوس -->
+                <Setter Property="Background" Value="{DynamicResource SidebarHoverBg}"/>
+
+                <!-- تغيير لون النص عند مرور الماوس -->
+                <Setter Property="TextElement.Foreground" Value="{DynamicResource SidebarTextselected}"/>
+
+            </Trigger>
+
+
+            <!--
+            حالة تحديد الزر
+            Checked / Selected
+        -->
+            <Trigger Property="IsChecked" Value="True">
+
+                <!-- لون الخلفية عندما يكون الزر محددًا -->
+                <Setter Property="Background" Value="{DynamicResource SidebarActiveBg}"/>
+
+                <!-- لون النص عندما يكون الزر محددًا -->
+                <Setter Property="TextElement.Foreground" Value="{DynamicResource SidebarTextselected}"/>
+
+            </Trigger>
+
+        </Style.Triggers>
+
+    </Style>
+
+
+
+
+    <!-- ستايل أزرار الإجراءات داخل الجدول (معاينة، تعديل، طباعة، حذف) -->
+    <Style x:Key="GridActionIconBtnStyle" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="#0284C7"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Width" Value="28"/>
+        <Setter Property="Height" Value="28"/>
+        <Setter Property="Margin" Value="2,0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="BtnBorder" Background="{TemplateBinding Background}" CornerRadius="4">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="BtnBorder" Property="Background" Value="#E0F2FE"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <SolidColorBrush x:Key="btncancel">red</SolidColorBrush>
+    <Style x:Key="ButtonCancel" TargetType="RadioButton">
+
+        <!-- =========================
+         الخصائص الأساسية للزر
+         ========================= -->
+
+        <!-- ارتفاع الزر -->
+        <Setter Property="Height" Value="40"/>
+
+        <!-- المسافة الخارجية حول الزر -->
+        <Setter Property="Margin" Value="10,4"/>
+
+        <!-- لون خلفية الزر في الحالة الطبيعية -->
+        <Setter Property="Background"   Value="{DynamicResource btncancel}"/>
+
+
+
+        <!-- =========================
+         تنسيق النص داخل الزر
+         ========================= -->
+
+        <!-- لون النص -->
+        <Setter Property="TextElement.Foreground" Value="White"/>
+
+        <!-- نوع الخط -->
+        <Setter Property="TextElement.FontFamily" Value="{DynamicResource CairFont}"/>
+
+        <!-- حجم الخط -->
+        <Setter Property="TextElement.FontSize" Value="14"/>
+
+        <!-- سماكة الخط -->
+        <Setter Property="TextElement.FontWeight" Value="Medium"/>
+
+
+        <!-- =========================
+         القالب الخاص بالزر
+         ========================= -->
+
+        <Setter Property="Template">
+            <Setter.Value>
+
+                <!--
+                إعادة تصميم RadioButton بالكامل
+                باستخدام ControlTemplate
+            -->
+                <ControlTemplate TargetType="RadioButton">
+
+                    <!--
+                    Border يمثل الشكل الخارجي للزر
+                    ويستخدم لإعطاء الزر خلفية وحواف دائرية
+                -->
+                    <Border
+                    Background="{TemplateBinding Background}"
+                    CornerRadius="6"
+                    Padding="5,0">
+
+                        <!--
+                        عرض محتوى الزر مثل النص أو أي عنصر آخر
+                        مع محاذاته عموديًا وأفقيًا
+                    -->
+                        <ContentPresenter
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"/>
+
+                    </Border>
+
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+
+
+        <!-- =========================
+         حالات الزر
+         ========================= -->
+
+        <Style.Triggers>
+
+            <!--
+            حالة مرور مؤشر الماوس فوق الزر
+            Mouse Hover
+        -->
+            <Trigger Property="IsMouseOver" Value="True">
+
+                <!-- تغيير لون الخلفية عند مرور الماوس -->
+                <Setter Property="Background" Value="{DynamicResource SidebarHoverBg}"/>
+
+                <!-- تغيير لون النص عند مرور الماوس -->
+                <Setter Property="TextElement.Foreground" Value="{DynamicResource SidebarTextselected}"/>
+
+            </Trigger>
+
+
+            <!--
+            حالة تحديد الزر
+            Checked / Selected
+        -->
+            <Trigger Property="IsChecked" Value="True">
+
+                <!-- لون الخلفية عندما يكون الزر محددًا -->
+                <Setter Property="Background" Value="{DynamicResource SidebarActiveBg}"/>
+
+                <!-- لون النص عندما يكون الزر محددًا -->
+                <Setter Property="TextElement.Foreground" Value="{DynamicResource SidebarTextselected}"/>
+
+            </Trigger>
+
+        </Style.Triggers>
+
+    </Style>
+
+
+
+
 
 
 

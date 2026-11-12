@@ -23,5 +23,7 @@ namespace MyClinicProject_VersionOne.View.HealthCareSystem.PatientAndAppointment
         {
             InitializeComponent();
         }
+
+      
     }
 }

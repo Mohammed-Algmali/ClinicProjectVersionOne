@@ -23,6 +23,13 @@ namespace MyClinicProject_VersionOne.View.HealthCareSystem.HumanResources
         public EmployeeListView()
         {
             InitializeComponent();
+            this.DataContext = new EmployeeListViewModel();
+        }
+
+        private void btnCreateEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            CreateEmployeeView view = new CreateEmployeeView();
+            view.ShowDialog();
         }
     }
 }

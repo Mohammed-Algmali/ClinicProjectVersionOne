@@ -1,0 +1,201 @@
+﻿<Window x:Class="MyClinicProject_VersionOne.View.HealthCareSystem.MedicalAdministration.PharmacyUnit.Prescription.EditPrescription"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.HealthCareSystem.MedicalAdministration.PharmacyUnit.Prescription"
+        mc:Ignorable="d"
+        Title="EditPrescription" Height="450" Width="800"
+         Background="Transparent"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+         FlowDirection="RightToLeft">
+
+    <Border Background="#FFB4D7FA" CornerRadius="2">
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <!--  العنوان وبيانات الوصفة المحددة -->
+                <RowDefinition Height="Auto"/>
+                <!--  تعديل الحالة وإضافة/تحديث دواء -->
+                <RowDefinition Height="Auto"/>
+                <!--  جدول أدوية الوصفة القابل للتعديل المباشر -->
+                <RowDefinition Height="*"/>
+                <!--  سبب التعديل / الملاحظات -->
+                <RowDefinition Height="Auto"/>
+                <!--  أزرار حفظ التعديلات والطباعة والإلغاء -->
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- 1. رأس الصفحة + بيانات الوصفة قيد التعديل -->
+            <Border Grid.Row="0" Style="{StaticResource MainBorderStyle}">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.5*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                        <TextBlock Text="✏️" FontSize="24" VerticalAlignment="Center" Margin="5,0,10,0"/>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="تعديل بيانات الوصفة الطبية" Style="{StaticResource PrimaryTextTitleadd}"/>
+                            <TextBlock Text="تحديث الأدوية أو الجرعات أو تغيير حالة الوصفة الحالية" Style="{StaticResource SecondaryTextTitlePage}"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <HeaderedContentControl Grid.Column="1" Header="رقم الوصفة" Content="{Binding PrescriptionCode, FallbackValue='RX-000245'}" Style="{StaticResource PatientMetaItemStyle}" />
+                    <HeaderedContentControl Grid.Column="2" Header="اسم المريض" Content="{Binding PatientFullName, FallbackValue='أحمد محمد علي'}" Style="{StaticResource PatientMetaItemStyle}" />
+                    <HeaderedContentControl Grid.Column="3" Header="تاريخ الإنشاء" Content="{Binding CreatedDate, FallbackValue='2025/10/14'}" Style="{StaticResource PatientMetaItemStyle}" />
+                    <HeaderedContentControl Grid.Column="4" Header="الطبيب المحرر" Content="{Binding DoctorName, FallbackValue='د. محمد أحمد'}" Style="{StaticResource PatientMetaItemStyle}" />
+                </Grid>
+            </Border>
+
+            <!-- حالة الوصفة وإضافة صنف دوائي جديد للتعديل -->
+            <Border Grid.Row="1" Style="{StaticResource MainBorderStyle}">
+                <StackPanel>
+                    <TextBlock Text=" حالة الوصفة وإدارة الأصناف الدوائية" Style="{StaticResource CardHeaderStyle}"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <!-- تغيير حالة الوصفة (مكتملة / ملغاة) -->
+                            <ColumnDefinition Width="1.1*"/>
+                            <ColumnDefinition Width="1.4*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- حالة الوصفة -->
+                        <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                            <TextBlock Text="حالة الوصفة *" Style="{StaticResource FiledLabelStyle}"/>
+                            <ComboBox SelectedValue="{Binding PrescriptionStatus}" Height="36">
+                                <ComboBoxItem Content="مكتملة" IsSelected="True"/>
+                                <ComboBoxItem Content="ملغاة"/>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <!-- إضافة دواء إضافي أثناء التعديل -->
+                        <StackPanel Grid.Column="1" Margin="5,0,5,0">
+                            <TextBlock Text="إضافة دواء جديد للوصفة" Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox Text="{Binding NewDrugName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+
+                        <!-- الجرعة -->
+                        <StackPanel Grid.Column="2" Margin="5,0,5,0">
+                            <TextBlock Text="التركيز / الجرعة" Style="{StaticResource FiledLabelStyle}"/>
+                            <Border BorderBrush="#CBD5E0" BorderThickness="1" CornerRadius="5" Background="White" Height="36">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0" Text="{Binding NewDosage, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" Background="Transparent" VerticalContentAlignment="Center" Padding="8,0" FontWeight="Bold"/>
+                                    <Border Grid.Column="1" Background="#F1F5F9" BorderBrush="#CBD5E0" BorderThickness="1,0,0,0" Padding="8,0">
+                                        <TextBlock Text="mg" FlowDirection="LeftToRight" VerticalAlignment="Center" Foreground="#64748B" FontSize="11"/>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+
+                        <!-- التكرار -->
+                        <StackPanel Grid.Column="3" Margin="5,0,5,0">
+                            <TextBlock Text="التكرار" Style="{StaticResource FiledLabelStyle}"/>
+                            <ComboBox SelectedIndex="0" Height="36">
+                                <ComboBoxItem Content="مرتين يومياً"/>
+                                <ComboBoxItem Content="3 مرات يومياً"/>
+                                <ComboBoxItem Content="مرة واحدة يومياً"/>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <!-- المدة -->
+                        <StackPanel Grid.Column="4" Margin="5,0,8,0">
+                            <TextBlock Text="المدة" Style="{StaticResource FiledLabelStyle}"/>
+                            <Border BorderBrush="#CBD5E0" BorderThickness="1" CornerRadius="5" Background="White" Height="36">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0" Text="{Binding NewDurationDays, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" Background="Transparent" VerticalContentAlignment="Center" Padding="8,0" FontWeight="Bold"/>
+                                    <Border Grid.Column="1" Background="#F1F5F9" BorderBrush="#CBD5E0" BorderThickness="1,0,0,0" Padding="8,0">
+                                        <TextBlock Text="أيام" VerticalAlignment="Center" Foreground="#64748B" FontSize="11"/>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+
+                        <Button Grid.Column="5" 
+                                Content="+ إضافة" 
+                                Command="{Binding AddMedicationItemCommand}"
+                                VerticalAlignment="Bottom" Height="36" Padding="14,0"
+                                Background="#0284C7" Foreground="White" FontWeight="Bold" BorderThickness="0"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!--  جدول تعديل الأدوية الحالية في الوصفة (قابل للتعديل المباشر داخل الخلايا) -->
+            <Border Grid.Row="2" Style="{StaticResource MainBorderStyle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="تعديل الأدوية والجرعات المسجلة في الوصفة (يمكنك التعديل مباشرة داخل الجدول)" Style="{StaticResource CardHeaderStyle}"/>
+
+                    <DataGrid Grid.Row="1"
+                              ItemsSource="{Binding EditablePrescriptionItems}"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              HeadersVisibility="Column"
+                              GridLinesVisibility="Horizontal"
+                              HorizontalGridLinesBrush="#E2E8F0"
+                              RowHeight="42"
+                              Background="White">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="#" Binding="{Binding Index}" Width="0.4*" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="اسم الدواء" Binding="{Binding DrugName, UpdateSourceTrigger=PropertyChanged}" Width="1.8*"/>
+                            <DataGridTextColumn Header="الجرعة" Binding="{Binding DosageWithUnit, UpdateSourceTrigger=PropertyChanged}" Width="1*"/>
+                            <DataGridTextColumn Header="التكرار" Binding="{Binding Frequency, UpdateSourceTrigger=PropertyChanged}" Width="1.2*"/>
+                            <DataGridTextColumn Header="المدة" Binding="{Binding Duration, UpdateSourceTrigger=PropertyChanged}" Width="0.8*"/>
+                            <DataGridTextColumn Header="تعليمات الاستخدام" Binding="{Binding Instructions, UpdateSourceTrigger=PropertyChanged}" Width="1.3*"/>
+                            <DataGridTemplateColumn Header="حذف الصنف" Width="0.7*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="🗑️ حذف" 
+                                                Command="{Binding DataContext.RemoveMedicationItemCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                CommandParameter="{Binding}"
+                                                Background="Transparent" BorderThickness="0" Foreground="#DC2626" FontWeight="SemiBold" Cursor="Hand"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Border>
+
+            <!--  ملاحظات التعديل -->
+            <Border Grid.Row="3" Style="{StaticResource MainBorderStyle}">
+                <StackPanel>
+                    <TextBlock Text="📝 ملاحظات الوصفة / سبب التعديل" Style="{StaticResource CardHeaderStyle}"/>
+                    <TextBox Height="45" TextWrapping="Wrap" AcceptsReturn="True" 
+                             Text="{Binding EditNotes, UpdateSourceTrigger=PropertyChanged}" 
+                             Style="{StaticResource TextBoxStyle}"/>
+                </StackPanel>
+            </Border>
+
+            <!--  أزرار حفظ التعديلات والطباعة والإلغاء (بنفس نمطك) -->
+            <Border Grid.Row="4" Style="{StaticResource MainBorderStyle}">
+                <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Margin="15,5,15,12">
+                    <Button Command="{Binding UpdatePrescriptionCommand}" Style="{StaticResource ButtonSave}"/>
+                    <Button Command="{Binding CancelEditCommand}" Style="{StaticResource ButtonExit}"/>
+                    <RadioButton Content="طباعة الوصفة" Command="{Binding PrintPrescriptionCommand}" Style="{StaticResource ButtonPrint}" Margin="10,0,0,0"/>
+                </StackPanel>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>

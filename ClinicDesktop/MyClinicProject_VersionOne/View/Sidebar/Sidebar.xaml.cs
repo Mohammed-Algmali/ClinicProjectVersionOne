@@ -16,7 +16,7 @@ namespace MyClinicProject_VersionOne.View.Sidebar
             //PlatformOwner
             //HospitalManager
             
-            DataContext = new SidebarViewModel(AccountType.PlatformOwner);
+            DataContext = new SidebarViewModel(AccountType.HospitalManager);
         }
 
 

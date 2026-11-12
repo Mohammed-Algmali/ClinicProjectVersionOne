@@ -48,6 +48,17 @@
     </Style>
 
 
+    <!-- خصائص البوكس بلوك حق واجهه العلامات الحيوية -->
+    <Style x:Key="VitalSignInputContainerStyle" TargetType="Border">
+        <Setter Property="BorderBrush" Value="#CBD5E0"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Height" Value="38"/>
+    </Style>
+
+
+
 
 
     <!--

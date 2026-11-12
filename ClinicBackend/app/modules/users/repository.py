@@ -1,96 +1,65 @@
 from typing import Optional
 from sqlalchemy import select
 from sqlalchemy.orm import Session
-from app.modules.users.models import Role
-class RoleRepository:
-    """
-    مستودع العمليات المباشرة على جدول الأدوار tbRoles
-    """
-    def __init__(self, db: Session):
-        self.db = db
-        # استقبال جلسة قاعدة البيانات وحفظها في self.db لتستخدمها جميع دوال الكلاس
+from app.core.BaseRepository import BaseRepository
+from app.modules.users.models import Role ,User
 
-    def create(self, role_dict: dict) -> Role:
-        """
-        1. دالة إنشاء دور جديد وحفظه في جدول tbRoles
-        """
-        new_role = Role(**role_dict)
-        # تفريغ مفاتيح وقيم القاموس مباشرة داخل أعمدة جدول Role
 
-        self.db.add(new_role)
-        # إدراج الكائن في قائمة انتظار الحفظ (Staging)
 
-        self.db.commit()
-        # تثبيت العملية نهائياً في قاعدة البيانات (INSERT)
+class RoleRepository(BaseRepository[Role]):
+  """مستودع جدول الأدوار (tbRoles):
 
-        self.db.refresh(new_role)
-        # إعادة قراءة السجل لجلب RoleId وتاريخ الإنشاء المتولدة تلقائياً
+  يرث تلقائياً من BaseRepository دوال (create, update, delete, get_by_id,
+  get_all).
+  """
 
-        return new_role
-        # إرجاع كائن الدور المكتمل
+  def __init__(self, db: Session):
+    super().__init__(Role, db)
+    # نمرر لكلاس الأب: جدول Role، وجلسة قاعدة البيانات db
 
-    def get_by_name(self, role_name: str) -> Optional[Role]:
+  # =========================================================================
+  # دالة إضافية خاصة بالأدوار فقط: البحث عن دور بواسطة اسمه
+  # • فائدتها: فحص عدم تكرار اسم الدور (مثلاً: منع وجود دورين باسم "Doctor").
+  # =========================================================================
+  def get_by_name(self, role_name: str) -> Optional[Role]:
+    statement = select(Role).where(Role.RoleName == role_name)
+    # الاستعلام: SELECT * FROM tbRoles WHERE RoleName = role_name
+
+    return self.db.scalar(statement)
+    # ترجع كائن الدور إن وُجد، أو ترجع None إن كان الاسم متاحاً
+
+
+
+
+
+
+
+
+class UserRepository(BaseRepository[User]):
+  """مستودع جدول المستخدمين:
+
+  يرث تلقائياً من BaseRepository دوال (get_by_id, get_all, create, update,
+  delete).
+  """
+
+  def __init__(self, db: Session):
+    super().__init__(User, db)
+    # تمرير موديل User وجلسة db لكلاس الأب BaseRepository
+
+  # =========================================================================
+  # دالة إنشاء المستخدم لمدير المنشأة (ضمن معاملة مركبة)
+  #
+  # • الوظيفة: إنشاء حساب المدير وتوليد UserId فوراً في الذاكرة دون Commit نهائي.
+  # • متى تستخدمها؟ في العمليات المترابطة التي تحتاج لربط المستخدم بجدول آخر (مثل المنشأة).
+  # =========================================================================
+  def create_manager_user(self, user_dict: Dict[str, Any]) -> User:
+    return self.create_without_commit(user_dict)
+    # تستدعي الدالة الموروثة من كلاس الأب لتنفيذ db.add و db.flush
+    # النتيجة: يولد رقم UserId فوراً في الكائن قبل الحفظ النهائي
+
+  def get_by_username(self, user_name: str) -> Optional[User]:
    
-        statement = select(Role).where(Role.RoleName == role_name)
+      statement = select(User).where(User.Username == user_name)
     # بناء استعلام الاختيار بالشرط
 
-        return self.db.scalar(statement)
-    # تنفيذ الاستعلام وإرجاع أول نتيجة مباشرة، أو إرجاع None إن لم يوجد
-
-
-
-
-    def get_by_id(self, role_id: int) -> Optional[Role]:
-      """3.
-
-      دالة البحث عن الدور بواسطة رقمه التعريفي الأساسي (Primary Key)
-      """
-      statement = select(Role).where(Role.RoleId == role_id)
-      # بناء الاستعلام: SELECT * FROM tbRoles WHERE RoleId = role_id
-
       return self.db.scalar(statement)
-      # تنفيذ الاستعلام وإرجاع كائن الدور، أو إرجاع None إذا لم يوجد دور بهذا الرقم
-
-    
-    def get_all(self) -> List[Role]:
-      """4.
-
-      دالة جلب قائمة بجميع الأدوار المسجلة في النظام
-      """
-      statement = select(Role)
-      # بناء الاستعلام: SELECT * FROM tbRoles (بدون شروط لجلب كل السجلات)
-
-      return list(self.db.scalars(statement).all())
-      # --------------------------------------------------------------------------
-      # لاحظ الفرق الدقيق بين scalar و scalars:
-      # - scalar()  (بالمفرد): ترجع كائناً واحداً فقط (مثل البحث بالاسم أو الرقم).
-      # - scalars() (بالجمع):  تتعامل مع مجموعة نتائج متعددة.
-      # - .all()              : تجمع النتائج كلها في قائمة واحدة List.
-      # --------------------------------------------------------------------------
-
-
-
-    def update(self, role: Role, update_data: dict) -> Role:
-      """5.
-
-      دالة تحديث بيانات دور موجود مسبقاً
-      """
-      for key, value in update_data.items():
-        setattr(role, key, value)
-        # ----------------------------------------------------------------------
-        # ماذا يفعل setattr؟
-        # يمر على كل مفتاح وقيمة في القاموس ويطبقهما على الكائن، مثلاً:
-        # setattr(role, 'RoleDescription', 'وصف جديد')
-        # تكافئ تماماً كتابة: role.RoleDescription = 'وصف جديد'
-        # لكنها برمجياً ذكية وتعدل أي حقل تم إرساله ديناميكياً دون تكرار الكود
-        # ----------------------------------------------------------------------
-
-      self.db.commit()
-      # SQLAlchemy ذكي جداً، يلاحظ التغييرات وينفذ أمر:
-      # UPDATE tbRoles SET RoleDescription = ... WHERE RoleId = ...
-
-      self.db.refresh(role)
-      # إعادة تحميل الكائن للتأكد من تطابق بياناته مع قاعدة البيانات
-
-      return role
-      # إرجاع كائن الدور بعد التعديل

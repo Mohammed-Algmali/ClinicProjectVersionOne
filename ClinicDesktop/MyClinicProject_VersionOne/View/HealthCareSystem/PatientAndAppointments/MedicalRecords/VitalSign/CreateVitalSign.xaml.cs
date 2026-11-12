@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MyClinicProject_VersionOne.View.HealthCareSystem.Attendance
+namespace MyClinicProject_VersionOne.View.HealthCareSystem.PatientAndAppointments.MedicalRecords.VitalSign
 {
     /// <summary>
-    /// Interaction logic for AttendanceListView.xaml
+    /// Interaction logic for CreateVitalSign.xaml
     /// </summary>
-    public partial class PlatformListView : UserControl
+    public partial class CreateVitalSign : Window
     {
-        public PlatformListView()
+        public CreateVitalSign()
         {
             InitializeComponent();
         }

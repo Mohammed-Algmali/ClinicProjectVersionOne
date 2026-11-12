@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="MyClinicProject_VersionOne.View.HealthCareSystem.MedicalAdministration.Laboratory.TestCompenent.Biochemistry"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.HealthCareSystem.MedicalAdministration.Laboratory.TestCompenent"
+             mc:Ignorable="d" 
+            d:DesignHeight="450" d:DesignWidth="800"
+             FlowDirection="RightToLeft">
+
+    <Border  Background="#FFB4D7FA" CornerRadius="2">
+
+
+
+        <Border Background="White" CornerRadius="8" Padding="20" Margin="0,0,0,15">
+            <StackPanel>
+                <TextBlock Text="  فحوصات الكيمياء الحيوية" FontSize="16" FontWeight="Bold" Foreground="#0066FF"/>
+                <TextBlock Text="اختر الفحص" FontSize="11" Foreground="Gray" Margin="0,2,0,15"/>
+
+                <UniformGrid Columns="3" Rows="4">
+
+                    <CheckBox Content="Glucose — سكر الدم" Margin="5,5"/>
+                    <CheckBox Content="Fasting Blood Sugar (FBS) — سكر صائم" Margin="5,5"/>
+                    <CheckBox Content="Random Blood Sugar (RBS) — سكر عشوائي" Margin="5,5"/>
+                    <CheckBox Content="HbA1c — السكر التراكمي" Margin="5,5"/>
+                    <CheckBox Content="Urea — اليوريا" Margin="5,5"/>
+                    <CheckBox Content="Creatinine — الكرياتينين" Margin="5,5"/>
+                    <CheckBox Content="Uric Acid — حمض اليوريك" Margin="5,5"/>
+                    <CheckBox Content="Total Cholesterol — الكوليسترول الكلي" Margin="5,5"/>
+                    <CheckBox Content="Triglycerides — الدهون الثلاثية" Margin="5,5"/>
+                    <CheckBox Content="HDL — الكوليسترول الجيد" Margin="5,5"/>
+                    <CheckBox Content="LDL — الكوليسترول الضار" Margin="5,5"/>
+                    <CheckBox Content="Total Bilirubin — البيليروبين الكلي" Margin="5,5"/>
+                    <CheckBox Content="Direct Bilirubin — البيليروبين المباشر" Margin="5,5"/>
+                    <CheckBox Content="ALT — إنزيم الكبد ALT" Margin="5,5"/>
+                    <CheckBox Content="AST — إنزيم الكبد AST" Margin="5,5"/>
+                    <CheckBox Content="ALP — الفوسفاتاز القلوي" Margin="5,5"/>
+                    <CheckBox Content="Total Protein — البروتين الكلي" Margin="5,5"/>
+                    <CheckBox Content="Albumin — الألبومين" Margin="5,5"/>
+                    <CheckBox Content="Sodium (Na) — الصوديوم" Margin="5,5"/>
+                    <CheckBox Content="Potassium (K) — البوتاسيوم" Margin="5,5"/>
+                    <CheckBox Content="Chloride (Cl) — الكلوريد" Margin="5,5"/>
+                    <CheckBox Content="Calcium (Ca) — الكالسيوم" Margin="5,5"/>
+                    <CheckBox Content="Phosphorus — الفوسفور" Margin="5,5"/>
+                    <CheckBox Content="Magnesium — المغنيسيوم" Margin="5,5"/>
+                    <CheckBox Content="Amylase — الأميليز" Margin="5,5"/>
+                    <CheckBox Content="Lipase — الليباز" Margin="5,5"/>
+                    <CheckBox Content="LDH — إنزيم نازعة هيدروجين اللاكتات" Margin="5,5"/>
+                    <CheckBox Content="Total Protein/Albumin Ratio — نسبة البروتين إلى الألبومين" Margin="5,5"/>
+
+                </UniformGrid>
+            </StackPanel>
+        </Border>
+    </Border>
+
+
+
+</UserControl>

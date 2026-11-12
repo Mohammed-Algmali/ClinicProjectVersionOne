@@ -10,7 +10,21 @@
              xmlns:rolevms="clr-namespace:MyClinicProject_VersionOne.ViewModel.PlatformAdmin.UserAndPermissions.RoleAndPermissios"
               xmlns:planview="clr-namespace:MyClinicProject_VersionOne.View.PlatformAdmin.SubscriptionsAndFinance.Plan"
              xmlns:planvms="clr-namespace:MyClinicProject_VersionOne.ViewModel.PlatformAdmin.SubscriptionsAndFinance.Plan"
-             StartupUri="View/PlatformAdmin/UserAndPermissions/RoleAndPermissios/CreateRoleView.xaml">
+             xmlns:employeeview="clr-namespace:MyClinicProject_VersionOne.View.HealthCareSystem.HumanResources"
+             xmlns:employeevms="clr-namespace:MyClinicProject_VersionOne.ViewModel.HealthCareSystem.HumanResources"
+             xmlns:attendanceview="clr-namespace:MyClinicProject_VersionOne.View.HealthCareSystem.HumanResources.Attendance"
+             xmlns:attendancevms="clr-namespace:MyClinicProject_VersionOne.ViewModel.HealthCareSystem.HumanResources.Attendance"
+             xmlns:operationauditview="clr-namespace:MyClinicProject_VersionOne.View.HealthCareSystem.OperationAudit"
+             xmlns:operationauditvms="clr-namespace:MyClinicProject_VersionOne.ViewModel.HealthCareSystem.OperationAudit"
+             
+             xmlns:jobview="clr-namespace:MyClinicProject_VersionOne.View.HealthCareSystem.HumanResources.Job"
+             xmlns:jobvms="clr-namespace:MyClinicProject_VersionOne.ViewModel.HealthCareSystem.HumanResources.Job"
+             
+              xmlns:shiftview="clr-namespace:MyClinicProject_VersionOne.View.HealthCareSystem.HumanResources.Shifts"
+             xmlns:shiftvms="clr-namespace:MyClinicProject_VersionOne.ViewModel.HealthCareSystem.HumanResources.Shift"
+             
+             
+             StartupUri="View/Authentication/LoginView.xaml">
     <!--StartupUri="View/Authentication/LoginView.xaml"-->
     <Application.Resources>
         <ResourceDictionary>
@@ -45,6 +59,28 @@
             <DataTemplate DataType="{x:Type rolevms:RoleListViewModel}">
                 <roleview:RoleListView/>
             </DataTemplate>
+
+
+            <DataTemplate DataType="{x:Type employeevms:EmployeeListViewModel}">
+                <employeeview:EmployeeListView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type attendancevms:AttendanceListViewModel}">
+                <attendanceview:AttendanceListView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type operationauditvms:AuditLogViewModel}">
+                <operationauditview:AuditLogView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type jobvms:JobListViewModel}">
+                <jobview:JobListView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type shiftvms:ShiftListViewModel}">
+                <shiftview:ShiftListView/>
+            </DataTemplate>
+
 
         </ResourceDictionary>
       

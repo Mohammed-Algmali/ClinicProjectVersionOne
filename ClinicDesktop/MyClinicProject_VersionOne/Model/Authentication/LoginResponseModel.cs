@@ -18,23 +18,23 @@ namespace MyClinicProject_VersionOne.Model.Authentication
         [JsonPropertyName("access_token")]
         public string AccessToken { get; set; } = string.Empty;
 
-        /// <summary>
-        /// نوع الرمز (غالباً يكون "bearer").
-        /// </summary>
         [JsonPropertyName("token_type")]
         public string TokenType { get; set; } = "bearer";
 
         /// <summary>
-        /// الدور الوظيفي للمستخدم (Role):
-        /// يفيدنا في توجيه المستخدم بعد الدخول (مثلاً: إذا كان "Doctor" نفتح شاشة الطبيب، وإذا كان "Receptionist" نفتح شاشة الاستقبال).
+        /// رقم الدور الوظيفي (RoleId):
+        /// 1 = مدير النظام (Super Admin)
+        /// 2 = مدير المنشأة (Facility Manager)
+        /// 3 = طبيب (Doctor)
+        /// ... إلخ
         /// </summary>
-        [JsonPropertyName("role")]
-        public string Role { get; set; } = string.Empty;
+        [JsonPropertyName("role_id")]
+        public int RoleId { get; set; }
 
-        /// <summary>
-        /// الاسم الشخصي الكامل للمستخدم (مثل: د. أحمد علي) لعرضه كرسالة ترحيبية في الواجهة الرئيسية.
-        /// </summary>
         [JsonPropertyName("full_name")]
         public string FullName { get; set; } = string.Empty;
+
+        [JsonPropertyName("facility_id")]
+        public long? FacilityId { get; set; }
     }
 }

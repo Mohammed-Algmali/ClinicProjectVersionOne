@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.PlatformAdmin.FacilitiesManagement.Facility"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="1200"
+             d:DesignHeight="450" d:DesignWidth="1000"
               FlowDirection="RightToLeft"
              Background="White">
     <Grid>
@@ -55,7 +55,7 @@
 
             <TextBox Grid.Column="1"
                      Style="{DynamicResource searchTextBoxStyle}"
-                     
+                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                      Tag="ابحث باسم المنشاه او رقم الهاتف"
             />
 
@@ -84,107 +84,59 @@
              ============================================================ -->
 
         <DataGrid Grid.Row="1"
-                  x:Name="dataGridFacilities"
-                  ItemsSource="{Binding FacilitiesList}"
-                  AutoGenerateColumns="False" >
+                  ItemsSource="{Binding Facilities}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  CanUserAddRows="False"
+                  GridLinesVisibility="Horizontal">
+
             <DataGrid.Columns>
+                <!-- رقم المنشأة -->
+                <DataGridTextColumn Header="رقم المنشأة" 
+                                    Binding="{Binding FacilityId}" 
+                                    Width="90"/>
 
-                <!-- رقم المستخدم -->
-                <DataGridTextColumn Header="رقم المنشاه" 
-                            Width="80"
-                            Binding="{Binding FacilityId}"/>
+                <!-- اسم المنشأة -->
+                <DataGridTextColumn Header="اسم المنشأة" 
+                                    Binding="{Binding FacilityName}" 
+                                    Width="180"/>
 
-                <!-- رقم الصلاحيه او سمهاء -->
-                <DataGridTextColumn Header="اسم المنشاه"
-                            Width="*"
-                            Binding="{Binding FacilityName}"/>
+                <!-- المدير -->
+                <DataGridTextColumn Header="المدير المسؤول" 
+                                    Binding="{Binding ManagerFullName}" 
+                                    Width="160"/>
 
-                <!-- الاسم الكامل  -->
-                <DataGridTextColumn Header="اسم مدير المنشاه" 
-                            Width="*"
-                            Binding="{Binding FacilityManagerName }"/>
+                <!-- المحافظة -->
+                <DataGridTextColumn Header="المحافظة" 
+                                    Binding="{Binding FacilityCity}" 
+                                    Width="120"/>
 
-                <!-- اسم المستخدم -->
-                <DataGridTextColumn Header="النوع"
-                            Width="*"
-                            Binding="{Binding FacilityType }"/>
-
-                <DataGridTextColumn Header="رقم الترخيض"
-                            Width="*"
-                            Binding="{Binding FacilityLicenseNumber }"/>
-
-                <DataGridTextColumn Header="تاريخ اصدار الترخيص"
-                            Width="*"
-                            Binding="{Binding FacilityLicenseIssueDate }"/>
-
-                <DataGridTextColumn Header="تاريخ الانتهاء"
-                            Width="*"
-                            Binding="{Binding FacilityLicenseExpiryDate }"/>
+                <!-- العنوان -->
+                <DataGridTextColumn Header="العنوان" 
+                                    Binding="{Binding FacilityAddress}" 
+                                    Width="*"/>
 
                 <!-- الحالة -->
-                <DataGridTextColumn Header="الحالة"
-                            Width="60"
-                            Binding="{Binding FacilityStatus}"/>
+                <DataGridTextColumn Header="الحالة" 
+                                    Binding="{Binding FacilityStatus}" 
+                                    Width="90"/>
 
-                <!-- رمز المنشاه -->
-                <DataGridTextColumn Header="رمز المنشاء"
-                            Width="60"
-                            Binding="{Binding FacilityCode}"/>
-
-                <!-- الدوله -->
-                <DataGridTextColumn Header="الدوله"
-                            Width="60"
-                            Binding="{Binding FacilityCountry}"/>
-
-                <!-- المدينه -->
-                <DataGridTextColumn Header="المدينه"
-                            Width="60"
-                            Binding="{Binding FacilityCity}"/>
-
-                <DataGridTextColumn Header="العنوان" 
-                            Width="*"
-                            Binding="{Binding FacilityAddress}"/>
-
-
-                <!-- رقم الهاتف -->
-                <DataGridTextColumn Header="رقم الهاتف"
-                            Width="*"
-                            Binding="{Binding FacilityPhone }"/>
-
-                <!-- البريد الإلكتروني -->
-                <DataGridTextColumn Header="البريد الإلكتروني"
-                            Width="*"
-                            Binding="{Binding FacilityEmail}"/>
-
-                <!-- الموقع الالكتروني -->
-                <DataGridTextColumn Header="الموقع الالكتروني"
-                            Width="60"
-                            Binding="{Binding FacilityWebsiteUrl}"/>
-
-
-
-
-                <!-- تاريخ الانشاء -->
-                <DataGridTextColumn Header="تاريخ الانشاء"
-                            Width="*"
-                            Binding="{Binding FacilityCreatedAt, StringFormat=yyyy-MM-dd}"/>
-
-                <!-- الإجراءات سنضيفها لاحقًا -->
-                <!-- ============================================================
-                     الإجراءات
-
-                     هذا العمود مخصص للأزرار التي سنتعامل من خلالها
-                     مع المستخدم المحدد.
-
-                     حاليًا سنضع زر "تعديل" فقط.
-                     وسنضيف لاحقًا:
-                     - تعديل
-                     - تعطيل
-                     - حذف
-                     ============================================================ -->
-
-
+                <DataGridTemplateColumn Header="الإجراءات"
+                        Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="تعديل"
+                                 Width="60"
+                                 Margin="2"
+                                    Command="{Binding DataContext.EditFacilityCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                     CommandParameter="{Binding FacilityId}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
+
+            
         </DataGrid>
     </Grid>
 </UserControl>

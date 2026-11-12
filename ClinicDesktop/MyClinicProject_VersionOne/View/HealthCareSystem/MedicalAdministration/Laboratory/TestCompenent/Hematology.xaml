@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="MyClinicProject_VersionOne.View.HealthCareSystem.MedicalAdministration.Laboratory.TestCompenent.Hematology"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.HealthCareSystem.MedicalAdministration.Laboratory.TestCompenent"
+             mc:Ignorable="d" 
+              d:DesignHeight="450" d:DesignWidth="800"
+             FlowDirection="RightToLeft">
+
+    <Border  Background="#FFB4D7FA" CornerRadius="2">
+
+
+
+        <Border Background="White" CornerRadius="8" Padding="20" Margin="0,0,0,15">
+            <StackPanel>
+                <TextBlock Text="  فحوصات أمراض الدم" FontSize="16" FontWeight="Bold" Foreground="#0066FF"/>
+                <TextBlock Text="اختر الفحص" FontSize="11" Foreground="Gray" Margin="0,2,0,15"/>
+
+                <UniformGrid Columns="3" Rows="4">
+
+                    <CheckBox Content="Hemoglobin (Hb) — الهيموغلوبين" Margin="5,5"/>
+                    <CheckBox Content="RBC — عدد كريات الدم الحمراء" Margin="5,5"/>
+                    <CheckBox Content="WBC — عدد كريات الدم البيضاء" Margin="5,5"/>
+                    <CheckBox Content="Platelets (PLT) — الصفائح الدموية" Margin="5,5"/>
+                    <CheckBox Content="Hematocrit (HCT) — الهيماتوكريت" Margin="5,5"/>
+                    <CheckBox Content="MCV — متوسط حجم كرية الدم الحمراء" Margin="5,5"/>
+                    <CheckBox Content="MCH — متوسط كمية الهيموغلوبين في الكرية" Margin="5,5"/>
+                    <CheckBox Content="MCHC — متوسط تركيز الهيموغلوبين في الكريات" Margin="5,5"/>
+                    <CheckBox Content="RDW — تباين أحجام كريات الدم الحمراء" Margin="5,5"/>
+                    <CheckBox Content="Neutrophils — العدلات" Margin="5,5"/>
+                    <CheckBox Content="Lymphocytes — الخلايا اللمفاوية" Margin="5,5"/>
+                    <CheckBox Content="Monocytes — الخلايا الوحيدة" Margin="5,5"/>
+                    <CheckBox Content="Eosinophils — الخلايا الحمضية" Margin="5,5"/>
+                    <CheckBox Content="Basophils — الخلايا القاعدية" Margin="5,5"/>
+                    <CheckBox Content="ESR — سرعة ترسيب الدم" Margin="5,5"/>
+                    <CheckBox Content="Reticulocyte Count — عدد الخلايا الشبكية" Margin="5,5"/>
+                    <CheckBox Content="PT — زمن البروثرومبين" Margin="5,5"/>
+                    <CheckBox Content="INR — النسبة المعيارية الدولية" Margin="5,5"/>
+                    <CheckBox Content="APTT — زمن الثرومبوبلاستين الجزئي المنشط" Margin="5,5"/>
+                    <CheckBox Content="Blood Group — فصيلة الدم" Margin="5,5"/>
+                    <CheckBox Content="Rh Factor — عامل ريسوس" Margin="5,5"/>
+                    <CheckBox Content="Peripheral Blood Smear—لطاخة الدم المحيطية" />
+
+                </UniformGrid>
+            </StackPanel>
+        </Border>
+    </Border>
+</UserControl>

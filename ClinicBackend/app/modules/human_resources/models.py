@@ -19,41 +19,6 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.core.database import Base
 
 
-# ==============================================================================
-# 1. جدول الوظائف (tbJobPositions)
-# ==============================================================================
-class JobPosition(Base):
-    """
-    جدول المسميات والهياكل الوظيفية في المنشأة الطبية
-    """
-    __tablename__ = "tbJobPositions"
-
-    JobPositionId: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
-    # المعرف الأساسي للمسمى الوظيفي
-
-    DepartmentId: Mapped[int] = mapped_column(BigInteger, ForeignKey("tbDepartments.DepartmentId"), nullable=False, index=True)
-    # معرف القسم الطبي أو الإداري التابعة له هذه الوظيفة
-
-    JobTitle: Mapped[str] = mapped_column(String(100), nullable=False)
-    # اسم الوظيفة الرسمي مثل: طبيب استشاري، ممرض، موظف استقبال
-
-    JobCode: Mapped[Optional[str]] = mapped_column(String(50), unique=True, nullable=True)
-    # كود الوظيفة المختصر مثل: DOC-01 لسهولة الربط والأرشفة
-
-    JobDescription: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
-    # الوصف الوظيفي والمسؤوليات والمهام المطلوبة من الموظف
-
-    MinSalary: Mapped[Optional[Decimal]] = mapped_column(Numeric(10, 2), nullable=True)
-    # الحد الأدنى لسلم الراتب المعتمد لهذه الوظيفة
-
-    MaxSalary: Mapped[Optional[Decimal]] = mapped_column(Numeric(10, 2), nullable=True)
-    # الحد الأعلى لسلم الراتب المعتمد لهذه الوظيفة
-
-    IsActive: Mapped[bool] = mapped_column(Boolean, default=True)
-    # حالة الوظيفة: هل هي مفعلة ومتاحة للتوظيف حالياً أم مجمدة
-
-    # العلاقات
-    employees: Mapped[List["Employee"]] = relationship("Employee", back_populates="job_position")
 
 
 # ==============================================================================
@@ -89,8 +54,18 @@ class Shift(Base):
     ShiftStatus: Mapped[str] = mapped_column(String(50), default="Active")
     # حالة الوردية: نشطة ومستخدمة في الجداول أم معطلة
 
+    TotalHours: Mapped[float] = mapped_column(Numeric(4, 2), default=8.0)
     # العلاقات
+    ShiftType: Mapped[str] = mapped_column(String(50))
+
     employee_shifts: Mapped[List["EmployeeShift"]] = relationship("EmployeeShift", back_populates="shift")
+
+    # 1. [العلاقة المصححة]: علاقة الوردية بالمنشأة (N إلى 1)
+    # -------------------------------------------------------------
+    facility: Mapped["Facility"] = relationship(
+        "Facility", 
+        back_populates="shifts"
+    )
 
 
 # ==============================================================================
@@ -104,19 +79,8 @@ class Employee(Base):
 
     EmployeeId: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
     # الرقم الوظيفي والمعرف الأساسي للموظف
-
-    DepartmentId: Mapped[int] = mapped_column(BigInteger, ForeignKey("tbDepartments.DepartmentId"), nullable=False, index=True)
-    # القسم الذي يعمل به الموظف داخل المنشأة
-
     UserId: Mapped[int] = mapped_column(BigInteger, ForeignKey("Users.UserId"), nullable=False, unique=True, index=True)
     # ربط الموظف بحسابه الشخصي في جدول Users للدخول إلى النظام
-
-    JobPositionId: Mapped[Optional[int]] = mapped_column(BigInteger, ForeignKey("tbJobPositions.JobPositionId"), nullable=True, index=True)
-    # المسمى الوظيفي المربوط بجدول الوظائف
-
-    NationalId: Mapped[Optional[str]] = mapped_column(String(50), unique=True, nullable=True)
-    # رقم الهوية الوطنية أو الإقامة أو جواز السفر
-
     MedicalLicenseNumber: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
     # رقم ترخيص مزاولة المهنة الطبي للأطباء والتمريض
 
@@ -126,18 +90,6 @@ class Employee(Base):
     Qualification: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
     # المؤهل الدراسي الأكاديمي وسنة التخرج
 
-    EmploymentType: Mapped[str] = mapped_column(String(50), default="Full-Time")
-    # نظام التعاقد: دوام كامل، دوام جزئي، أو طبيب زائر
-
-    EmployeeHireDate: Mapped[datetime] = mapped_column(DateTime, nullable=False)
-    # تاريخ مباشرة العمل الفعلي في المنشأة
-
-    ContractEndDate: Mapped[Optional[date]] = mapped_column(Date, nullable=True)
-    # تاريخ انتهاء عقد العمل لمتابعة إجراءات التجديد
-
-    EmergencyContactName: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
-    # اسم قريب يتم التواصل معه عند الطوارئ
-
     EmergencyContactPhone: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)
     # رقم هاتف الشخص المعتمد في حالات الطوارئ
 
@@ -146,15 +98,44 @@ class Employee(Base):
 
     EmployeeStatus: Mapped[str] = mapped_column(String(50), default="Active")
     # الحالة الوظيفية: نشط، في إجازة، أو منهي الخدمة
-
     EmployeeCreatedAt: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
     # تاريخ ووقت إضافة سجل الموظف في النظام
+    # علاقة تمكنك من كتابة: employee.user.UserFullName
+    user: Mapped["User"] = relationship("User", back_populates="employee")
+
+
+
+
+
+    # NationalId: Mapped[Optional[str]] = mapped_column(String(50), unique=True, nullable=True)
+    # # رقم الهوية الوطنية أو الإقامة أو جواز السفر
+   
+
+    # EmploymentType: Mapped[str] = mapped_column(String(50), default="Full-Time")
+    # # نظام التعاقد: دوام كامل، دوام جزئي، أو طبيب زائر
+
+    # EmployeeHireDate: Mapped[datetime] = mapped_column(DateTime, nullable=False)
+    # # تاريخ مباشرة العمل الفعلي في المنشأة
+
+    # ContractEndDate: Mapped[Optional[date]] = mapped_column(Date, nullable=True)
+    # # تاريخ انتهاء عقد العمل لمتابعة إجراءات التجديد
+
+   
+    
+
+    
 
     # العلاقات
-    job_position: Mapped[Optional["JobPosition"]] = relationship("JobPosition", back_populates="employees")
+    
     schedules: Mapped[List["EmployeeShift"]] = relationship("EmployeeShift", back_populates="employee", cascade="all, delete-orphan")
+    attendances: Mapped[List["Attendance"]] = relationship(
+        "Attendance",
+        back_populates="employee",
+        cascade="all, delete-orphan" # إذا حُذف الموظف تُحذف سجلات حضوره تلقائياً لحماية قاعدة البيانات
+    )
 
-
+  
+   
 # ==============================================================================
 # 4. جدول المناوبات (tbEmployeeShifts)
 # ==============================================================================
@@ -185,3 +166,50 @@ class EmployeeShift(Base):
     # العلاقات
     employee: Mapped["Employee"] = relationship("Employee", back_populates="schedules")
     shift: Mapped["Shift"] = relationship("Shift", back_populates="employee_shifts")
+
+
+
+class Attendance(Base):
+    """
+    نموذج جدول سجلات الحضور والانصراف الفعلي في العيادة (tbAttendance)
+    مصمم بنفس معمارية وأسلوب جدول المناوبات (SQLAlchemy 2.0)
+    """
+    __tablename__ = "tbAttendance"
+
+    AttendanceId: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
+    # المعرف الأساسي لسجل الحضور والانصراف اليومي
+    EmployeeId: Mapped[int] = mapped_column(BigInteger, ForeignKey("tbEmployees.EmployeeId"), nullable=False, index=True)
+    # الموظف أو الطبيب صاحب سجل الحضور
+    EmployeeShiftId: Mapped[Optional[int]] = mapped_column(BigInteger, ForeignKey("tbEmployeeShifts.EmployeeShiftId"), nullable=True, index=True)
+    # المناوبة المجدولة المرتبطة بهذا الحضور (لحساب التأخير وساعات العمل تلقائياً)
+    AttendanceDate: Mapped[date] = mapped_column(Date, default=date.today, nullable=False, index=True)
+    # تاريخ يوم العمل الفعلي
+
+    CheckInTime: Mapped[time] = mapped_column(Time, nullable=False)
+    # وقت تسجيل الحضور الفعلي في العيادة
+
+    CheckOutTime: Mapped[Optional[time]] = mapped_column(Time, nullable=True)
+    # وقت تسجيل الانصراف الفعلي (يقبل None طالما الموظف قيد العمل)
+
+    AttendanceStatus: Mapped[str] = mapped_column(String(50), default="Present")
+    # حالة الحضور: Present (حاضر)، Late (متأخر)، Excused (إجازة/عذر)
+    LateMinutes: Mapped[int] = mapped_column(Integer, default=0)
+    # عدد دقائق التأخير المحسوبة بناءً على وقت بداية المناوبة
+
+    VerificationMethod: Mapped[str] = mapped_column(String(50), default="face") 
+    # يوضح كيف حضر اليوم: "face" (وجه)، أو "fingerprint" (إصبع)، أو "manual" (يدوياً)
+    WorkHours: Mapped[float] = mapped_column(Numeric(4, 2), default=0.00)
+
+    
+    # إجمالي ساعات العمل الفعلية المنجزة في الوردية
+    Notes: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
+    # ملاحظات على الحضور مثل: إذن خروج مبكر أو مبرر تأخير
+
+    CreatedAt: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    # تاريخ ووقت إنشاء السجل في النظام لأغراض الرقابة والتدقيق
+    # =========================================================================
+    # العلاقات (Relationships)
+    # =========================================================================
+    employee: Mapped["Employee"] = relationship("Employee", back_populates="attendances")
+
+

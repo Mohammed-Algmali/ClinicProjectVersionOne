@@ -1,0 +1,180 @@
+﻿<Window x:Class="MyClinicProject_VersionOne.View.HealthCareSystem.HumanResources.Shifts.CreateShiftView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.HealthCareSystem.HumanResources.Shifts"
+        mc:Ignorable="d"
+        Width="580" Height="430"
+         WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent"
+           FlowDirection="RightToLeft">
+    <Border   Background="#FFB4D7FA" CornerRadius="2">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Style="{StaticResource MainBorderStyle}"
+                            >
+                <Grid >
+
+                    <Grid.ColumnDefinitions>
+
+                        <!-- الصورة -->
+                        <ColumnDefinition Width="Auto"/>
+
+                        <!-- العنوان والوصف -->
+                        <ColumnDefinition Width="*"/>
+
+                    </Grid.ColumnDefinitions>
+
+
+                    <!-- صورة المستخدم -->
+
+                    <Image Grid.Column="0"
+                                   Source="/Styles/Images/user.png"
+                                 Style="{StaticResource ImageHeaderStyle}"/>
+
+
+                    <!-- العنوان والوصف -->
+
+                    <StackPanel Grid.Column="1"
+                              
+                               >
+
+                        <TextBlock Text="إنشاء وارديه جديده"
+                                            Style="{StaticResource PrimaryTextTitleadd}"/>
+
+                        <TextBlock Text="قم بادخال بيانات الوارديه  الجديده في النظام"
+                                                Style="{StaticResource SecondaryTextTitlePage}"/>
+
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+
+            <!--"❶ البيانات الأساسية"-->
+            <Border Grid.Row="1" Style="{StaticResource MainBorderStyle}">
+                <StackPanel>
+                    <TextBlock Text="❶ البيانات الأساسية" Style="{StaticResource CardHeaderStyle}"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+
+                        <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                            <TextBlock Text="اسم الوارديه" Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox  x:Name="TxtShiftName"
+                                        Text="{Binding ShiftName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="0,0,5,0">
+
+                            <TextBlock Text="نوع الوارديه*"
+                                   Style="{StaticResource FiledLabelStyle}"/>
+
+                            <ComboBox ItemsSource="{Binding ShiftTypesList}"
+                                      SelectedItem="{Binding SelectedShiftType}"
+                                      Style="{StaticResource ModernComboBoxStyle}"
+                                      Height="38"
+                                      VerticalContentAlignment="Center"/>
+
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Column="2" Margin="0,0,5,0">
+                            <TextBlock Text="*ساعات العمل"  Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox  x:Name="TxtTotalHours"
+                                     Style="{StaticResource TextBoxStyle}"
+                                     IsReadOnly="True"
+                                     Background="#F1F5F9"
+                                     Foreground="#0284C7"
+                                     FontWeight="Bold"
+                                     Text="{Binding TotalHours, Mode=OneWay, StringFormat='{}{0} ساعات'}"/>
+                        </StackPanel>
+
+
+                        
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="2" Style="{StaticResource MainBorderStyle}">
+                <StackPanel>
+                    <TextBlock Text="❶ البيانات الأساسية" Style="{StaticResource CardHeaderStyle}"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+
+                        <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                            <TextBlock Text="وقت البدايه" Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox  x:Name="TxtStartTime"
+                                       Style="{StaticResource TextBoxStyle}"
+                                       Text="{Binding StartTime, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Margin="0,0,5,0">
+                            <TextBlock Text="وقت النهايه" Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox  x:Name="TxtEndTime"
+                                     Style="{StaticResource TextBoxStyle}"
+                                     Text="{Binding EndTime, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+
+
+
+                        <StackPanel Grid.Column="2" Margin="0,0,5,0">
+                            <TextBlock Text="*دقائق التاخير "  Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox  x:Name="TxtGracePeriod"
+                                     Style="{StaticResource TextBoxStyle}"
+                                     Text="{Binding GracePeriodMinutes, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+
+
+
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+
+            <Border Grid.Row="3"  Style="{StaticResource MainBorderStyle}">
+
+                <StackPanel 
+                            Orientation="Horizontal"
+                            FlowDirection="LeftToRight"
+                           >
+
+                    <!-- زر الحفظ -->
+
+                    <Button Style="{StaticResource ButtonSave}"
+                            Command="{Binding SaveShiftCommand}"
+                                 />
+
+                    <!-- زر الإلغاء -->
+
+                    <Button Style="{StaticResource ButtonExit}" 
+                               Command="{Binding CancelCommand}"
+                               CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                             />
+
+                </StackPanel>
+
+            </Border>
+        </Grid>
+
+       
+        
+    </Border>
+</Window>

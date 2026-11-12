@@ -1,0 +1,121 @@
+﻿<UserControl x:Class="MyClinicProject_VersionOne.View.HealthCareSystem.MedicalAdministration.PharmacyUnit.Medicen.MedicenTabView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.HealthCareSystem.MedicalAdministration.PharmacyUnit.Medicen"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+           FlowDirection="RightToLeft">
+
+    <Border   Background="#FFB4D7FA" CornerRadius="2">
+
+
+        <Grid Margin="5" >
+            <Grid.RowDefinitions>
+
+                <RowDefinition Height="*"/>
+                <!--شريط عنوان الادوية الحالية  مع زر الاضافة -->
+                <RowDefinition Height="170"/>
+                <!--  شريط عنوان تاريخ الادوية -->
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0"  Style="{StaticResource MainBorderStyle}">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <!--القسم الاول -->
+                        <RowDefinition Height="Auto"/>
+                        <!-- القسم الثاني للبيانات الجدولية -->
+                        <RowDefinition Height="*"/>
+
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="الادوية الحالية " Style="{StaticResource CardHeaderStyle}"/>
+                        <RadioButton Grid.Column="1" Content="إضافة دواء" Style="{StaticResource ButtonADD}" />
+
+
+
+                    </Grid>
+
+
+                    <!-- 4. جدول البيانات (يدعم التمرير الأفقي عند انخفاض المساحة) -->
+                    <Border Grid.Row="1" Style="{StaticResource MainBorderStyle}" >
+
+                        <DataGrid >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="#" Width="50"/>
+                                <DataGridTextColumn Header="اسم الدواء" Width="2*"/>
+                                <DataGridTextColumn Header="الجرعة" Width="1.5*"/>
+                                <DataGridTextColumn Header="الطريق" Width="1.5*"/>
+                                <DataGridTextColumn Header="تاريخ البدء " Width="80"/>
+                                <DataGridTextColumn Header="المراجعة القادمة " Width="90"/>
+                                <DataGridTextColumn Header="الحالة" Width="70"/>
+                                <DataGridTextColumn Header="الوصف " Width="80"/>
+                                <DataGridTextColumn Header="الإجراءات" Width="80"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                    </Border>
+
+
+                </Grid>
+
+            </Border>
+
+            <Border Grid.Row="1" Style="{StaticResource MainBorderStyle}">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <!--القسم الاول لعنوان تاريخ الادوية-->
+                        <RowDefinition Height="Auto"/>
+                        <!--   الجدول الذي سوف يعرض البيانات لتاريخ الادوية -->
+                        <RowDefinition Height="*"/>
+
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                    <TextBlock Grid.Column="0" Text=" تاريخ الادوية " Style="{StaticResource CardHeaderStyle}"/>
+
+
+                    <!-- 4. جدول البيانات (يدعم التمرير الأفقي عند انخفاض المساحة) -->
+                    <Border Grid.Row="1" Style="{StaticResource MainBorderStyle}" >
+
+                        <DataGrid >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="#" Width="50"/>
+                                <DataGridTextColumn Header="اسم الدواء" Width="2*"/>
+                                <DataGridTextColumn Header="الجرعة" Width="1.5*"/>
+                                <DataGridTextColumn Header="الطريق" Width="1.5*"/>
+                                <DataGridTextColumn Header="التكرار  " Width="80"/>
+                                <DataGridTextColumn Header="فترة الاستخدام  " Width="90"/>
+                                <DataGridTextColumn Header="سبب الايقاف" Width="70"/>
+                                <DataGridTextColumn Header="الوصف " Width="80"/>
+                                <DataGridTextColumn Header="المصدر" Width="80"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                    </Border>
+
+                </Grid>
+            </Border>
+
+
+
+
+        </Grid>
+
+
+    </Border>
+</UserControl>

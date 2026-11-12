@@ -7,51 +7,43 @@ namespace MyClinicProject_VersionOne.Model.BaseModel
 {
     public class FacilityBaseModel
     {
-        [JsonPropertyName("facilityname")]
-        public string FacilityName { get; set; } = String.Empty;
+        [JsonPropertyName("FacilityName")]
+        public string FacilityName { get; set; } = string.Empty;
 
+        [JsonPropertyName("FacilityType")]
+        public string FacilityType { get; set; } = string.Empty; // يفضل إرسالها كنص string
 
-        [JsonPropertyName("typefacility")] 
-        public FacilityTypes FacilityType { get; set; } 
+        [JsonPropertyName("FacilityLicenseNumber")]
+        public string FacilityLicenseNumber { get; set; } = string.Empty;
 
+        // مطابقة لاسم العمود في كلاس بايثون: LicenseIssueDate
+        [JsonPropertyName("LicenseIssueDate")]
+        public DateTime? FacilityLicenseIssueDate { get; set; }
 
-        [JsonPropertyName("facilitylicensenumber")]
-        public string FacilityLicenseNumber { get; set; } = String.Empty;
+        // مطابقة لاسم العمود في كلاس بايثون: LicenseExpiryDate
+        [JsonPropertyName("LicenseExpiryDate")]
+        public DateTime? FacilityLicenseExpiryDate { get; set; }
 
+        [JsonPropertyName("FacilityCode")]
+        public string FacilityCode { get; set; } = string.Empty;
 
-        [JsonPropertyName("facilitylicenseissuedate")]
-        public DateTime FacilityLicenseIssueDate { get; set; } 
+        [JsonPropertyName("FacilityCountry")]
+        public string FacilityCountry { get; set; } = "اليمن";
 
+        [JsonPropertyName("FacilityCity")]
+        public string FacilityCity { get; set; } = string.Empty;
 
-        [JsonPropertyName("facilitylicenseexpirydate")]
-        public DateTime FacilityLicenseExpiryDate { get; set; } 
+        [JsonPropertyName("FacilityPhone")]
+        public string FacilityPhone { get; set; } = string.Empty;
 
+        [JsonPropertyName("FacilityEmail")]
+        public string? FacilityEmail { get; set; }
 
-        [JsonPropertyName("facilitycode")]
-        public string FacilityCode { get; set; } = String.Empty;
-
-
-
-        [JsonPropertyName("facilitycountry")]
-        public string FacilityCountry { get; set; } = String.Empty;
-
-
-        [JsonPropertyName("facilitycity")]
-        public string FacilityCity { get; set; } = String.Empty;
-
-        [JsonPropertyName("facilityphone")]
-        public string FacilityPhone { get; set; } = String.Empty;
-
-
-        [JsonPropertyName("facilityemail")]
-        public string FacilityEmail { get; set; } = String.Empty;
-
-
-
-        [JsonPropertyName("facilityaddress")]
+        [JsonPropertyName("FacilityAddress")]
         public string FacilityAddress { get; set; } = string.Empty;
 
-        [JsonPropertyName("facilitywebsiteuri")]
-        public string FacilityWebsiteUrl { get; set; } = String.Empty;
+        // مطابقة لاسم العمود في كلاس بايثون: FacilityWebSite
+        [JsonPropertyName("FacilityWebSite")]
+        public string? FacilityWebsiteUrl { get; set; }
     }
 }

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyClinicProject_VersionOne.View.HealthCareSystem.HumanResources"
+       xmlns:helpers="clr-namespace:MyClinicProject_VersionOne.Helpers"
         mc:Ignorable="d"
         Title="CreateEmployeeView"  Width="800" MinHeight="800"
         WindowStartupLocation="CenterScreen"
@@ -72,19 +73,30 @@
 
                             <StackPanel Grid.Column="0" Margin="0,0,5,0">
                                 <TextBlock Text="الاسم الكامل*" Style="{StaticResource FiledLabelStyle}"/>
-                                <TextBox  Text="مثال: الباقة الأساسية" Style="{StaticResource TextBoxStyle}"/>
+                                <TextBox  x:Name="txtEmployeeName"
+                                 Style="{StaticResource TextBoxStyle}"
+                                   Text="{Binding UserFullName, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
                             </StackPanel>
 
 
                             <StackPanel Grid.Column="1" Margin="0,0,5,0">
-                                <TextBlock Text="* اسم المستخدم"  Style="{StaticResource FiledLabelStyle}"/>
-                                <TextBox  Text="أدخل اسم المستخدم ..." Style="{StaticResource TextBoxStyle}"/>
+                                <TextBlock Text="*تاريخ الميلاد"  Style="{StaticResource FiledLabelStyle}"/>
+                                <TextBox  x:Name="txtEmployeeBirthDate"
+                                 Style="{StaticResource TextBoxStyle}"
+                                   Text="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
                             </StackPanel>
 
 
                             <StackPanel Grid.Column="2" Margin="0,0,5,0">
-                                <TextBlock Text=" *" Foreground="#333" Margin="0,0,0,5"/>
-                                <TextBox   Text="1" Style="{StaticResource TextBoxStyle}"/>
+                             
+                                    <TextBlock Text="الجنس *"
+                                   Style="{StaticResource FiledLabelStyle}"/>
+
+                                <ComboBox ItemsSource="{Binding GendersList}"
+                             SelectedItem="{Binding Gender}"
+                                             Style="{StaticResource ModernComboBoxStyle}"/>
+
+                              
 
                             </StackPanel>
                         </Grid>
@@ -105,19 +117,25 @@
 
                             <StackPanel Grid.Column="0" Margin="0,0,5,0">
                                 <TextBlock Text=" الهاتف*" Style="{StaticResource FiledLabelStyle}"/>
-                                <TextBox   Text="مثال: الباقة الأساسية" Style="{StaticResource TextBoxStyle}"/>
+                                <TextBox x:Name="txtPhone"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 Text="{Binding UserPhone, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
                             </StackPanel>
 
 
                             <StackPanel Grid.Column="1" Margin="0,0,5,0">
                                 <TextBlock Text="* الايميل" Style="{StaticResource FiledLabelStyle}"/>
-                                <TextBox   Text="Mohammed@moh.com ..." Style="{StaticResource TextBoxStyle}"/>
+                                <TextBox x:Name="txtEmail"
+                                     Style="{StaticResource TextBoxStyle}"
+                                     Text="{Binding UserEmail, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
                             </StackPanel>
 
 
                             <StackPanel Grid.Column="2" Margin="0,0,5,0">
                                 <TextBlock Text=" العنوان*" Style="{StaticResource FiledLabelStyle}"/>
-                                <TextBox   Text="مثلا تعز-جوار مصانع هائل سعيد" Style="{StaticResource TextBoxStyle}"/>
+                                <TextBox x:Name="txtAddress"
+                                     Style="{StaticResource TextBoxStyle}"
+                                     Text="{Binding UserAddress, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
 
                             </StackPanel>
 
@@ -140,21 +158,26 @@
                             </Grid.ColumnDefinitions>
 
                             <StackPanel Grid.Column="0" Margin="0,0,5,0">
-                                <TextBlock Text=" سنوات الخبرة*" Style="{StaticResource FiledLabelStyle}"/>
-                                <TextBox   Text="ادخل البيانات هنا" Style="{StaticResource TextBoxStyle}"/>
+                                <TextBlock Text="المؤهل العلمي*" Style="{StaticResource FiledLabelStyle}"/>
+                                <TextBox x:Name="txtQualification"
+                                     Style="{StaticResource TextBoxStyle}"
+                                     Text="{Binding Qualification, UpdateSourceTrigger=PropertyChanged}"/>  
                             </StackPanel>
 
 
                             <StackPanel Grid.Column="1" Margin="0,0,5,0">
                                 <TextBlock Text="*شهاده البورد/التتخصص"  Style="{StaticResource FiledLabelStyle}"/>
-                                <TextBox   Text="أدخل البيانات هنا  ..." Style="{StaticResource TextBoxStyle}"/>
+                                <TextBox x:Name="txtSpecialization"
+                                     Style="{StaticResource TextBoxStyle}"
+                                     Text="{Binding Specialization, UpdateSourceTrigger=PropertyChanged}"/>
                             </StackPanel>
 
 
                             <StackPanel Grid.Column="2" Margin="0,0,5,0">
                                 <TextBlock Text="التراخيص المهنيه*" Style="{StaticResource FiledLabelStyle}"/>
-                                <TextBox   Text="ادخل البيانات هنا" Style="{StaticResource TextBoxStyle}"/>
-
+                                <TextBox x:Name="txtMedicalLicense"
+                                     Style="{StaticResource TextBoxStyle}"
+                                     Text="{Binding MedicalLicenseNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
                             </StackPanel>
 
 
@@ -164,38 +187,7 @@
                 </Border>
 
                 <!--"بيانات الوظيفة"-->
-                <Border Style="{StaticResource MainBorderStyle}">
-                    <StackPanel>
-                        <TextBlock Text="بيانات الوظيفة" Style="{StaticResource CardHeaderStyle}"/>
-
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <StackPanel Grid.Column="0" Margin="0,0,5,0">
-                                <TextBlock Text="المسمى الوظيفي*" Style="{StaticResource FiledLabelStyle}"/>
-                                <TextBox   Text="مثلا دكتور/محاسب/فني مخبري" Style="{StaticResource TextBoxStyle}"/>
-                            </StackPanel>
-
-
-                            <StackPanel Grid.Column="1" Margin="0,0,5,0">
-                                <TextBlock Text="القسم/العياده*" Style="{StaticResource FiledLabelStyle}"/>
-                                <TextBox   Text="عياده القلب..." Style="{StaticResource TextBoxStyle}"/>
-                            </StackPanel>
-
-
-                            <StackPanel Grid.Column="2" Margin="0,0,5,0">
-                                <TextBlock Text="تاريخ التعيين*" Style="{StaticResource FiledLabelStyle}"/>
-                                <TextBox   Text="2026/02/02" Style="{StaticResource TextBoxStyle}" />
-
-                            </StackPanel>
-
-                        </Grid>
-                    </StackPanel>
-                </Border>
+                
 
                 <!--"صلاحيات النظام"-->
                 <Border Style="{StaticResource MainBorderStyle}">
@@ -210,20 +202,35 @@
                             </Grid.ColumnDefinitions>
 
                             <StackPanel Grid.Column="0" Margin="0,0,5,0">
-                                <TextBlock Text="دور المستخدم*" Style="{StaticResource FiledLabelStyle}"/>
-                                <TextBox   Text="مثلا مدير/محاسب/موظف" Style="{StaticResource TextBoxStyle}"/>
+
+
+                                <TextBlock Text="الصلاحيات *"
+                                   Style="{StaticResource FiledLabelStyle}"/>
+
+                                <ComboBox ItemsSource="{Binding RolesList}"
+                                      SelectedValuePath="RoleId"
+                                      DisplayMemberPath="RoleName"
+                                      SelectedValue="{Binding SelectedRoleId}"                          
+                                Style="{StaticResource ModernComboBoxStyle}"/>
+
                             </StackPanel>
+
 
 
                             <StackPanel Grid.Column="1" Margin="0,0,5,0">
                                 <TextBlock Text="اسم المستخدم*" Style="{StaticResource FiledLabelStyle}"/>
-                                <TextBox   Text="عياده القلب..." Style="{StaticResource TextBoxStyle}"/>
+                                <TextBox x:Name="txtUsername"
+                                     Style="{StaticResource TextBoxStyle}"
+                                     Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
                             </StackPanel>
 
 
                             <StackPanel Grid.Column="2" Margin="0,0,5,0">
                                 <TextBlock Text="كلمه المرور الاوليه*" Style="{StaticResource FiledLabelStyle}"/>
-                                <PasswordBox Style="{StaticResource PasswordBoxStyle}"/>
+                                <PasswordBox x:Name="pbPassword"
+                                     Style="{StaticResource PasswordBoxStyle}"
+                                     helpers:PasswordHelper.Attach="True"
+                                     helpers:PasswordHelper.Password="{Binding UserPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
 
                             </StackPanel>
 
@@ -234,11 +241,27 @@
                 <!--ملاحظات إضافية-->
                 <!--كلمه المرور لم افعل لها تنسيق وهي و الملاحظات-->
                 <Border Style="{StaticResource MainBorderStyle}">
-                    <StackPanel>
-                        <TextBlock Text="📝 ملاحظات إضافية" Style="{StaticResource CardHeaderStyle}"/>
-                        <TextBox Height="60" TextWrapping="Wrap" AcceptsReturn="True" Text="  يجب اضافه الوارديه وايام وحاله المستخدم و حاله الموظف والاهتمام ب التنسيقات.ويوجد المستندات لم اصممه والايقونات.كلمه المرور لم افعل لها تنسيق وهي و الملاحظات."/>
-                        <TextBlock Text="0/500" FontSize="10" Foreground="Gray" HorizontalAlignment="Right" Margin="0,2,0,0"/>
-                    </StackPanel>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                            <TextBlock Text="رقم هاتف الطوارى*" Style="{StaticResource FiledLabelStyle}"/>
+                            <TextBox x:Name="txtEmergencyPhone"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 Text="{Binding EmergencyContactPhone, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="📝 ملاحظات إضافية" Style="{StaticResource CardHeaderStyle}"/>
+                            <TextBox Height="60" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="0/500" FontSize="10" Foreground="Gray" HorizontalAlignment="Right" Margin="0,2,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                   
                 </Border>
 
 
@@ -248,16 +271,21 @@
                     <StackPanel 
                             Orientation="Horizontal"
                             FlowDirection="LeftToRight"
-                            Margin="15,5,15,12">
+                            >
 
                         <!-- زر الحفظ -->
 
                         <Button Style="{StaticResource ButtonSave}"
+                                Command="{Binding SaveEmployeeCommand}"
                                  />
 
                         <!-- زر الإلغاء -->
 
                         <Button Style="{StaticResource ButtonExit}"
+                                Command="{Binding CancelCommand}"
+                               CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                                
+                                
                              />
 
                     </StackPanel>

@@ -93,7 +93,7 @@
                         <TextBox Grid.Column="1"
                              x:Name="TxtUsername"
                              Style="{StaticResource TextBoxStyle}"
-                             helpers:InputHelper.IsUsernameOnly="True"
+                             
                              Text="{Binding Username, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
                     </Grid>
                     <!-- رسالة الخطأ الخاصة باسم المستخدم -->

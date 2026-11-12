@@ -1,63 +1,70 @@
 # users/services.py
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
-from app.modules.users.repository import RoleRepository
-from app.modules.users.schemas import RoleCreate, RoleUpdate
+from app.modules.users.repository import RoleRepository,UserRepository
+from app.modules.users.schemas import RoleCreate, RoleUpdate,ManagerCreate
+from app.core.exceptions import DuplicateException, NotFoundException
+from app.modules.auth.utils import get_password_hash
+
 
 
 class RoleService:
-    """عقل النظام وإدارة منطق العمليات الخاص بالأدوار والصلاحيات"""
 
     def __init__(self, db: Session):
         self.repo = RoleRepository(db)
-        # تهيئة مستودع الأدوار وتمرير جلسة قاعدة البيانات له
 
     def create_new_role(self, data: RoleCreate):
+        # 1. استخدام كلاس التكرار بسطر واحد نظيف!
+        if self.repo.get_by_name(data.RoleName):
+            raise DuplicateException("الدور الوظيفي", data.RoleName)
+
+        return self.repo.create(data.dict())
+        
+    def list_all_roles(self):
+      """2.
+
+      دالة جلب قائمة بجميع الأدوار المسجلة في النظام
+      """
+      # --------------------------------------------------------------------------
+      # استدعاء دالة get_all الموروثة مباشرة من كلاس الأب BaseRepository
+      # --------------------------------------------------------------------------
+      return self.repo.get_all()
+      # تنفيذ الاستعلام لجلب كل سجلات جدول tbRoles كقائمة كائنات وإرجاعها للراوتر
+
+
+
+
+
+class UserService:
+    def __init__(self, db: Session):
+        self.repo = UserRepository(db)
+        # تهيئة مستودع الأدوار وتمرير جلسة قاعدة البيانات له
+
+    def create_new_user(self, data: ManagerCreate):
         """1. دالة فحص الشروط ثم إنشاء الدور الجديد"""
         # الخطوة 1: فحص قاعدة العمل (هل الاسم مكرر؟)
-        existing_role = self.repo.get_by_name(data.RoleName)
-        if existing_role:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"الدور الوظيفي '{data.RoleName}' مسجل مسبقاً في النظام، يرجى اختيار اسم آخر.",
-            )
+        if self.repo.get_by_username(data.Username):
+            raise DuplicateException("اسم المستخدم ",data.Username)
 
-        # الخطوة 2: تحويل البيانات لقاموس
-        role_dict = data.dict()
+        
+    # الخطوة 2: تشفير كلمة المرور عبر خوارزمية Bcrypt الآمنة
+        # --------------------------------------------------------------------------
+        hashed_password = get_password_hash(data.Password)
+        # تحويل النص الصريح (مثل 123456) إلى شفرة غير قابلة للفك تبدأ بـ $2b$
 
-        # الخطوة 3: الحفظ في قاعدة البيانات
-        return self.repo.create(role_dict)
+        # --------------------------------------------------------------------------
+        # الخطوة 3: تحويل البيانات لقاموس واستبدال كلمة المرور بالقيمة المشفرة
+        # --------------------------------------------------------------------------
+        user_dict = data.dict()
+        # تحويل بيانات Pydantic إلى قاموس عادي
 
-    def list_all_roles(self) -> list:
-        """2. دالة استرجاع قائمة جميع الأدوار المسجلة في النظام"""
-        return self.repo.get_all()
+        user_dict["Password"] = hashed_password
+        # وضع الهاش المشفر بدلاً من كلمة المرور الصريحة لحماية بيانات المستخدم
 
-    def get_role_by_id(self, role_id: int):
-        """3. دالة فحص وجلب دور محدد بواسطة معرّفه"""
-        role = self.repo.get_by_id(role_id)
-        if not role:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail=f"الدور الوظيفي ذو الرقم التعريفي ({role_id}) غير موجود في النظام.",
-            )
-        return role
+       
 
-    def update_role(self, role_id: int, data: RoleUpdate):
-        """4. دالة فحص شروط التعديل وتحديث الدور"""
-        # 1. التأكد أولاً من وجود الدور
-        role = self.get_role_by_id(role_id)
-
-        # 2. التأكد من عدم تكرار الاسم الجديد إن تم تغييره
-        if data.RoleName and data.RoleName != role.RoleName:
-            existing_role = self.repo.get_by_name(data.RoleName)
-            if existing_role:
-                raise HTTPException(
-                    status_code=status.HTTP_400_BAD_REQUEST,
-                    detail=f"لا يمكن التعديل: اسم الدور '{data.RoleName}' محجوز مسبقاً لدور آخر.",
-                )
-
-        # 3. استخراج الحقول المرسلة فقط
-        update_dict = data.dict(exclude_unset=True)
-
-        # 4. إرسال التعديل للمستودع لحفظه
-        return self.repo.update(role, update_dict)
+        # --------------------------------------------------------------------------
+        # الخطوة 4: الحفظ النهائي في جدول Users بقاعدة البيانات
+        # --------------------------------------------------------------------------
+        return self.repo.create(user_dict)
+        # إرجاع كائن المستخدم المنشأ بعد حفظه في قاعدة البيانات

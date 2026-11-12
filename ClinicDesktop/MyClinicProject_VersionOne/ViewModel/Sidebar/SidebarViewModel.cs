@@ -373,7 +373,7 @@ namespace MyClinicProject_VersionOne.ViewModel.Sidebar
                     new SidebarItemViewModel
                     {
                         Title = "بيانات المنشأة",
-                        PageName = "Facility"
+                        PageName = "FacilityListView"
                     },
                     new SidebarItemViewModel
                     {
@@ -403,43 +403,34 @@ namespace MyClinicProject_VersionOne.ViewModel.Sidebar
                     new SidebarItemViewModel
                     {
                         Title = "ملفات الموظفين",
-                        PageName = "Employees"
-                    },
-                    new SidebarItemViewModel
-                    {
-                        Title = "التوظيف والوظائف",
-                        PageName = "Recruitment"
-                    },
+                        PageName = "EmployeeListView"
+                    }, 
+                    
                     new SidebarItemViewModel
                     {
                         Title = "الحضور والانصراف",
-                        PageName = "Attendance"
+                        PageName = "AttendanceListView"
                     },
+
                     new SidebarItemViewModel
                     {
-                        Title = "الإجازات",
-                        PageName = "Leaves"
+                        Title = "التوظيف والوظائف",
+                        PageName = "JobListView"
                     },
+                 
+                   
                     new SidebarItemViewModel
                     {
                         Title = "الدوام والمناوبات",
-                        PageName = "WorkSchedules"
+                        PageName = "ShiftListView"
                     },
-                    new SidebarItemViewModel
-                    {
-                        Title = "التكليفات بين الفروع",
-                        PageName = "EmployeeAssignments"
-                    },
+                  
                     new SidebarItemViewModel
                     {
                         Title = "تقييم الأداء والتدريب",
                         PageName = "Performance"
                     },
-                    new SidebarItemViewModel
-                    {
-                        Title = "الرواتب",
-                        PageName = "Payroll"
-                    }
+                  
                 }
             });
 
@@ -458,7 +449,7 @@ namespace MyClinicProject_VersionOne.ViewModel.Sidebar
                     new SidebarItemViewModel
                     {
                         Title = "الأدوار والصلاحيات",
-                        PageName = "Roles"
+                        PageName = "RoleListView"
                     },
                     new SidebarItemViewModel
                     {
@@ -799,7 +790,7 @@ namespace MyClinicProject_VersionOne.ViewModel.Sidebar
             {
                 Title = "سجل العمليات",
                 Icon = "📜",
-                PageName = "AuditLog"
+                PageName = "AuditLogView"
             });
 
             // 14. الإعدادات والاشتراك: إعدادات المنشأة والوحدات والباقة الحالية.
@@ -812,7 +803,7 @@ namespace MyClinicProject_VersionOne.ViewModel.Sidebar
             new SidebarItemViewModel
             {
                 Title = "إعدادات المنشأة",
-                PageName = "FacilitySettings"
+                PageName = "AuditLogView"
             },
             new SidebarItemViewModel
             {
